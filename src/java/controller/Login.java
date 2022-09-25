@@ -1,4 +1,4 @@
-package java.controller;
+package controller;
 
 import dao.AccountDAO;
 import java.io.IOException;
