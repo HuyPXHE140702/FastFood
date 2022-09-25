@@ -36,7 +36,7 @@ public class AccountDAO {
         return list;
     }
 
-  // getAccountById
+    // getAccountById
     public Account login(String username, String password) {
         String sql = "select *from Account where Username = ? and Password = ?";
         try {
