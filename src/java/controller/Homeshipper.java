@@ -5,7 +5,7 @@
  */
 package controller;
 
-import dao.FoodDAO;
+import dao.OrderDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -13,14 +13,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import model.Food;
+import model.Order;
 
 /**
  *
  * @author dangtm
  */
-public class Home extends HttpServlet {
+public class Homeshipper extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,23 +33,11 @@ public class Home extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            FoodDAO food = new FoodDAO();
-            String specialFood = "2021-07-18";
-            String newestFood = "2022-02-12";
-//            List<Food> list = food.getallFood();
-            List<Food> listFoodSpec = food.getFoodbyDateCreated(specialFood);
-            List<Food> listFoodNew = food.getFoodbyDateCreated(newestFood);
-
-            HttpSession session = request.getSession();
-            session.setAttribute("listspecialfood", listFoodSpec);
-            session.setAttribute("listnewestfood", listFoodNew);
-
-            session.setAttribute("urlHistory", "home");
-
-            request.getRequestDispatcher("home.jsp").forward(request, response);
-        }
+        OrderDAO dao = new OrderDAO();
+        List<Order> list = dao.getOrderNotAcceptByShipperID();
+        
+        request.setAttribute("listorder", list);
+        request.getRequestDispatcher("homeshipper.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
