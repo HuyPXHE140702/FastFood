@@ -84,7 +84,7 @@
                                 <th hidden scope="row">${a.id}</th>
                                 <th scope="row"><c:set var="count" value="${count+1}"></c:set>${count}</th>
                                 <td>${a.username}</td>
-                                <td>${a.password}</td>
+                                <td type="password">${a.password}</td>
                                 <td>${a.displayName}</td>
                                 <td>${a.phone}</td>
                                 <td>${a.address}</td>

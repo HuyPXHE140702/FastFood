@@ -6,6 +6,8 @@ body {
   overflow-x: hidden;
 }
 
+.hidetext { -webkit-text-security: circle; }
+
 .layout_padding {
   padding: 90px 0;
 }

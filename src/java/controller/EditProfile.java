@@ -7,7 +7,7 @@ import java.io.IOException;
 import dao.AccountDAO;
 import java.io.PrintWriter;
 
-@WebServlet(name = "EditProfile", value = "/EditProfile")
+//@WebServlet(name = "EditProfile", value = "/EditProfile")
 public class EditProfile extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
