@@ -79,13 +79,16 @@ public class AccountDAO {
                 + "     VALUES\n"
                 + "           (?,?,?,?,?,0,1,0,0,0)";
         try {
+            //connect db by dbcontext
             Connection conn = new DBContext().getConnection();
+            //use query 
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, username);
             ps.setString(2, password);
             ps.setString(3, displayName);
             ps.setString(4, address);
             ps.setString(5, phone);
+            //execute query
             ps.executeUpdate();
 
         } catch (Exception e) {
