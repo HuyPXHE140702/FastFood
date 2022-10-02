@@ -1,8 +1,4 @@
-/*
- * Authenticate for system
- * If user not login yet, method will redirect to login page
- * @author Pham Xuan Huy
- */
+
 package filter;
 
 import java.io.IOException;
@@ -18,9 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Account;
 
-/**
- *
- * @author dmanh
+/*
+ * Authenticate for system
+ * If user not login yet, method will redirect to login page
+ * @author Pham Xuan Huy
  */
 @WebFilter(filterName = "Authentication", urlPatterns = {"/carts", "/payment", "/profile", "/thank", "/foodList"})
 public class Authentication implements Filter {

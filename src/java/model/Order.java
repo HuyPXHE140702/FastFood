@@ -5,13 +5,10 @@
  */
 package model;
 
-
-
 /**
- *
- * @author admin
+ * Model for Order 
+ * @author HuyPX
  */
-
 
 public class Order {
     private int orderid;

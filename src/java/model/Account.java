@@ -6,8 +6,8 @@
 package model;
 
 /**
- *
- * @author admin
+ * Model for Account 
+ * @author HuyPX
  */
 public class Account {
     private int id;

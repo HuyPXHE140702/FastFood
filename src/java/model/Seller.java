@@ -6,9 +6,10 @@
 package model;
 
 /**
- *
- * @author admin
+ * Model for Seller 
+ * @author HuyPX
  */
+
 public class Seller {
 
     private int sellerid;

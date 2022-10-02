@@ -1,8 +1,4 @@
-/*
- * Authorize for user type Shipper
- * If user is not type Shipper, method will redirect to Error page
- * @author Pham Xuan Huy
- */
+
 package filter;
 
 import java.io.IOException;
@@ -18,9 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Account;
 
-/**
- *
- * @author dmanh
+/*
+ * Authorize for user type Shipper
+ * If user is not type Shipper, method will redirect to Error page
+ * @author Pham Xuan Huy
  */
 @WebFilter(filterName = "AuthorizationShipper", urlPatterns = {"/homeshipper/*"})
 public class AuthorizationShipper implements Filter {

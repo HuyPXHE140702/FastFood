@@ -6,8 +6,8 @@
 package model;
 
 /**
- *
- * @author admin
+ * Model for Food 
+ * @author HuyPX
  */
 public class Food {
     private int foodid;

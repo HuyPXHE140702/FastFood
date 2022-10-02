@@ -7,8 +7,8 @@ package model;
  */
 
 /**
- *
- * @author admin
+ * Model for Category 
+ * @author HuyPX
  */
 public class Category {
     private String categoryId;

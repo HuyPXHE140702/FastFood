@@ -4,10 +4,12 @@
  * and open the template in the editor.
  */
 package model;
+
 /**
- *
- * @author admin
+ * Model for Shipper 
+ * @author HuyPX
  */
+
 public class Shipper {
     private int shipperid;
     private int sellerid;

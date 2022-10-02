@@ -1,8 +1,4 @@
-/*
- * Authorize for user type Seller
- * If user is not type Seller, method will redirect to Error page
- * @author Pham Xuan Huy
- */
+
 package filter;
 
 import java.io.IOException;
@@ -18,9 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Account;
 
-/**
- *
- * @author dmanh
+/*
+ * Authorize for user type Seller
+ * If user is not type Seller, method will redirect to Error page
+ * @author Pham Xuan Huy
  */
 @WebFilter(filterName = "AuthorizationSeller", urlPatterns = {"/SellerFood", "/SellerOrder"})
 public class AuthorizationSeller implements Filter {

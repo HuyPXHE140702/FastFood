@@ -6,8 +6,8 @@
 package model;
 
 /**
- *
- * @author admin
+ * Model for Cart 
+ * @author HuyPX
  */
 public class Cart {
     private Food product;

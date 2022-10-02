@@ -6,9 +6,10 @@
 package model;
 
 /**
- *
- * @author admin
+ * Model for OrderDetail 
+ * @author HuyPX
  */
+
 public class OrderDetail {
     private int id;
     private int orderid;
