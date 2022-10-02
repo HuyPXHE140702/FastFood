@@ -84,10 +84,13 @@ public class Login extends HttpServlet {
     String password = request.getParameter("password");
     AccountDAO dao = new AccountDAO();
     Account account = dao.login(username, password);
+    //check input 
     if (account == null) {
+      //get fail request 
       request.setAttribute("msg", "Wrong username or password.");
       request.getRequestDispatcher("login.jsp").forward(request, response);
     } else {
+      //create session and save
       HttpSession session = request.getSession();
       session.setAttribute("acc", account);
       // session.setMaxInactiveInterval(300);

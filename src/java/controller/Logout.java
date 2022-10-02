@@ -15,6 +15,7 @@ public class Logout extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+            //remove session for account 
             HttpSession session = request.getSession();
             session.removeAttribute("acc");
             session.removeAttribute("carts");

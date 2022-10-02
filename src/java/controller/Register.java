@@ -17,6 +17,7 @@ public class Register extends HttpServlet {
     response.setCharacterEncoding("UTF-8");
     try (PrintWriter out = response.getWriter()) {
       /* TODO output your page here. You may use following sample code. */
+      //set input 
       String firstname = request.getParameter("firstname");
       String lastname = request.getParameter("lastname");
       String displayname = firstname + " " + lastname;
