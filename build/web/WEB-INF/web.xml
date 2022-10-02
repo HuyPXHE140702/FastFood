@@ -20,6 +20,10 @@
         <servlet-name>Profile</servlet-name>
         <servlet-class>controller.Profile</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditProfile</servlet-name>
+        <servlet-class>controller.EditProfile</servlet-class>
+    </servlet>
      <servlet>
         <servlet-name>Homeshipper</servlet-name>
         <servlet-class>controller.Homeshipper</servlet-class>
