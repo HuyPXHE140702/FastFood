@@ -326,7 +326,7 @@
                         </a>
                         <div class="text px-4 pt-3 pb-4">
                             <div class="meta">
-                                <div><a href="#">June 3, 2022</a></div>
+                                <div><a href="#">Sep 24, 2022</a></div>
                                 <div><a href="#">Admin</a></div>
                             </div>
                             <h3 class="heading"><a target="_blank" href="https://foodtolive.com/healthy-blog/fast-food-junk-food-difference/">Fast Food and Junk Food: Is There Any Difference</a></h3>
@@ -343,7 +343,7 @@
                         </a>
                         <div class="text px-4 pt-3 pb-4">
                             <div class="meta">
-                                <div><a href="#">June 3, 2022</a></div>
+                                <div><a href="#">Sep 24, 2022</a></div>
                                 <div><a href="#">Admin</a></div>
                             </div>
                             <h3 class="heading"><a target="_blank" href="https://www.hungryforever.com/recreate-wendys-salads-at-home/">Recreate Wendy’s Salads at Home</a></h3>
@@ -361,7 +361,7 @@
                         </a>
                         <div class="text px-4 pt-3 pb-4">
                             <div class="meta">
-                                <div><a href="#">June 3, 2022</a></div>
+                                <div><a href="#">Sep 24, 2022</a></div>
                                 <div><a href="#">Admin</a></div>
                             </div>
                             <h3 class="heading"><a target="_blank" href="https://hotdogonline.com/2019/09/11/your-perfect-burger-2/">Choose Your Perfect Burger</a></h3>

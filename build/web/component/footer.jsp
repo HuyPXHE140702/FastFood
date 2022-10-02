@@ -1,7 +1,7 @@
 <%-- 
     Document   : footer
-    Created on : Jun 1, 2022, 10:27:30 PM
-    Author     : dmanh
+    Created on : Sep 22, 2022, 10:27:30 PM
+    Author     : HuyPX
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
