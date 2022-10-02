@@ -39,14 +39,17 @@ public class EditProfile extends HttpServlet {
          request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+            /* Set new name, address, phone, pass */
             int id = Integer.parseInt(request.getParameter("id"));
             String name = request.getParameter("name");
             String address = request.getParameter("address");
             String phone = request.getParameter("phone");
             String password = request.getParameter("userpass");
+
+            /* Send to dao */
              AccountDAO accdao = new AccountDAO();
              accdao.editProfileById(password, name, address, phone, id);
+            /* Set new name, address, phone, pass */
              String url = "profile?id="+id;
               request.getRequestDispatcher(url).forward(request, response);
         }

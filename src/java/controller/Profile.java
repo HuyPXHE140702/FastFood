@@ -36,11 +36,14 @@ public class Profile extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+
+        /* Get account from dao */
         AccountDAO dao = new AccountDAO();
         String id1 = request.getParameter("id");
         int id = Integer.parseInt(id1);
         Account profile = dao.getAccountByID(id);
-        //System.out.println(profile);
+
+        /* Send account to page */
         request.setAttribute("profile", profile);
         request.getRequestDispatcher("profile.jsp").forward(request, response);
     }
