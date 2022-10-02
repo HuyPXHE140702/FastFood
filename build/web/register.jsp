@@ -1,5 +1,5 @@
 <%-- 
-    Document   : login
+    Document   : register
     Created on : Sep 29, 2022, 10:05:23 PM
     Author     : vinh
 --%>

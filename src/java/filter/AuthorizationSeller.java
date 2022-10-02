@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Authorize for user type Seller
+ * If user is not type Seller, method will redirect to Error page
+ * @author Pham Xuan Huy
  */
 package filter;
 

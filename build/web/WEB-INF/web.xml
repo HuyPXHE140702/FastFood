@@ -20,6 +20,10 @@
         <servlet-name>Profile</servlet-name>
         <servlet-class>controller.Profile</servlet-class>
     </servlet>
+     <servlet>
+        <servlet-name>Homeshipper</servlet-name>
+        <servlet-class>controller.Homeshipper</servlet-class>
+    </servlet>
     
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
@@ -44,6 +48,10 @@
     <servlet-mapping>
         <servlet-name>EditProfile</servlet-name>
         <url-pattern>/editProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Homeshipper</servlet-name>
+        <url-pattern>/homeshipper</url-pattern>
     </servlet-mapping>
     
     <session-config>

@@ -1,8 +1,3 @@
-<%-- 
-    Document   : homeshipper
-    Created on : Oct 2, 2022, 4:00:08 PM
-    Author     : HuyPX
---%>
 
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
