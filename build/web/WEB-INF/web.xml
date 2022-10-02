@@ -16,11 +16,11 @@
         <servlet-name>Home</servlet-name>
         <servlet-class>controller.Home</servlet-class>
     </servlet>
-    <servlet>
+     <servlet>
         <servlet-name>Profile</servlet-name>
         <servlet-class>controller.Profile</servlet-class>
     </servlet>
-
+    
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -45,6 +45,7 @@
         <servlet-name>EditProfile</servlet-name>
         <url-pattern>/editProfile</url-pattern>
     </servlet-mapping>
+    
     <session-config>
         <session-timeout>
             30
