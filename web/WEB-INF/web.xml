@@ -20,130 +20,22 @@
         <servlet-name>Admin</servlet-name>
         <servlet-class>controller.Admin</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>FoodServlet</servlet-name>
-        <servlet-class>controller.FoodServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>Menu</servlet-name>
-        <servlet-class>controller.Menu</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>CateContro</servlet-name>
-        <servlet-class>controller.CateContro</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>DetailFood</servlet-name>
-        <servlet-class>controller.DetailFood</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>Search</servlet-name>
-        <servlet-class>controller.Search</servlet-class>
-    </servlet>
+   
     <servlet>
         <servlet-name>Homeshipper</servlet-name>
         <servlet-class>controller.Homeshipper</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>AddToCart</servlet-name>
-        <servlet-class>controller.AddToCart</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>Carts</servlet-name>
-        <servlet-class>controller.Carts</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>DeleteCart</servlet-name>
-        <servlet-class>controller.DeleteCart</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>UpdateCartQuantity</servlet-name>
-        <servlet-class>controller.UpdateCartQuantity</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>Payment</servlet-name>
-        <servlet-class>controller.Payment</servlet-class>
-    </servlet>
+    
     <servlet>
         <servlet-name>Profile</servlet-name>
         <servlet-class>controller.Profile</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>DeleteAccount</servlet-name>
-        <servlet-class>controller.DeleteAccount</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>AddNewAccount</servlet-name>
-        <servlet-class>controller.AddNewAccount</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>InsertShipper</servlet-name>
-        <servlet-class>controller.InsertShipper</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>InsertSeller</servlet-name>
-        <servlet-class>controller.InsertSeller</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>DeleteShipper</servlet-name>
-        <servlet-class>controller.DeleteShipper</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>DeleteSeller</servlet-name>
-        <servlet-class>controller.DeleteSeller</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>EditAccount</servlet-name>
-        <servlet-class>controller.EditAccount</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>loadAccount</servlet-name>
-        <servlet-class>controller.loadAccount</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ThanksforPayment</servlet-name>
-        <servlet-class>controller.ThanksforPayment</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>AcceptOrder</servlet-name>
-        <servlet-class>controller.AcceptOrder</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>AcceptOrderShipper</servlet-name>
-        <servlet-class>controller.AcceptOrderShipper</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>Shipperacceptorder</servlet-name>
-        <servlet-class>controller.Shipperacceptorder</servlet-class>
-    </servlet>
+    
     <servlet>
         <servlet-name>EditProfile</servlet-name>
         <servlet-class>controller.EditProfile</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>Dedeliverymoney</servlet-name>
-        <servlet-class>controller.Dedeliverymoney</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>DeliveryMoney</servlet-name>
-        <servlet-class>controller.DeliveryMoney</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ViewBillByShipper</servlet-name>
-        <servlet-class>controller.ViewBillByShipper</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>bankToSeller</servlet-name>
-        <servlet-class>controller.BankToSeller</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>SellerOrderController</servlet-name>
-        <servlet-class>controller.SellerOrderController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>Ngu</servlet-name>
-        <servlet-class>controller.Ngu</servlet-class>
-    </servlet>
+    
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -164,130 +56,22 @@
         <servlet-name>Admin</servlet-name>
         <url-pattern>/admin</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>FoodServlet</servlet-name>
-        <url-pattern>/food</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Menu</servlet-name>
-        <url-pattern>/menu</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>CateContro</servlet-name>
-        <url-pattern>/CateContro</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>DetailFood</servlet-name>
-        <url-pattern>/DetailFood</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Search</servlet-name>
-        <url-pattern>/Search</url-pattern>
-    </servlet-mapping>
+    
     <servlet-mapping>
         <servlet-name>Homeshipper</servlet-name>
         <url-pattern>/homeshipper</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AddToCart</servlet-name>
-        <url-pattern>/add-to-cart</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Carts</servlet-name>
-        <url-pattern>/carts</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>DeleteCart</servlet-name>
-        <url-pattern>/delete-cart</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>UpdateCartQuantity</servlet-name>
-        <url-pattern>/update-quantity</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Payment</servlet-name>
-        <url-pattern>/payment</url-pattern>
-    </servlet-mapping>
+   
     <servlet-mapping>
         <servlet-name>Profile</servlet-name>
         <url-pattern>/profile</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>DeleteAccount</servlet-name>
-        <url-pattern>/delete-account</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AddNewAccount</servlet-name>
-        <url-pattern>/add-account</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>InsertShipper</servlet-name>
-        <url-pattern>/insert-shipper</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>InsertSeller</servlet-name>
-        <url-pattern>/insert-seller</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>DeleteShipper</servlet-name>
-        <url-pattern>/delete-shipper</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>DeleteSeller</servlet-name>
-        <url-pattern>/delete-seller</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>EditAccount</servlet-name>
-        <url-pattern>/edit-account</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>loadAccount</servlet-name>
-        <url-pattern>/loadAccount</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ThanksforPayment</servlet-name>
-        <url-pattern>/thank</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AcceptOrder</servlet-name>
-        <url-pattern>/AcceptOrder</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AcceptOrderShipper</servlet-name>
-        <url-pattern>/AcceptOrderShipper</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Shipperacceptorder</servlet-name>
-        <url-pattern>/Shipperacceptorder</url-pattern>
-    </servlet-mapping>
+    
     <servlet-mapping>
         <servlet-name>EditProfile</servlet-name>
         <url-pattern>/edit-profile</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Dedeliverymoney</servlet-name>
-        <url-pattern>/dedeliverymoney</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>DeliveryMoney</servlet-name>
-        <url-pattern>/deliveryMoney</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ViewBillByShipper</servlet-name>
-        <url-pattern>/viewBillByShipper</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>bankToSeller</servlet-name>
-        <url-pattern>/bankToSeller</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>SellerOrderController</servlet-name>
-        <url-pattern>/SellerOrder</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Ngu</servlet-name>
-        <url-pattern>/ngu</url-pattern>
-    </servlet-mapping>
+    
     <session-config>
         <session-timeout>
             30
