@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author dmanh
+ * @author NamVN
  */
 public class EditProfile extends HttpServlet {
 

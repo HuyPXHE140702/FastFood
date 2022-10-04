@@ -16,7 +16,7 @@ import model.Account;
 
 /**
  *
- * @author vanhung38ht
+ * @author NamVN
  */
 public class Profile extends HttpServlet {
 
