@@ -15,7 +15,7 @@ import model.Food;
 
 /**
  *
- * @author dmanh
+ * @author DangTM
  */
 public class FoodDAO extends ConnectDB {
 
