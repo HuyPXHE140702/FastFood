@@ -36,11 +36,14 @@ public class HomeshipperController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        OrderDAO dao = new OrderDAO();
-        List<Order> list = dao.getOrderNotAcceptByShipperID();
-        
-        request.setAttribute("listorder", list);
-        request.getRequestDispatcher("homeshipper.jsp").forward(request, response);
+        OrderDAO orderDao = new OrderDAO();
+        List<Order> orderList = orderDao.getOrderNotAcceptByShipperID();
+        if (orderList == null) {
+            response.sendRedirect("error_Database.jsp");
+        } else {
+            request.setAttribute("listorder", orderList);
+            request.getRequestDispatcher("homeshipper.jsp").forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

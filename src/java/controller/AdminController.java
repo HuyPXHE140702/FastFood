@@ -35,10 +35,15 @@ public class AdminController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            
-          List<Account> list = new AccountDAO().getallAccount();
-           request.setAttribute("listAccounts",list);
-           request.getRequestDispatcher("admin.jsp").forward(request, response);
+
+            List<Account> accountList = new AccountDAO().getallAccount();
+            if (accountList == null) {
+                response.sendRedirect("error_Database.jsp");
+            } else {
+
+                request.setAttribute("listAccounts", accountList);
+                request.getRequestDispatcher("admin.jsp").forward(request, response);
+            }
         }
     }
 

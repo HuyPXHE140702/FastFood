@@ -40,20 +40,25 @@ public class HomeController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            FoodDAO food = new FoodDAO();
+            FoodDAO foodDao = new FoodDAO();
             String specialFood = "2021-07-18";
             String newestFood = "2022-02-12";
 //            List<Food> list = food.getallFood();
-            List<Food> listFoodSpec = food.getFoodbyDateCreated(specialFood);
-            List<Food> listFoodNew = food.getFoodbyDateCreated(newestFood);
+            List<Food> listFoodSpec = foodDao.getFoodbyDateCreated(specialFood);
+            List<Food> listFoodNew = foodDao.getFoodbyDateCreated(newestFood);
 
             HttpSession session = request.getSession();
-            session.setAttribute("listspecialfood", listFoodSpec);
-            session.setAttribute("listnewestfood", listFoodNew);
+            if (listFoodNew == null || listFoodSpec == null) {
+                response.sendRedirect("error_Database.jsp");
+            } else {
 
-            session.setAttribute("urlHistory", "home");
+                session.setAttribute("listspecialfood", listFoodSpec);
+                session.setAttribute("listnewestfood", listFoodNew);
 
-            request.getRequestDispatcher("home.jsp").forward(request, response);
+                session.setAttribute("urlHistory", "home");
+
+                request.getRequestDispatcher("home.jsp").forward(request, response);
+            }
         }
     }
 
