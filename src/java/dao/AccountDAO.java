@@ -9,7 +9,7 @@ import model.Account;
 
 public class AccountDAO {
 
-    public List<Account> getallAccount() {
+    public List<Account> getallAccount() throws Exception {
         List<Account> list = new ArrayList<>();
 
         try {
@@ -32,6 +32,9 @@ public class AccountDAO {
             }
 
         } catch (Exception e) {
+            throw e;
+        } finally {
+
         }
         return list;
     }
@@ -121,6 +124,7 @@ public class AccountDAO {
         }
         return null;
     }
+
     public Account getAccountByID(int id) {
         String sql = "select *from Account where ID = ?";
         try {
@@ -128,7 +132,7 @@ public class AccountDAO {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 return new Account(rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
@@ -145,6 +149,7 @@ public class AccountDAO {
         }
         return null;
     }
+
     public Account deleteAccountByID(int id) {
         String sql = "delete from Account where ID = ?";
         try {
@@ -169,6 +174,7 @@ public class AccountDAO {
         }
         return null;
     }
+
     public void editAccountById(String username, String password, String displayName, String address, String phone, int isCustomer, int isShipper, int isSeller, int id) {
         String sql = "UPDATE [dbo].[Account]\n"
                 + "   SET [Username] = ?\n"
@@ -223,9 +229,10 @@ public class AccountDAO {
         }
 
     }
-    public String getUsernameById(int id){
+
+    public String getUsernameById(int id) {
         try {
-            String sql= "select Username from Account where id = ?";
+            String sql = "select Username from Account where id = ?";
             Connection conn = new DBContext().getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
