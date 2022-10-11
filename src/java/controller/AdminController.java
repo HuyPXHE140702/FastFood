@@ -44,6 +44,8 @@ public class AdminController extends HttpServlet {
                 request.setAttribute("listAccounts", accountList);
                 request.getRequestDispatcher("admin.jsp").forward(request, response);
             }
+        } catch (Exception e) {
+            response.sendRedirect("error_Database.jsp");
         }
     }
 
