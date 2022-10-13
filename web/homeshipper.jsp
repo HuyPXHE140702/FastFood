@@ -80,6 +80,7 @@
                             <th scope="col">Address</th>
                             <th scope="col">Phone</th>
                             <th scope="col">Total Price</th>
+                            <th scope="col">Date Created</th>
                             <th scope="col">View</th>
                             <th scope="col">Status</th>
                         </tr>
@@ -97,6 +98,7 @@
                                 <td>${l.address}</td>
                                 <td>${l.phone}</td>
                                 <td>$${l.totalprice}</td>
+                                <td>${l.created_date}</td>
                                 <td>
                                     <a class="btn btn-outline-dark" href="viewBillByShipper?orderID=${l.orderid}&cusname=${l.name}">View</a>
                                 </td>
