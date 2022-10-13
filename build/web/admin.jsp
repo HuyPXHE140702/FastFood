@@ -60,7 +60,7 @@
                     <a href="#addEmployeeModal" class="btn btn-success " data-toggle="modal" ><i class="bi bi-plus-circle-fill"></i> Add</a>
                 </div>
                 <br>
-                <h1>List Account</h1>
+                <h1>Account List</h1>
                 <form action="admin" method="POST">
                     <input type="text" id="myInput" name ="Displayname" placeholder="Search for names.." title="Type in a name">
                     <select name="roles" id="cars">

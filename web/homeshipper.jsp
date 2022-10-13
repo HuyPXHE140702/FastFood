@@ -66,7 +66,7 @@
                 <br>
                 <br>
 
-                <h1>List</h1>
+                <h1>Order List</h1>
                 <form action="homeshipper" method="POST">
                     From Date: <input type="date" id="myInput" name ="DateFrom" title="Type in a date from">
                     - To Date: <input type="date" id="myInput" name ="DateTo" title="Type in a date to">

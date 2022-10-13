@@ -11,6 +11,7 @@ package controller;
 
 import dao.OrderDAO;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -80,17 +81,28 @@ public class HomeshipperController extends HttpServlet {
         try {
             String dateFrom = (String) request.getParameter("DateFrom");
             String dateTo = (String) request.getParameter("DateTo");
-            String condition = "BETWEEN ? and ?";
-            
+            String condition = "and created_date BETWEEN ? and ?";
+
             OrderDAO orderDao = new OrderDAO();
-            List<Order> orderList = orderDao.getOrderByDate(dateFrom, dateTo, condition);
+            List<Order> orderList = new ArrayList<>();
+            if (dateFrom.equals("") && dateTo.equals("")) {
+                orderList = orderDao.getOrderNotAcceptByShipperID();
+            } else if (dateFrom.equals("")) {
+                condition = "and created_date <= ?";
+                orderList = orderDao.getOrderByDate(dateTo, condition);
+            } else if (dateTo.equals("")) {
+                condition = "and created_date >= ?";
+                orderList = orderDao.getOrderByDate(dateFrom, condition);
+            } else {
+                orderList = orderDao.getOrderByDateToDate(dateFrom, dateTo, condition);
+            }
 
             request.setAttribute("listorder", orderList);
             request.getRequestDispatcher("homeshipper.jsp").forward(request, response);
 
         } catch (Exception e) {
             e.printStackTrace();
-            
+
             response.sendRedirect("error_Database.jsp");
         }
 
