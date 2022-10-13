@@ -67,7 +67,11 @@
                 <br>
 
                 <h1>List</h1>
-
+                <form action="homeshipper" method="POST">
+                    <input type="date" id="myInput" name ="DateFrom" placeholder="Date from..." title="Type in a date from">
+                    <input type="date" id="myInput" name ="DateTo" placeholder="Date from..." title="Type in a date to">
+                    <input type="submit" value="Search">
+                </form>
                 <table class="table">
                     <thead>
                         <tr>

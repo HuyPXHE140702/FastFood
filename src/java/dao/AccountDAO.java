@@ -246,4 +246,36 @@ public class AccountDAO {
         return null;
     }
 
+    public List<Account> getAccountByName(String name, String role) throws Exception {
+        List<Account> list = new ArrayList<>();
+        try {
+            //String extra = "";
+            
+            String sql = "SELECT * from Account WHERE Displayname like ? " + role;
+
+            Connection conn = new DBContext().getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, "%" + name + "%");
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Account(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getInt(7),
+                        rs.getInt(8),
+                        rs.getInt(9),
+                        rs.getInt(10),
+                        rs.getInt(11)));
+            }
+
+        } catch (Exception e) {
+            throw e;
+        } finally {
+
+        }
+        return list;
+    }
 }

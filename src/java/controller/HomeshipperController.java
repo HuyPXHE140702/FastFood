@@ -36,14 +36,19 @@ public class HomeshipperController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        OrderDAO orderDao = new OrderDAO();
-        List<Order> orderList = orderDao.getOrderNotAcceptByShipperID();
-        if (orderList == null) {
+        try {
+            OrderDAO orderDao = new OrderDAO();
+            List<Order> orderList = orderDao.getOrderNotAcceptByShipperID();
+            if (orderList == null) {
+                response.sendRedirect("error_Database.jsp");
+            } else {
+                request.setAttribute("listorder", orderList);
+                request.getRequestDispatcher("homeshipper.jsp").forward(request, response);
+            }
+        } catch (Exception e) {
             response.sendRedirect("error_Database.jsp");
-        } else {
-            request.setAttribute("listorder", orderList);
-            request.getRequestDispatcher("homeshipper.jsp").forward(request, response);
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -72,7 +77,19 @@ public class HomeshipperController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            String dateFrom = (String) request.getParameter("DateFrom");
+            String dateTo = (String) request.getParameter("DateTo");
+            OrderDAO orderDao = new OrderDAO();
+            List<Order> orderList = orderDao.getOrderByDate(dateFrom, dateTo);
+
+            request.setAttribute("listorder", orderList);
+            request.getRequestDispatcher("homeshipper.jsp").forward(request, response);
+
+        } catch (Exception e) {
+            response.sendRedirect("error_Database.jsp");
+        }
+
     }
 
     /**

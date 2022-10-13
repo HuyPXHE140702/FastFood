@@ -55,12 +55,23 @@
 
                 <br>
                 <h6 style="color: #be123c">${msg}</h6>
-               <h6 style="color: #be123c">${error}</h6>
+                <h6 style="color: #be123c">${error}</h6>
                 <div>
                     <a href="#addEmployeeModal" class="btn btn-success " data-toggle="modal" ><i class="bi bi-plus-circle-fill"></i> Add</a>
                 </div>
                 <br>
                 <h1>List Account</h1>
+                <form action="admin" method="POST">
+                    <input type="text" id="myInput" name ="Displayname" placeholder="Search for names.." title="Type in a name">
+                    <select name="roles" id="cars">
+                        <option value="all">All roles</option>
+                        <option value="admin">Admin</option>
+                        <option value="customer">Customer</option>
+                        <option value="seller">Seller</option>
+                        <option value="shipper">Shipper</option>
+                    </select>
+                    <input type="submit" value="Search">
+                </form>
 
                 <table class="table" >
                     <thead>

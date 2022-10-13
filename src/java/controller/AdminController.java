@@ -75,7 +75,29 @@ public class AdminController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+
+            String name = request.getParameter("Displayname");
+            String role = (String) request.getParameter("roles");
+            String extra = "";
+            if (role.equalsIgnoreCase("all")) {
+                extra = "";
+            } else if (role.equalsIgnoreCase("admin")) {
+                extra = "and isAdmin = 1";
+            } else if (role.equalsIgnoreCase("customer")) {
+                extra = "and isCustomer = 1";
+            } else if (role.equalsIgnoreCase("seller")) {
+                extra = "and isSaller = 1";
+            } else if (role.equalsIgnoreCase("shipper")) {
+                extra = "and isShipper = 1";
+            }
+            List<Account> accountList = new AccountDAO().getAccountByName(name, extra);
+            request.setAttribute("listAccounts", accountList);
+            request.getRequestDispatcher("admin.jsp").forward(request, response);
+        } catch (Exception e) {
+            response.sendRedirect("error_Database.jsp");
+        }
     }
 
     /**
