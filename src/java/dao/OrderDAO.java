@@ -66,14 +66,21 @@ public class OrderDAO {
         return list;
     }
 
-    public List<Order> getOrderByDate(String dateFrom, String dateTo) throws Exception  {
+    public List<Order> getOrderByDate(String dateFrom, String dateTo, String condition) throws Exception {
         List<Order> list = new ArrayList<>();
         try {
-            String sql = "SELECT * from Orders WHERE created_date BETWEEN";
+
+            if (dateFrom.equals("")) {
+                condition = "<=";
+            }
+            if (dateTo.equals("")) {
+                condition = ">=";
+            }
+            String sql = "SELECT * from Orders WHERE created_date " + condition;
             Connection conn = new DBContext().getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, "%" + dateFrom + "%");
-            ps.setString(2, "%" + dateTo + "%");
+            ps.setString(1, dateFrom);
+            ps.setString(2, dateTo);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 list.add(new Order(rs.getInt(1),

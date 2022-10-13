@@ -80,14 +80,17 @@ public class HomeshipperController extends HttpServlet {
         try {
             String dateFrom = (String) request.getParameter("DateFrom");
             String dateTo = (String) request.getParameter("DateTo");
+            String condition = "BETWEEN ? and ?";
+            
             OrderDAO orderDao = new OrderDAO();
-            List<Order> orderList = orderDao.getOrderByDate(dateFrom, dateTo);
+            List<Order> orderList = orderDao.getOrderByDate(dateFrom, dateTo, condition);
 
             request.setAttribute("listorder", orderList);
             request.getRequestDispatcher("homeshipper.jsp").forward(request, response);
 
         } catch (Exception e) {
             e.printStackTrace();
+            
             response.sendRedirect("error_Database.jsp");
         }
 
