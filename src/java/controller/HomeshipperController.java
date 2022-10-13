@@ -87,6 +87,7 @@ public class HomeshipperController extends HttpServlet {
             request.getRequestDispatcher("homeshipper.jsp").forward(request, response);
 
         } catch (Exception e) {
+            e.printStackTrace();
             response.sendRedirect("error_Database.jsp");
         }
 

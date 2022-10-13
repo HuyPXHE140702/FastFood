@@ -66,7 +66,7 @@ public class OrderDAO {
         return list;
     }
 
-    public List<Order> getOrderByDate(String dateFrom, String dateTo) {
+    public List<Order> getOrderByDate(String dateFrom, String dateTo) throws Exception  {
         List<Order> list = new ArrayList<>();
         try {
             String sql = "SELECT * from Orders WHERE created_date BETWEEN";
@@ -88,6 +88,7 @@ public class OrderDAO {
                         rs.getBoolean(10)));
             }
         } catch (Exception e) {
+            throw e;
         }
         return list;
     }
