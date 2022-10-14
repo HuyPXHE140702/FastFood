@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import model.Account;
@@ -246,12 +247,14 @@ public class AccountDAO {
         return null;
     }
 
-    public List<Account> getAccountByName(String name, String role) throws Exception {
+    public List<Account> getAccountByName(String name, String role, int offset) throws Exception {
         List<Account> list = new ArrayList<>();
         try {
             //String extra = "";
-            
-            String sql = "SELECT * from Account WHERE Displayname like ? " + role;
+
+            String sql = "SELECT * from Account WHERE Displayname like ? " + role
+                    + "ORDER BY ID "
+                    + "OFFSET " + offset + " ROWS FETCH NEXT 3 ROWS ONLY";
 
             Connection conn = new DBContext().getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -277,5 +280,84 @@ public class AccountDAO {
 
         }
         return list;
+    }
+
+    public List<Account> viewAllAccounts(int offset, int noOfRecords) throws Exception {
+        String sql = "SELECT * FROM Account "
+                + "ORDER BY ID "
+                + "OFFSET " + offset + " ROWS FETCH NEXT " + noOfRecords + " ROWS ONLY";
+        List<Account> list = new ArrayList<Account>();
+        try {
+            Connection conn = new DBContext().getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                list.add(new Account(rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getInt(7),
+                        rs.getInt(8),
+                        rs.getInt(9),
+                        rs.getInt(10),
+                        rs.getInt(11)));
+            }
+            rs.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+//            try {
+//                if (ps != null) {
+//                    ps.close();
+//                }
+//                if (connection != null) {
+//                    connection.close();
+//                }
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//            }
+        }
+        return list;
+    }
+
+    public int getNoOfRecords() throws Exception {
+        int noOfRecords = 0;
+        String sql = "SELECT COUNT(*) FROM Account";
+        try {
+            Connection conn = new DBContext().getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                noOfRecords = rs.getInt(1);
+            }
+            rs.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return noOfRecords;
+    }
+    
+    public int getNoOfRecordsPost(String condition) throws Exception {
+        int noOfRecords = 0;
+        String sql = "SELECT COUNT(*) FROM Account " + condition;
+        try {
+            Connection conn = new DBContext().getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                noOfRecords = rs.getInt(1);
+            }
+            rs.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return noOfRecords;
     }
 }
