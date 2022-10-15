@@ -175,6 +175,37 @@ public class AccountDAO {
         }
         return null;
     }
+     public void addNewAccount(String username, String password, String displayName, String address, String phone, int isCustomer, int isShipper, int isSeller) {
+        String sql = "INSERT INTO [dbo].[Account]\n"
+                + "           ([Username]\n"
+                + "           ,[Password]\n"
+                + "           ,[Displayname]\n"
+                + "           ,[Address]\n"
+                + "           ,[Phone]\n"
+                + "           ,[isAdmin]\n"
+                + "           ,[isCustomer]\n"
+                + "           ,[IsShipper]\n"
+                + "           ,[IsSaller]\n"
+                + "           ,[status])\n"
+                + "     VALUES\n"
+                + "           (?,?,?,?,?,0,?,?,?,0)";
+        try {
+            Connection conn = new DBContext().getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, username);
+            ps.setString(2, password);
+            ps.setString(3, displayName);
+            ps.setString(4, address);
+            ps.setString(5, phone);
+            ps.setInt(6, isCustomer);
+            ps.setInt(7, isShipper);
+            ps.setInt(8, isSeller);
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+        }
+
+    }
 
     public void editAccountById(String username, String password, String displayName, String address, String phone, int isCustomer, int isShipper, int isSeller, int id) {
         String sql = "UPDATE [dbo].[Account]\n"
