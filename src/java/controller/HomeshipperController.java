@@ -9,6 +9,7 @@
  */
 package controller;
 
+import dao.AccountDAO;
 import dao.OrderDAO;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Account;
 import model.Order;
 
 /**
@@ -37,18 +39,18 @@ public class HomeshipperController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try {
-            OrderDAO orderDao = new OrderDAO();
-            List<Order> orderList = orderDao.getOrderNotAcceptByShipperID();
-            if (orderList == null) {
-                response.sendRedirect("error_Database.jsp");
-            } else {
-                request.setAttribute("listorder", orderList);
-                request.getRequestDispatcher("homeshipper.jsp").forward(request, response);
-            }
-        } catch (Exception e) {
-            response.sendRedirect("error_Database.jsp");
-        }
+//        try {
+//            OrderDAO orderDao = new OrderDAO();
+//            List<Order> orderList = orderDao.getOrderNotAcceptByShipperID();
+//            if (orderList == null) {
+//                response.sendRedirect("error_Database.jsp");
+//            } else {
+//                request.setAttribute("listorder", orderList);
+//                request.getRequestDispatcher("homeshipper.jsp").forward(request, response);
+//            }
+//        } catch (Exception e) {
+//            response.sendRedirect("error_Database.jsp");
+//        }
 
     }
 
@@ -65,6 +67,23 @@ public class HomeshipperController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        try {
+            int page = 1;
+            int recordsPerPage = 3;
+            if (request.getParameter("page") != null) {
+                page = Integer.parseInt(request.getParameter("page"));
+            }
+            OrderDAO dao = new OrderDAO();
+            List<Order> orderList = dao.viewAllOrders((page - 1) * recordsPerPage, recordsPerPage);
+            int noOfRecords = dao.getNoOfRecords();
+            int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+            request.setAttribute("listOrder", orderList);
+            request.setAttribute("noOfPages", noOfPages);
+            request.setAttribute("currentPage", page);
+            request.getRequestDispatcher("homeshipper.jsp").forward(request, response);
+        } catch (Exception e) {
+            response.sendRedirect("error_Database.jsp");
+        }
     }
 
     /**
@@ -97,7 +116,7 @@ public class HomeshipperController extends HttpServlet {
                 orderList = orderDao.getOrderByDateToDate(dateFrom, dateTo, condition);
             }
 
-            request.setAttribute("listorder", orderList);
+            request.setAttribute("listOrder", orderList);
             request.getRequestDispatcher("homeshipper.jsp").forward(request, response);
 
         } catch (Exception e) {
