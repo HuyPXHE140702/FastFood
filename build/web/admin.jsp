@@ -55,12 +55,23 @@
 
                 <br>
                 <h6 style="color: #be123c">${msg}</h6>
-               <h6 style="color: #be123c">${error}</h6>
+                <h6 style="color: #be123c">${error}</h6>
                 <div>
                     <a href="#addEmployeeModal" class="btn btn-success " data-toggle="modal" ><i class="bi bi-plus-circle-fill"></i> Add</a>
                 </div>
                 <br>
-                <h1>List Account</h1>
+                <h1>Account List</h1>
+                <form action="admin" method="POST">
+                    <input type="text" id="myInput" name ="Displayname" placeholder="Search for names.." title="Type in a name">
+                    <select name="roles" id="cars">
+                        <option value="all">All roles</option>
+                        <option value="admin">Admin</option>
+                        <option value="customer">Customer</option>
+                        <option value="seller">Seller</option>
+                        <option value="shipper">Shipper</option>
+                    </select>
+                    <input type="submit" value="Search">
+                </form>
 
                 <table class="table" >
                     <thead>
@@ -129,15 +140,39 @@
                                     </c:if>
                                 </td>
 
-
-
-
                             </tr>
                         </c:forEach>
 
                     </tbody>
                 </table>
+                <%--For displaying Previous link except for the 1st page --%>
+                <c:if test="${currentPage != 1}">
+                    <td><a href="admin?page=${currentPage - 1}">Previous</a></td>
+                </c:if>
+
+                <%--For displaying Page numbers. 
+                The when condition does not display a link for the current page--%>
+                <table border="1" cellpadding="5" cellspacing="5">
+                    <tr>
+                        <c:forEach begin="1" end="${noOfPages}" var="i">
+                            <c:choose>
+                                <c:when test="${currentPage eq i}">
+                                    <td>${i}</td>
+                                </c:when>
+                                <c:otherwise>
+                                    <td><a href="admin?page=${i}">${i}</a></td>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
+                    </tr>
+                </table>
+
+                <%--For displaying Next link --%>
+                <c:if test="${currentPage lt noOfPages}">
+                    <td><a href="admin?page=${currentPage + 1}">Next</a></td>
+                </c:if>
             </div>
+
         </section>
         <!-- Add new Account -->
         <div id="addEmployeeModal" class="modal fade">

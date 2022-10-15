@@ -66,8 +66,12 @@
                 <br>
                 <br>
 
-                <h1>List</h1>
-
+                <h1>Order List</h1>
+                <form action="homeshipper" method="POST">
+                    From Date: <input type="date" id="myInput" name ="DateFrom" title="Type in a date from">
+                    - To Date: <input type="date" id="myInput" name ="DateTo" title="Type in a date to">
+                    <input type="submit" value="Search">
+                </form>
                 <table class="table">
                     <thead>
                         <tr>
@@ -76,6 +80,7 @@
                             <th scope="col">Address</th>
                             <th scope="col">Phone</th>
                             <th scope="col">Total Price</th>
+                            <th scope="col">Date Created</th>
                             <th scope="col">View</th>
                             <th scope="col">Status</th>
                         </tr>
@@ -84,7 +89,7 @@
                         <input value="${sessionScope.acc.id}" name="idShipper">
                     </a>
                     <tbody>
-                        <c:forEach items="${listorder}" var="l">
+                        <c:forEach items="${listOrder}" var="l">
                             <tr>
 
                                 <th hidden scope="row">${l.orderid}</th>
@@ -93,6 +98,7 @@
                                 <td>${l.address}</td>
                                 <td>${l.phone}</td>
                                 <td>$${l.totalprice}</td>
+                                <td>${l.created_date}</td>
                                 <td>
                                     <a class="btn btn-outline-dark" href="viewBillByShipper?orderID=${l.orderid}&cusname=${l.name}">View</a>
                                 </td>
@@ -104,6 +110,32 @@
                         </c:forEach>
                     </tbody>
                 </table>
+                    <%--For displaying Previous link except for the 1st page --%>
+                <c:if test="${currentPage != 1}">
+                    <td><a href="homeshipper?page=${currentPage - 1}">Previous</a></td>
+                </c:if>
+
+                <%--For displaying Page numbers. 
+                The when condition does not display a link for the current page--%>
+                <table border="1" cellpadding="5" cellspacing="5">
+                    <tr>
+                        <c:forEach begin="1" end="${noOfPages}" var="i">
+                            <c:choose>
+                                <c:when test="${currentPage eq i}">
+                                    <td>${i}</td>
+                                </c:when>
+                                <c:otherwise>
+                                    <td><a href="homeshipper?page=${i}">${i}</a></td>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
+                    </tr>
+                </table>
+
+                <%--For displaying Next link --%>
+                <c:if test="${currentPage lt noOfPages}">
+                    <td><a href="homeshipper?page=${currentPage + 1}">Next</a></td>
+                </c:if>
             </div>
         </section>
 
