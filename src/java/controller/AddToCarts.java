@@ -49,12 +49,7 @@ public class AddToCarts extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
            int foodid = Integer.parseInt(request.getParameter("foodid"));
             HttpSession session = request.getSession();
-            //checklogin
-//            Account account = (Account) session.getAttribute("acc");
-//            if(account ==null){
-//                response.sendRedirect("login.jsp");
-//                return;
-//            }
+            
             Map<Integer,model.Cart> carts = (Map<Integer,model.Cart>) session.getAttribute("carts");
             if(carts == null){
                 carts = new LinkedHashMap<>();//linkedmap se sap xep theo thu tu
@@ -67,10 +62,10 @@ public class AddToCarts extends HttpServlet {
                 Food food =  new FoodDAOImpl().getFoodById(foodid);
                 carts.put(foodid,new model.Cart(food,1));
             }
+            
             //th1: sp chua co trong gio hang
             //th2: san pham da co tren gio hang -> cap nhat lai so luong tren gio hang
             session.setAttribute("carts", carts);
-//            response.getWriter().println(carts.size());
             String urlHistory = (String) session.getAttribute("urlHistory");
             if(urlHistory == null){
                 urlHistory = "home";

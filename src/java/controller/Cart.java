@@ -34,21 +34,22 @@ public class Cart extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+            
+            //kiem tra Cart co san
             HttpSession session = request.getSession();
             Map<Integer, model.Cart> carts = (Map<Integer, model.Cart>) session.getAttribute("carts");
             if (carts== null) {
                 carts = new LinkedHashMap<>();
             }
             //tinh total amout
-            float totalAmout = 0;
+            float totalAmount = 0;
             for (Map.Entry<Integer, model.Cart> entry : carts.entrySet()) {
-                Integer foodid = entry.getKey();
-                model.Cart cart = entry.getValue();
-                
-                totalAmout+= cart.getQuantity()*cart.getProduct().getUnitprice();
+                //lay ra gia tri mon hang
+                model.Cart ItemCart = entry.getValue();
+                //cong vao tong amount
+                totalAmount+= ItemCart.getQuantity()*ItemCart.getProduct().getUnitprice();
             }
-            request.setAttribute("totalAmount", totalAmout);
+            request.setAttribute("totalAmount", totalAmount);
             request.setAttribute("carts", carts);
             request.getRequestDispatcher("cart.jsp").forward(request, response);
         }
