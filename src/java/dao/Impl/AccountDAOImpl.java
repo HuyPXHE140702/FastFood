@@ -275,9 +275,11 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
+        //create dao
         BaseDAO baseDAO = new BaseDAOImpl();
         try {
             connection = baseDAO.getConnection();
+            //connect sql querry
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, password);
@@ -413,14 +415,12 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
      */
     @Override
     public List<Account> getAccountByName(String name, String role, int offset) throws Exception {
-        List<Account> list = new ArrayList<>();
+        List<Account> accountList = new ArrayList<>();
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         BaseDAO baseDAO = new BaseDAOImpl();
         try {
-            //String extra = "";
-
             String sql = "SELECT * from Account WHERE Displayname like ? " + role
                     + "ORDER BY ID "
                     + "OFFSET " + offset + " ROWS FETCH NEXT 3 ROWS ONLY";
@@ -429,17 +429,17 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
             preparedStatement.setString(1, "%" + name + "%");
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                list.add(new Account(resultSet.getInt(1),
-                        resultSet.getString(2),
-                        resultSet.getString(3),
-                        resultSet.getString(4),
-                        resultSet.getString(5),
-                        resultSet.getString(6),
-                        resultSet.getInt(7),
-                        resultSet.getInt(8),
-                        resultSet.getInt(9),
-                        resultSet.getInt(10),
-                        resultSet.getInt(11)));
+                accountList.add(new Account(resultSet.getInt("ID"),
+                        resultSet.getString("Username"),
+                        resultSet.getString("Password"),
+                        resultSet.getString("Displayname"),
+                        resultSet.getString("Address"),
+                        resultSet.getString("Phone"),
+                        resultSet.getInt("isAdmin"),
+                        resultSet.getInt("isCustomer"),
+                        resultSet.getInt("IsShipper"),
+                        resultSet.getInt("IsSaller"),
+                        resultSet.getInt("status")));
             }
 
         } catch (Exception e) {
@@ -449,7 +449,7 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
             baseDAO.closePreparedStatement(preparedStatement);
             baseDAO.closeConnection(connection);
         }
-        return list;
+        return accountList;
     }
 
     /**
@@ -470,7 +470,7 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         String sql = "SELECT * FROM Account "
                 + "ORDER BY ID "
                 + "OFFSET " + offset + " ROWS FETCH NEXT " + noOfRecords + " ROWS ONLY";
-        List<Account> list = new ArrayList<>();
+        List<Account> accountList = new ArrayList<>();
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -480,17 +480,17 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
             preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                list.add(new Account(resultSet.getInt(1),
-                        resultSet.getString(2),
-                        resultSet.getString(3),
-                        resultSet.getString(4),
-                        resultSet.getString(5),
-                        resultSet.getString(6),
-                        resultSet.getInt(7),
-                        resultSet.getInt(8),
-                        resultSet.getInt(9),
-                        resultSet.getInt(10),
-                        resultSet.getInt(11)));
+                accountList.add(new Account(resultSet.getInt("ID"),
+                        resultSet.getString("Username"),
+                        resultSet.getString("Password"),
+                        resultSet.getString("Displayname"),
+                        resultSet.getString("Address"),
+                        resultSet.getString("Phone"),
+                        resultSet.getInt("isAdmin"),
+                        resultSet.getInt("isCustomer"),
+                        resultSet.getInt("IsShipper"),
+                        resultSet.getInt("IsSaller"),
+                        resultSet.getInt("status")));
             }
             resultSet.close();
 
@@ -503,7 +503,7 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
             baseDAO.closePreparedStatement(preparedStatement);
             baseDAO.closeConnection(connection);
         }
-        return list;
+        return accountList;
     }
 
     /**
@@ -581,5 +581,51 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
             baseDAO.closeConnection(connection);
         }
         return noOfRecords;
+    }
+
+    /**
+     * Get a number of records of Account table from Database<br>
+     * The result is type of Integer<br>
+     *
+     * @param baseDAO handle connection from Database
+     * @param preparedStatement execute query to Database
+     * @param resultSet get data from Database
+     * @param accountID get id of delete account
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     * @throws SQLException if an SQL error occurs
+     */
+    public Account deleteAcountByID(int accountID) {
+        String sql = "delete from Account where ID = ?";
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        BaseDAO baseDAO = new BaseDAOImpl();
+        try {
+            connection = baseDAO.getConnection();
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, accountID);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                return new Account(resultSet.getInt("ID"),
+                        resultSet.getString("Username"),
+                        resultSet.getString("Password"),
+                        resultSet.getString("Displayname"),
+                        resultSet.getString("Address"),
+                        resultSet.getString("Phone"),
+                        resultSet.getInt("isAdmin"),
+                        resultSet.getInt("isCustomer"),
+                        resultSet.getInt("IsShipper"),
+                        resultSet.getInt("IsSaller"),
+                        resultSet.getInt("status"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            baseDAO.closeResultSet(resultSet);
+            baseDAO.closePreparedStatement(preparedStatement);
+            baseDAO.closeConnection(connection);
+        }
+        return null;
     }
 }

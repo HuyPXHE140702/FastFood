@@ -10,6 +10,7 @@
 package controller;
 
 import dao.Impl.OrderDAOImpl;
+import dao.OrderDAO;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,10 +56,10 @@ public class HomeshipperController extends HttpServlet {
             if (request.getParameter("page") != null) {
                 page = Integer.parseInt(request.getParameter("page"));
             }
-            OrderDAOImpl dao = new OrderDAOImpl();
+            OrderDAO orderDAO = new OrderDAOImpl();
             //get all available orders with paging
-            List<Order> orderList = dao.viewAllOrders((page - 1) * recordsPerPage, recordsPerPage);
-            int noOfRecords = dao.getNoOfRecords();
+            List<Order> orderList = orderDAO.viewAllOrders((page - 1) * recordsPerPage, recordsPerPage);
+            int noOfRecords = orderDAO.getNoOfRecords();
             int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
             request.setAttribute("listOrder", orderList);
             request.setAttribute("noOfPages", noOfPages);
@@ -93,7 +94,7 @@ public class HomeshipperController extends HttpServlet {
             if (request.getParameter("page") != null) {
                 page = Integer.parseInt(request.getParameter("page"));
             }
-            OrderDAOImpl orderDao = new OrderDAOImpl();
+            OrderDAO orderDao = new OrderDAOImpl();
 
             List<Order> orderList = new ArrayList<>();
             //if search form empty

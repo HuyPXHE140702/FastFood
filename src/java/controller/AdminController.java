@@ -9,6 +9,7 @@
  */
 package controller;
 
+import dao.AccountDAO;
 import dao.Impl.AccountDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -38,7 +39,7 @@ public class AdminController extends HttpServlet {
      * Get a list of Account for Admin role to view, edit, add with paging <br>
      * The result contain a list of <code>model.Account </code> objects <br>
      *
-     * @param baseDAO get connection from Database
+     * @param accountDAO get connection from Database
      * @param accountList request data from Database
      * @param request set attribute for jsp page
      * @throws ServletException if a servlet-specific error occurs
@@ -56,10 +57,10 @@ public class AdminController extends HttpServlet {
                 page = Integer.parseInt(request.getParameter("page"));
             }
             String role = (String) request.getParameter("roles");
-            AccountDAOImpl dao = new AccountDAOImpl();
+            AccountDAO accountDAO = new AccountDAOImpl();
             //get all account with paging
-            List<Account> accountList = dao.viewAllAccounts((page - 1) * recordsPerPage, recordsPerPage);
-            int noOfRecords = dao.getNoOfRecords();
+            List<Account> accountList = accountDAO.viewAllAccounts((page - 1) * recordsPerPage, recordsPerPage);
+            int noOfRecords = accountDAO.getNoOfRecords();
             int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
             request.setAttribute("listAccounts", accountList);
             request.setAttribute("noOfPages", noOfPages);
@@ -109,7 +110,8 @@ public class AdminController extends HttpServlet {
                 setRole = "and isShipper = 1";
             }
             //get all account with paging and name contain
-            List<Account> accountList = new AccountDAOImpl().getAccountByName(name, setRole, (page - 1) * recordsPerPage);
+            AccountDAO accountDAO = new AccountDAOImpl();
+            List<Account> accountList = accountDAO.getAccountByName(name, setRole, (page - 1) * recordsPerPage);
             int noOfRecords = new AccountDAOImpl().getNoOfRecordsPost(condition + setRole);
             int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
             request.setAttribute("noOfPages", noOfPages);
