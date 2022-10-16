@@ -1,6 +1,6 @@
 package controller;
 
-import dao.AccountDAO;
+import dao.Impl.AccountDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -26,7 +26,7 @@ public class RegisterController extends HttpServlet {
             String phone = request.getParameter("phone");
             String address = request.getParameter("address");
             String password = request.getParameter("password");
-            AccountDAO dao = new AccountDAO();
+            AccountDAOImpl dao = new AccountDAOImpl();
             Account account = dao.checkAccountExist(username);
             if (account == null) {
                 // dc signup

@@ -9,7 +9,7 @@
  */
 package controller;
 
-import dao.FoodDAO;
+import dao.Impl.FoodDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -40,7 +40,7 @@ public class HomeController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            FoodDAO foodDao = new FoodDAO();
+            FoodDAOImpl foodDao = new FoodDAOImpl();
             String specialFood = "2021-07-18";
             String newestFood = "2022-02-12";
 //            List<Food> list = food.getallFood();

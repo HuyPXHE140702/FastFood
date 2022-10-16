@@ -9,8 +9,8 @@
  */
 package controller;
 
-import dao.AccountDAO;
-import dao.OrderDAO;
+import dao.Impl.AccountDAOImpl;
+import dao.Impl.OrderDAOImpl;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -73,7 +73,7 @@ public class HomeshipperController extends HttpServlet {
             if (request.getParameter("page") != null) {
                 page = Integer.parseInt(request.getParameter("page"));
             }
-            OrderDAO dao = new OrderDAO();
+            OrderDAOImpl dao = new OrderDAOImpl();
             List<Order> orderList = dao.viewAllOrders((page - 1) * recordsPerPage, recordsPerPage);
             int noOfRecords = dao.getNoOfRecords();
             int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
@@ -102,7 +102,7 @@ public class HomeshipperController extends HttpServlet {
             String dateTo = (String) request.getParameter("DateTo");
             String condition = "and created_date BETWEEN ? and ?";
 
-            OrderDAO orderDao = new OrderDAO();
+            OrderDAOImpl orderDao = new OrderDAOImpl();
             List<Order> orderList = new ArrayList<>();
             if (dateFrom.equals("") && dateTo.equals("")) {
                 orderList = orderDao.getOrderNotAcceptByShipperID();

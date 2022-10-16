@@ -5,7 +5,7 @@
  */
 package controller;
 
-import dao.AccountDAO;
+import dao.Impl.AccountDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -40,7 +40,7 @@ public class EditProfileController extends HttpServlet {
             String address = request.getParameter("address");
             String phone = request.getParameter("phone");
             String password = request.getParameter("userpass");
-             AccountDAO accdao = new AccountDAO();
+             AccountDAOImpl accdao = new AccountDAOImpl();
              accdao.editProfileById(password, name, address, phone, id);
              String url = "profile?id="+id;
               request.getRequestDispatcher(url).forward(request, response);

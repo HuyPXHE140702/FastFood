@@ -1,6 +1,6 @@
 package controller;
 
-import dao.AccountDAO;
+import dao.Impl.AccountDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -82,7 +82,7 @@ public class LoginController extends HttpServlet {
       throws ServletException, IOException {
     String username = request.getParameter("username");
     String password = request.getParameter("password");
-    AccountDAO dao = new AccountDAO();
+    AccountDAOImpl dao = new AccountDAOImpl();
     Account account = dao.login(username, password);
     //check input 
     if (account == null) {

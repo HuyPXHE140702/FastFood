@@ -9,7 +9,7 @@
  */
 package controller;
 
-import dao.AccountDAO;
+import dao.Impl.AccountDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -58,7 +58,7 @@ public class AdminController extends HttpServlet {
                 page = Integer.parseInt(request.getParameter("page"));
             }
             String role = (String) request.getParameter("roles");
-            AccountDAO dao = new AccountDAO();
+            AccountDAOImpl dao = new AccountDAOImpl();
             List<Account> accountList = dao.viewAllAccounts((page - 1) * recordsPerPage, recordsPerPage);
             int noOfRecords = dao.getNoOfRecords();
             int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
@@ -105,8 +105,8 @@ public class AdminController extends HttpServlet {
             } else if (role.equalsIgnoreCase("shipper")) {
                 setRole = "and isShipper = 1";
             }
-            List<Account> accountList = new AccountDAO().getAccountByName(name, setRole, (page - 1) * recordsPerPage);
-            int noOfRecords = new AccountDAO().getNoOfRecordsPost(condition + setRole);
+            List<Account> accountList = new AccountDAOImpl().getAccountByName(name, setRole, (page - 1) * recordsPerPage);
+            int noOfRecords = new AccountDAOImpl().getNoOfRecordsPost(condition + setRole);
             int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
             request.setAttribute("noOfPages", noOfPages);
             request.setAttribute("currentPage", page);

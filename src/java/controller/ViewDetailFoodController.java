@@ -5,7 +5,7 @@
  */
 package controller;
 
-import dao.FoodDAO;
+import dao.Impl.FoodDAOImpl;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -33,7 +33,7 @@ public class ViewDetailFoodController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
          int foodid = Integer.parseInt(request.getParameter("foodid"));
-         Food food =  new FoodDAO().getFoodById(foodid);
+         Food food =  new FoodDAOImpl().getFoodById(foodid);
          request.setAttribute("food",food);
          request.getSession().setAttribute("urlHistory", "DetailFood?foodid="+foodid);
          request.getRequestDispatcher("detailfood.jsp").forward(request, response);

@@ -5,7 +5,7 @@
  */
 package controller;
 
-import dao.AccountDAO;
+import dao.Impl.AccountDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -73,7 +73,7 @@ public class EditAccountController extends HttpServlet {
         String phone = request.getParameter("phone");
         int role = Integer.parseInt(request.getParameter("role"));
 
-        AccountDAO accdao = new AccountDAO();
+        AccountDAOImpl accdao = new AccountDAOImpl();
         String user = accdao.getUsernameById(id);
         Account account = accdao.checkAccountExist(username);
       

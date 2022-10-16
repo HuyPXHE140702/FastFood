@@ -5,7 +5,7 @@
  */
 package controller;
 
-import dao.AccountDAO;
+import dao.Impl.AccountDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -32,7 +32,7 @@ public class ProfileController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        AccountDAO dao = new AccountDAO();
+        AccountDAOImpl dao = new AccountDAOImpl();
         String id1 = request.getParameter("id");
         int id = Integer.parseInt(id1);
         Account profile = dao.getAccountByID(id);
