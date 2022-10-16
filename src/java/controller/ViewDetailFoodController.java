@@ -17,7 +17,7 @@ import model.Food;
 
 /**
  *
- * @author trung
+ * @author dangtm
  */
 public class ViewDetailFoodController extends HttpServlet {
 
@@ -33,7 +33,7 @@ public class ViewDetailFoodController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
-
+        //show detail food
          int foodid = Integer.parseInt(request.getParameter("foodid"));
          Food food =  new FoodDAOImpl().getFoodById(foodid);
          request.setAttribute("food",food);

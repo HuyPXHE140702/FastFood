@@ -17,7 +17,7 @@ import model.Account;
 
 /**
  *
- * @author dmanh
+ * @author vinhnv
  */
 public class EditAccountController extends HttpServlet {
 

@@ -19,7 +19,7 @@ import model.Account;
 
 /**
  *
- * @author dmanh
+ * @author vinhnv
  */
 public class AddNewAccountController extends HttpServlet {
 

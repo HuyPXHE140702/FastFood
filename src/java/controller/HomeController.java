@@ -46,14 +46,16 @@ public class HomeController extends HttpServlet {
             String specialFood = "2021-07-18";
             String newestFood = "2022-02-12";
 //            List<Food> list = food.getallFood();
+            //get all food in menu
             List<Food> listFoodSpec = foodDao.getFoodbyDateCreated(specialFood);
             List<Food> listFoodNew = foodDao.getFoodbyDateCreated(newestFood);
 
             HttpSession session = request.getSession();
+            //check invalid database
             if (listFoodNew == null || listFoodSpec == null) {
                 response.sendRedirect("error_Database.jsp");
             } else {
-
+                
                 session.setAttribute("listspecialfood", listFoodSpec);
                 session.setAttribute("listnewestfood", listFoodNew);
 

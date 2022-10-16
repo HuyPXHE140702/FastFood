@@ -20,7 +20,7 @@ import model.Food;
 
 /**
  *
- * @author dmanh
+ * @author dangtm
  */
 public class ViewFoodMenuController extends HttpServlet {
 
@@ -41,6 +41,7 @@ public class ViewFoodMenuController extends HttpServlet {
             FoodDAOImpl food = new FoodDAOImpl();
             List<Food> list2 = food.getallFood();
             String indexPage = request.getParameter("index");
+            //check database for pagination 
             if(indexPage == null){
                 indexPage = "1";
             }
@@ -51,6 +52,7 @@ public class ViewFoodMenuController extends HttpServlet {
             if (count % 9 != 0) {
                 endPage++;
             }
+            //get food to pagging
             List<Food> list = food.getProductwithpagging(index);
             request.setAttribute("page", indexPage);//de khi an vao trang 2 thi trang 2 mau den
             request.setAttribute("endP", endPage);
@@ -58,7 +60,7 @@ public class ViewFoodMenuController extends HttpServlet {
             HttpSession session = request.getSession();
             session.setAttribute("listfood", list);
             session.setAttribute("urlHistory", "menu");
-            
+            //show food in menu
             request.getRequestDispatcher("menu.jsp").forward(request, response);
         }
     }

@@ -19,7 +19,7 @@ import model.Account;
 
 /**
  *
- * @author dmanh
+ * @author dangtm
  */
 public class LoadAccountController extends HttpServlet {
 
@@ -39,6 +39,7 @@ public class LoadAccountController extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
              int accountid = Integer.parseInt(request.getParameter("accountid"));
              AccountDAOImpl dao = new AccountDAOImpl();
+            //get account by id
             Account account =  dao.getAccountByID(accountid);
             request.setAttribute("account", account);
             request.getRequestDispatcher("editaccount.jsp").forward(request, response);
