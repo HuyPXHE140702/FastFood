@@ -35,7 +35,7 @@ public class EditAccountController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-          
+
         }
     }
 
@@ -76,30 +76,30 @@ public class EditAccountController extends HttpServlet {
         AccountDAOImpl accdao = new AccountDAOImpl();
         String user = accdao.getUsernameById(id);
         Account account = accdao.checkAccountExist(username);
-      
-        if (account == null || username.equals(user) ) {
+
+        if (account == null || username.equals(user)) {
             //dc add
             switch (role) {
                 case 1:
                     //add customer
-                    accdao.editAccountById(username, password, name, address, phone, 1, 0, 0,id);
+                    accdao.editAccountById(username, password, name, address, phone, 1, 0, 0, id);
                     request.getRequestDispatcher("admin").forward(request, response);
                     break;
                 case 2:
                     //add seller
-                    accdao.editAccountById(username, password, name, address, phone, 0, 0, 1,id);
+                    accdao.editAccountById(username, password, name, address, phone, 0, 0, 1, id);
                     request.getRequestDispatcher("admin").forward(request, response);
                     break;
                 case 3:
                     //add shipper
-                    accdao.editAccountById(username, password, name, address, phone, 0, 1, 0,id);
+                    accdao.editAccountById(username, password, name, address, phone, 0, 1, 0, id);
                     request.getRequestDispatcher("admin").forward(request, response);
                     break;
             }
         } else {
             //ko dc add
             request.setAttribute("error", "Username exist");
-            String url = "loadAccount?accountid="+id;
+            String url = "loadAccount?accountid=" + id;
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

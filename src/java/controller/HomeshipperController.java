@@ -102,20 +102,29 @@ public class HomeshipperController extends HttpServlet {
             String dateTo = (String) request.getParameter("DateTo");
             String condition = "and created_date BETWEEN ? and ?";
 
+            int page = 1;
+            int recordsPerPage = 3;
+            if (request.getParameter("page") != null) {
+                page = Integer.parseInt(request.getParameter("page"));
+            }
             OrderDAOImpl orderDao = new OrderDAOImpl();
+
             List<Order> orderList = new ArrayList<>();
             if (dateFrom.equals("") && dateTo.equals("")) {
-                orderList = orderDao.getOrderNotAcceptByShipperID();
+                orderList = orderDao.viewAllOrders(page, recordsPerPage);
             } else if (dateFrom.equals("")) {
                 condition = "and created_date <= ?";
-                orderList = orderDao.getOrderByDate(dateTo, condition);
+                orderList = orderDao.getOrderByDate(dateTo, condition, (page - 1) * recordsPerPage);
             } else if (dateTo.equals("")) {
                 condition = "and created_date >= ?";
-                orderList = orderDao.getOrderByDate(dateFrom, condition);
+                orderList = orderDao.getOrderByDate(dateFrom, condition, (page - 1) * recordsPerPage);
             } else {
-                orderList = orderDao.getOrderByDateToDate(dateFrom, dateTo, condition);
+                orderList = orderDao.getOrderByDateToDate(dateFrom, dateTo, condition, (page - 1) * recordsPerPage);
             }
-
+            int noOfRecords = orderDao.getNoOfRecords();
+            int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+            request.setAttribute("noOfPages", noOfPages);
+            request.setAttribute("currentPage", page);
             request.setAttribute("listOrder", orderList);
             request.getRequestDispatcher("homeshipper.jsp").forward(request, response);
 

@@ -49,7 +49,7 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
 
     // getAccountById
     @Override
-    public Account login(String username, String password) throws Exception {
+    public Account login(String username, String password) {
         String sql = "select *from Account where Username = ? and Password = ?";
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -76,7 +76,6 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
             }
 
         } catch (Exception e) {
-            throw e;
         } finally {
             baseDAO.closeResultSet(resultSet);
             baseDAO.closePreparedStatement(preparedStatement);
@@ -128,7 +127,7 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
     }
 
     @Override
-    public Account checkAccountExist(String username) throws Exception {
+    public Account checkAccountExist(String username) {
         String sql = "select *from Account where Username = ?";
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -154,7 +153,6 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
             }
 
         } catch (Exception e) {
-            throw e;
         } finally {
             baseDAO.closeResultSet(resultSet);
             baseDAO.closePreparedStatement(preparedStatement);
@@ -276,7 +274,7 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
     }
 
     @Override
-    public void editAccountById(String username, String password, String displayName, String address, String phone, int isCustomer, int isShipper, int isSeller, int id) throws Exception {
+    public void editAccountById(String username, String password, String displayName, String address, String phone, int isCustomer, int isShipper, int isSeller, int id) {
         String sql = "UPDATE [dbo].[Account]\n"
                 + "   SET [Username] = ?\n"
                 + "      ,[Password] =?\n"
@@ -308,7 +306,6 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
             preparedStatement.executeUpdate();
 
         } catch (Exception e) {
-            throw e;
         } finally {
             baseDAO.closeResultSet(resultSet);
             baseDAO.closePreparedStatement(preparedStatement);
@@ -318,7 +315,7 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
     }
 
     @Override
-    public void editProfileById(String password, String displayName, String address, String phone, int id) throws Exception {
+    public void editProfileById(String password, String displayName, String address, String phone, int id) {
         String sql = "UPDATE [dbo].[Account]\n"
                 + "   SET [Password] =?\n"
                 + "      ,[Displayname] = ?\n"
@@ -341,7 +338,6 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
             preparedStatement.executeUpdate();
 
         } catch (Exception e) {
-            throw e;
         } finally {
             baseDAO.closeResultSet(resultSet);
             baseDAO.closePreparedStatement(preparedStatement);
@@ -350,7 +346,7 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
     }
 
     @Override
-    public String getUsernameById(int id) throws Exception {
+    public String getUsernameById(int id) {
         String sql = "select Username from Account where id = ?";
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -366,7 +362,7 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
             }
 
         } catch (Exception e) {
-            throw e;
+
         } finally {
             baseDAO.closeResultSet(resultSet);
             baseDAO.closePreparedStatement(preparedStatement);
