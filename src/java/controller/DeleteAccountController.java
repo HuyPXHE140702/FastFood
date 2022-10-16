@@ -1,7 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright(C) 2005, FPT University
+ * Java MVC:
+ *  Fast Food Shop
+ *
+ * Record of change:
+ * DATE            Version             AUTHOR                   DESCRIPTION
+ * 2022-10-02      1.0                 HuyPXHE140702            First Implement
  */
 package controller;
 
@@ -15,19 +19,24 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ * The class contains method to delete an account for Admin role<br>
+ * The method wil throw an object of  <code>java.lang.Exception</code> class if
+ * there is any error occurring when finding, inserting, or updating data<br>
  *
- * @author dmanh
+ * @author HuyPX
  */
 public class DeleteAccountController extends HttpServlet {
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
+     * Get a list of Account for Admin role to view, edit, add with paging <br>
+     * The result contain a list of <code>model.Account </code> objects <br>
      *
-     * @param request servlet request
-     * @param response servlet response
+     * @param accountDAO get connection from Database
+     * @param accountId get accountID to delete
+     * @param request set attribute for jsp page
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws SQLException if an SQL error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

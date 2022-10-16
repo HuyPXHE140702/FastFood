@@ -42,5 +42,5 @@ public interface AccountDAO {
 
     public int getNoOfRecordsPost(String condition) throws Exception;
     
-    public Account deleteAcountByID(int id);
+    public Account deleteAcountByID(int accountID);
 }

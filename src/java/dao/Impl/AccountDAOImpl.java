@@ -583,7 +583,19 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         return noOfRecords;
     }
 
-    public Account deleteAcountByID(int id) {
+    /**
+     * Get a number of records of Account table from Database<br>
+     * The result is type of Integer<br>
+     *
+     * @param baseDAO handle connection from Database
+     * @param preparedStatement execute query to Database
+     * @param resultSet get data from Database
+     * @param accountID get id of delete account
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     * @throws SQLException if an SQL error occurs
+     */
+    public Account deleteAcountByID(int accountID) {
         String sql = "delete from Account where ID = ?";
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -592,7 +604,7 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         try {
             connection = baseDAO.getConnection();
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, id);
+            preparedStatement.setInt(1, accountID);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 return new Account(resultSet.getInt(1),
