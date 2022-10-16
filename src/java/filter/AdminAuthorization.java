@@ -1,4 +1,12 @@
-
+/*
+ * Copyright(C) 2005, FPT University
+ * Java MVC:
+ *  Fast Food Shop
+ *
+ * Record of change:
+ * DATE            Version             AUTHOR                   DESCRIPTION
+ * 2022-10-02      1.0                 HuyPXHE140702            First Implement
+ */
 package filter;
 
 import java.io.IOException;

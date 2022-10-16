@@ -32,6 +32,58 @@
         <servlet-name>EditProfile</servlet-name>
         <servlet-class>controller.EditProfileController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewFoodMenu</servlet-name>
+        <servlet-class>controller.ViewFoodMenuController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DetailFood</servlet-name>
+        <servlet-class>controller.DetailFood</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddToCart</servlet-name>
+        <servlet-class>controller.AddToCart</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Carts</servlet-name>
+        <servlet-class>controller.Carts</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteAccount</servlet-name>
+        <servlet-class>controller.DeleteAccount</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddNewAccount</servlet-name>
+        <servlet-class>controller.AddNewAccount</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InsertShipper</servlet-name>
+        <servlet-class>controller.InsertShipper</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InsertSeller</servlet-name>
+        <servlet-class>controller.InsertSeller</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteShipper</servlet-name>
+        <servlet-class>controller.DeleteShipper</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewDetailFood</servlet-name>
+        <servlet-class>controller.ViewDetailFoodController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeleteSeller</servlet-name>
+        <servlet-class>controller.DeleteSeller</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditAccount</servlet-name>
+        <servlet-class>controller.EditAccount</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>loadAccount</servlet-name>
+        <servlet-class>controller.loadAccount</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -63,6 +115,55 @@
     <servlet-mapping>
         <servlet-name>EditProfile</servlet-name>
         <url-pattern>/edit-profile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddToCart</servlet-name>
+        <url-pattern>/add-to-cart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Carts</servlet-name>
+        <url-pattern>/carts</url-pattern>
+    </servlet-mapping>
+   
+    <servlet-mapping>
+        <servlet-name>DeleteAccount</servlet-name>
+        <url-pattern>/delete-account</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddNewAccount</servlet-name>
+        <url-pattern>/add-account</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InsertShipper</servlet-name>
+        <url-pattern>/insert-shipper</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InsertSeller</servlet-name>
+        <url-pattern>/insert-seller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteShipper</servlet-name>
+        <url-pattern>/delete-shipper</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteSeller</servlet-name>
+        <url-pattern>/delete-seller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditAccount</servlet-name>
+        <url-pattern>/edit-account</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>loadAccount</servlet-name>
+        <url-pattern>/loadAccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewDetailFood</servlet-name>
+        <url-pattern>/DetailFood</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewFoodMenu</servlet-name>
+        <url-pattern>/menu</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

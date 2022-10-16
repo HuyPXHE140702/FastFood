@@ -9,8 +9,7 @@
  */
 package controller;
 
-import dao.AccountDAO;
-import dao.OrderDAO;
+import dao.Impl.OrderDAOImpl;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,50 +17,33 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Account;
 import model.Order;
 
 /**
+ * The class contains method for view order list, search and paging <br>
+ * The method wil throw an object of  <code>java.lang.Exception</code> class if
+ * there is any error occurring when finding data <br>
  *
  * @author HuyPX
  */
 public class HomeshipperController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-//        try {
-//            OrderDAO orderDao = new OrderDAO();
-//            List<Order> orderList = orderDao.getOrderNotAcceptByShipperID();
-//            if (orderList == null) {
-//                response.sendRedirect("error_Database.jsp");
-//            } else {
-//                request.setAttribute("listorder", orderList);
-//                request.getRequestDispatcher("homeshipper.jsp").forward(request, response);
-//            }
-//        } catch (Exception e) {
-//            response.sendRedirect("error_Database.jsp");
-//        }
-
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
-     * Handles the HTTP <code>GET</code> method.
+     * Get a list of Order for Shipper role to view, accept order with paging
+     * <br>
+     * The result contain a list of <code>model.Account </code> objects <br>
      *
-     * @param request servlet request
-     * @param response servlet response
+     * @param baseDAO get connection from Database
+     * @param orderList request data from Database
+     * @param request set attribute for jsp page
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws SQLException if an SQL error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -73,7 +55,8 @@ public class HomeshipperController extends HttpServlet {
             if (request.getParameter("page") != null) {
                 page = Integer.parseInt(request.getParameter("page"));
             }
-            OrderDAO dao = new OrderDAO();
+            OrderDAOImpl dao = new OrderDAOImpl();
+            //get all available orders with paging
             List<Order> orderList = dao.viewAllOrders((page - 1) * recordsPerPage, recordsPerPage);
             int noOfRecords = dao.getNoOfRecords();
             int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
@@ -87,12 +70,15 @@ public class HomeshipperController extends HttpServlet {
     }
 
     /**
-     * Handles the HTTP <code>POST</code> method.
+     * Get a list of Order for Shipper when search by date <br>
+     * The result contain a list of <code>model.Order </code> objects <br>
      *
-     * @param request servlet request
-     * @param response servlet response
+     * @param baseDAO get connection from Database
+     * @param orderList request data from Database
+     * @param request set attribute for jsp page
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws SQLException if an SQL error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -102,20 +88,32 @@ public class HomeshipperController extends HttpServlet {
             String dateTo = (String) request.getParameter("DateTo");
             String condition = "and created_date BETWEEN ? and ?";
 
-            OrderDAO orderDao = new OrderDAO();
+            int page = 1;
+            int recordsPerPage = 3;
+            if (request.getParameter("page") != null) {
+                page = Integer.parseInt(request.getParameter("page"));
+            }
+            OrderDAOImpl orderDao = new OrderDAOImpl();
+
             List<Order> orderList = new ArrayList<>();
+            //if search form empty
             if (dateFrom.equals("") && dateTo.equals("")) {
-                orderList = orderDao.getOrderNotAcceptByShipperID();
+                orderList = orderDao.viewAllOrders(page, recordsPerPage);
+                //if shipper do not choose start date
             } else if (dateFrom.equals("")) {
                 condition = "and created_date <= ?";
-                orderList = orderDao.getOrderByDate(dateTo, condition);
+                orderList = orderDao.getOrderByDate(dateTo, condition, (page - 1) * recordsPerPage);
+                //if shipper do not choose end date
             } else if (dateTo.equals("")) {
                 condition = "and created_date >= ?";
-                orderList = orderDao.getOrderByDate(dateFrom, condition);
+                orderList = orderDao.getOrderByDate(dateFrom, condition, (page - 1) * recordsPerPage);
             } else {
-                orderList = orderDao.getOrderByDateToDate(dateFrom, dateTo, condition);
+                orderList = orderDao.getOrderByDateToDate(dateFrom, dateTo, condition, (page - 1) * recordsPerPage);
             }
-
+            int noOfRecords = orderDao.getNoOfRecords();
+            int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+            request.setAttribute("noOfPages", noOfPages);
+            request.setAttribute("currentPage", page);
             request.setAttribute("listOrder", orderList);
             request.getRequestDispatcher("homeshipper.jsp").forward(request, response);
 
