@@ -54,7 +54,7 @@
     </servlet>
     <servlet>
         <servlet-name>AddNewAccount</servlet-name>
-        <servlet-class>controller.AddNewAccount</servlet-class>
+        <servlet-class>controller.AddNewAccountController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>InsertShipper</servlet-name>
