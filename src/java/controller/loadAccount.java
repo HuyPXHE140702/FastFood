@@ -6,8 +6,11 @@
 package controller;
 
 import dao.AccountDAO;
+import dao.Impl.AccountDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -30,12 +33,13 @@ public class loadAccount extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
              int accountid = Integer.parseInt(request.getParameter("accountid"));
-            Account account = new AccountDAO().getAcountByID(accountid);
+             AccountDAOImpl dao = new AccountDAOImpl();
+            Account account =  dao.getAccountByID(accountid);
             request.setAttribute("account", account);
             request.getRequestDispatcher("editaccount.jsp").forward(request, response);
         }
@@ -53,7 +57,11 @@ public class loadAccount extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(loadAccount.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -67,7 +75,11 @@ public class loadAccount extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(loadAccount.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
