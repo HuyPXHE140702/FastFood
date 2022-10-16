@@ -19,7 +19,7 @@ import model.Account;
  *
  * @author dmanh
  */
-public class EditAccount extends HttpServlet {
+public class EditAccountController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
