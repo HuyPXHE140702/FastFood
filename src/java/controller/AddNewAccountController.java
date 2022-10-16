@@ -56,25 +56,25 @@ public class AddNewAccountController extends HttpServlet {
                         //add customer
                         accdao.addNewAccount(username, password, name, address, phone, 1, 0, 0);
                         request.setAttribute("msg", "Add new account successfully!");
-                        request.getRequestDispatcher("admin").forward(request, response);
+                        request.getRequestDispatcher("admin.jsp").forward(request, response);
                         break;
                     case 2:
                         //add seller
                         accdao.addNewAccount(username, password, name, address, phone, 0, 0, 1);
                         request.setAttribute("msg", "Add new account successfully!");
-                        request.getRequestDispatcher("admin").forward(request, response);
+                        request.getRequestDispatcher("admin.jsp").forward(request, response);
                         break;
                     case 3:
                         //add shipper
                         accdao.addNewAccount(username, password, name, address, phone, 0, 1, 0);
                         request.setAttribute("msg", "Add new account successfully!");
-                        request.getRequestDispatcher("admin").forward(request, response);
+                        request.getRequestDispatcher("admin.jsp").forward(request, response);
                         break;
                 }
             } else {
                 //ko dc add
                 request.setAttribute("error", "Username exist");
-                request.getRequestDispatcher("admin").forward(request, response);
+                request.getRequestDispatcher("admin.jsp").forward(request, response);
             }
 
         }

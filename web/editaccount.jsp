@@ -145,11 +145,14 @@
                                         </div>
                                         <div class="col-sm-9">
                                             <div class="d-flex justify-content-end">
-                                            <a href="admin" type="button" class="btn btn-default" style="background:#f5f5f5"  >Cancel</a>
-                                            <input style="margin-left: 10px" type="submit" class="btn btn-success" value="Edit">
-                                        </div>
+                                                <a href="admin" type="button" class="btn btn-default" style="background:#f5f5f5"  >Cancel</a>
+                                                <input style="margin-left: 10px" type="submit" class="btn btn-success" value="Edit">
                                             </div>
+                                        </div>
                                     </div>
+                                    <br>
+                                    <h6 style="color: #be123c">${msg}</h6>
+                                    <h6 style="color: #be123c">${error}</h6>
                                 </div>
                             </div>
                         </div>
