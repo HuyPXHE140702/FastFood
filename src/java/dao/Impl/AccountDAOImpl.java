@@ -582,4 +582,38 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         }
         return noOfRecords;
     }
+
+    public Account deleteAcountByID(int id) {
+        String sql = "delete from Account where ID = ?";
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        BaseDAO baseDAO = new BaseDAOImpl();
+        try {
+            connection = baseDAO.getConnection();
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                return new Account(resultSet.getInt(1),
+                        resultSet.getString(2),
+                        resultSet.getString(3),
+                        resultSet.getString(4),
+                        resultSet.getString(5),
+                        resultSet.getString(6),
+                        resultSet.getInt(7),
+                        resultSet.getInt(8),
+                        resultSet.getInt(9),
+                        resultSet.getInt(10),
+                        resultSet.getInt(11));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            baseDAO.closeResultSet(resultSet);
+            baseDAO.closePreparedStatement(preparedStatement);
+            baseDAO.closeConnection(connection);
+        }
+        return null;
+    }
 }
