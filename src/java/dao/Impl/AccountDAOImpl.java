@@ -413,14 +413,12 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
      */
     @Override
     public List<Account> getAccountByName(String name, String role, int offset) throws Exception {
-        List<Account> list = new ArrayList<>();
+        List<Account> accountList = new ArrayList<>();
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         BaseDAO baseDAO = new BaseDAOImpl();
         try {
-            //String extra = "";
-
             String sql = "SELECT * from Account WHERE Displayname like ? " + role
                     + "ORDER BY ID "
                     + "OFFSET " + offset + " ROWS FETCH NEXT 3 ROWS ONLY";
@@ -429,17 +427,17 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
             preparedStatement.setString(1, "%" + name + "%");
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                list.add(new Account(resultSet.getInt(1),
-                        resultSet.getString(2),
-                        resultSet.getString(3),
-                        resultSet.getString(4),
-                        resultSet.getString(5),
-                        resultSet.getString(6),
-                        resultSet.getInt(7),
-                        resultSet.getInt(8),
-                        resultSet.getInt(9),
-                        resultSet.getInt(10),
-                        resultSet.getInt(11)));
+                accountList.add(new Account(resultSet.getInt("ID"),
+                        resultSet.getString("Username"),
+                        resultSet.getString("Password"),
+                        resultSet.getString("Displayname"),
+                        resultSet.getString("Address"),
+                        resultSet.getString("Phone"),
+                        resultSet.getInt("isAdmin"),
+                        resultSet.getInt("isCustomer"),
+                        resultSet.getInt("IsShipper"),
+                        resultSet.getInt("IsSaller"),
+                        resultSet.getInt("status")));
             }
 
         } catch (Exception e) {
@@ -449,7 +447,7 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
             baseDAO.closePreparedStatement(preparedStatement);
             baseDAO.closeConnection(connection);
         }
-        return list;
+        return accountList;
     }
 
     /**
@@ -470,7 +468,7 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         String sql = "SELECT * FROM Account "
                 + "ORDER BY ID "
                 + "OFFSET " + offset + " ROWS FETCH NEXT " + noOfRecords + " ROWS ONLY";
-        List<Account> list = new ArrayList<>();
+        List<Account> accountList = new ArrayList<>();
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -480,17 +478,17 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
             preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                list.add(new Account(resultSet.getInt(1),
-                        resultSet.getString(2),
-                        resultSet.getString(3),
-                        resultSet.getString(4),
-                        resultSet.getString(5),
-                        resultSet.getString(6),
-                        resultSet.getInt(7),
-                        resultSet.getInt(8),
-                        resultSet.getInt(9),
-                        resultSet.getInt(10),
-                        resultSet.getInt(11)));
+                accountList.add(new Account(resultSet.getInt("ID"),
+                        resultSet.getString("Username"),
+                        resultSet.getString("Password"),
+                        resultSet.getString("Displayname"),
+                        resultSet.getString("Address"),
+                        resultSet.getString("Phone"),
+                        resultSet.getInt("isAdmin"),
+                        resultSet.getInt("isCustomer"),
+                        resultSet.getInt("IsShipper"),
+                        resultSet.getInt("IsSaller"),
+                        resultSet.getInt("status")));
             }
             resultSet.close();
 
@@ -503,7 +501,7 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
             baseDAO.closePreparedStatement(preparedStatement);
             baseDAO.closeConnection(connection);
         }
-        return list;
+        return accountList;
     }
 
     /**
@@ -607,17 +605,17 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
             preparedStatement.setInt(1, accountID);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                return new Account(resultSet.getInt(1),
-                        resultSet.getString(2),
-                        resultSet.getString(3),
-                        resultSet.getString(4),
-                        resultSet.getString(5),
-                        resultSet.getString(6),
-                        resultSet.getInt(7),
-                        resultSet.getInt(8),
-                        resultSet.getInt(9),
-                        resultSet.getInt(10),
-                        resultSet.getInt(11));
+                return new Account(resultSet.getInt("ID"),
+                        resultSet.getString("Username"),
+                        resultSet.getString("Password"),
+                        resultSet.getString("Displayname"),
+                        resultSet.getString("Address"),
+                        resultSet.getString("Phone"),
+                        resultSet.getInt("isAdmin"),
+                        resultSet.getInt("isCustomer"),
+                        resultSet.getInt("IsShipper"),
+                        resultSet.getInt("IsSaller"),
+                        resultSet.getInt("status"));
             }
         } catch (Exception e) {
             e.printStackTrace();

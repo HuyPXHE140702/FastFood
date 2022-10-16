@@ -43,9 +43,9 @@ public class DeleteAccountController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            int accountid = Integer.parseInt(request.getParameter("accountid"));
+            int accountID = Integer.parseInt(request.getParameter("accountid"));
             AccountDAO accountDAO = new AccountDAOImpl();
-            accountDAO.deleteAcountByID(accountid);
+            accountDAO.deleteAcountByID(accountID);
             response.sendRedirect("admin");
         }
     }
