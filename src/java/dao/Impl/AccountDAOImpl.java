@@ -1,3 +1,12 @@
+/*
+ * Copyright(C) 2005, FPT University
+ * Java MVC:
+ *  Fast Food Shop
+ *
+ * Record of change:
+ * DATE            Version             AUTHOR                   DESCRIPTION
+ * 2022-10-12      1.0                 HuyPXHE140702            First Implement
+ */
 package dao.Impl;
 
 import dao.AccountDAO;
@@ -10,8 +19,25 @@ import java.util.ArrayList;
 import java.util.List;
 import model.Account;
 
+/*
+ * The class contains method for view account list, add or update an account, search and paging, login, signup <br>
+ * Using table Account in database
+ * The method wil throw an object of  <code>java.lang.Exception</code> class if there is any error occurring when finding, inserting, or updating data <br>
+ * @author HuyPX
+ */
 public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
 
+    /**
+     * Get a list of Account for Admin role to view<br>
+     * The result contain a list of <code>model.Account </code> objects<br>
+     *
+     * @param baseDAO handle connection from Database
+     * @param preparedStatement execute query to Database
+     * @param resultSet get data from Database
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     * @throws SQLException if an SQL error occurs
+     */
     @Override
     public List<Account> getallAccount() throws Exception {
         List<Account> list = new ArrayList<>();
@@ -371,6 +397,20 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         return null;
     }
 
+    /**
+     * Get a list of Account by Name contain<br>
+     * The result contain a list of <code>model.Account</code> objects<br>
+     *
+     * @param baseDAO handle connection from Database
+     * @param preparedStatement execute query to Database
+     * @param resultSet get data from Database
+     * @param name get the search text
+     * @param role get search role types
+     * @param offset set the offset for the sql query
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     * @throws SQLException if an SQL error occurs
+     */
     @Override
     public List<Account> getAccountByName(String name, String role, int offset) throws Exception {
         List<Account> list = new ArrayList<>();
@@ -412,6 +452,19 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         return list;
     }
 
+    /**
+     * Get a list of all Account with paging<br>
+     * The result contain a list of <code>model.Account</code> objects<br>
+     *
+     * @param baseDAO handle connection from Database
+     * @param preparedStatement execute query to Database
+     * @param resultSet get data from Database
+     * @param offset set the offset for the sql query
+     * @param noOfRecords set number of records for 1 page
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     * @throws SQLException if an SQL error occurs
+     */
     @Override
     public List<Account> viewAllAccounts(int offset, int noOfRecords) throws Exception {
         String sql = "SELECT * FROM Account "
@@ -453,6 +506,18 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         return list;
     }
 
+    /**
+     * Get a number of records of Account table from Database<br>
+     * The result is type of Integer<br>
+     *
+     * @param baseDAO handle connection from Database
+     * @param preparedStatement execute query to Database
+     * @param resultSet get data from Database
+     * @param noOfRecords return a number of records
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     * @throws SQLException if an SQL error occurs
+     */
     @Override
     public int getNoOfRecords() throws Exception {
         int noOfRecords = 0;
@@ -468,8 +533,6 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
             while (resultSet.next()) {
                 noOfRecords = resultSet.getInt(1);
             }
-            resultSet.close();
-
         } catch (SQLException e) {
             throw e;
         } finally {
@@ -480,6 +543,19 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         return noOfRecords;
     }
 
+    /**
+     * Get a number of records of Account table with search condition from
+     * Database<br>
+     * The result is type of Integer<br>
+     *
+     * @param baseDAO handle connection from Database
+     * @param preparedStatement execute query to Database
+     * @param resultSet get data from Database
+     * @param noOfRecords return a number of records
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     * @throws SQLException if an SQL error occurs
+     */
     @Override
     public int getNoOfRecordsPost(String condition) throws Exception {
         int noOfRecords = 0;

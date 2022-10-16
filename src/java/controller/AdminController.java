@@ -13,39 +13,37 @@ import dao.Impl.AccountDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Account;
 
+/**
+ * The class contains method for view account list, add or update an account,
+ * search and paging <br>
+ * The method wil throw an object of  <code>java.lang.Exception</code> class if
+ * there is any error occurring when finding, inserting, or updating data <br>
+ *
+ * @author HuyPX
+ */
 public class AdminController extends HttpServlet {
 
-    // private List<Account> accountList;
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
-     * Handles the HTTP <code>GET</code> method.
+     * Get a list of Account for Admin role to view, edit, add with paging <br>
+     * The result contain a list of <code>model.Account </code> objects <br>
      *
-     * @param request servlet request
-     * @param response servlet response
+     * @param baseDAO get connection from Database
+     * @param accountList request data from Database
+     * @param request set attribute for jsp page
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws SQLException if an SQL error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -59,6 +57,7 @@ public class AdminController extends HttpServlet {
             }
             String role = (String) request.getParameter("roles");
             AccountDAOImpl dao = new AccountDAOImpl();
+            //get all account with paging
             List<Account> accountList = dao.viewAllAccounts((page - 1) * recordsPerPage, recordsPerPage);
             int noOfRecords = dao.getNoOfRecords();
             int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
@@ -73,12 +72,15 @@ public class AdminController extends HttpServlet {
     }
 
     /**
-     * Handles the HTTP <code>POST</code> method.
+     * Get a list of Account for Admin when search by name <br>
+     * The result contain a list of <code>model.Account </code> objects <br>
      *
-     * @param request servlet request
-     * @param response servlet response
+     * @param baseDAO get connection from Database
+     * @param accountList request data from Database
+     * @param request set attribute for jsp page
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws SQLException if an SQL error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -91,6 +93,7 @@ public class AdminController extends HttpServlet {
                 page = Integer.parseInt(request.getParameter("page"));
             }
             String name = request.getParameter("Displayname");
+            //get role for sql purpose
             String role = (String) request.getParameter("roles");
             String setRole = "";
             String condition = "WHERE Displayname like '%" + name + "%' ";
@@ -105,6 +108,7 @@ public class AdminController extends HttpServlet {
             } else if (role.equalsIgnoreCase("shipper")) {
                 setRole = "and isShipper = 1";
             }
+            //get all account with paging and name contain
             List<Account> accountList = new AccountDAOImpl().getAccountByName(name, setRole, (page - 1) * recordsPerPage);
             int noOfRecords = new AccountDAOImpl().getNoOfRecordsPost(condition + setRole);
             int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);

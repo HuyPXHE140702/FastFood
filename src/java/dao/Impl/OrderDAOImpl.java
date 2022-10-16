@@ -1,7 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright(C) 2005, FPT University
+ * Java MVC:
+ *  Fast Food Shop
+ *
+ * Record of change:
+ * DATE            Version             AUTHOR                   DESCRIPTION
+ * 2022-10-12      1.0                 HuyPXHE140702            First Implement
  */
 package dao.Impl;
 
@@ -15,12 +19,25 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import model.Order;
 
-/**
- *
+/*
+ * The class contains method for view order list, add or update an order, search and paging <br>
+ * Using table Order, OrderDetail in database
+ * The method wil throw an object of  <code>java.lang.Exception</code> class if there is any error occurring when finding, inserting, or updating data <br>
  * @author HuyPX
  */
 public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
 
+    /**
+     * Get a list of available Orders for Shipper role to view<br>
+     * The result contain a list of <code>model.Order</code> objects<br>
+     *
+     * @param baseDAO handle connection from Database
+     * @param preparedStatement execute query to Database
+     * @param resultSet get data from Database
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     * @throws SQLException if an SQL error occurs
+     */
     @Override
     public List<Order> getOrderNotAcceptByShipperID() throws Exception {
         List<Order> list = new ArrayList<>();
@@ -55,6 +72,17 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
         return list;
     }
 
+    /**
+     * Get a list of accepted Order by ShipperID<br>
+     * The result contain a list of <code>model.Order</code> objects<br>
+     *
+     * @param baseDAO handle connection from Database
+     * @param preparedStatement execute query to Database
+     * @param resultSet get data from Database
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     * @throws SQLException if an SQL error occurs
+     */
     @Override
     public List<Order> getOrderAcceptByShipperID() throws Exception {
         List<Order> list = new ArrayList<>();
@@ -89,8 +117,23 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
         return list;
     }
 
+    /**
+     * Get a list of Order when search by date to date<br>
+     * The result contain a list of <code>model.Order</code> objects<br>
+     *
+     * @param baseDAO handle connection from Database
+     * @param preparedStatement execute query to Database
+     * @param resultSet get data from Database
+     * @param dateFrom get the start date to search
+     * @param dateTo get the end date to search
+     * @param codition get the condition of search
+     * @param offset set offset for sql query
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     * @throws SQLException if an SQL error occurs
+     */
     @Override
-    public List<Order> getOrderByDateToDate(String dateFrom, String dateTo, String condition,int offset) throws Exception {
+    public List<Order> getOrderByDateToDate(String dateFrom, String dateTo, String condition, int offset) throws Exception {
         List<Order> list = new ArrayList<>();
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -127,6 +170,20 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
         return list;
     }
 
+    /**
+     * Get a list of Order when search by date<br>
+     * The result contain a list of <code>model.Order</code> objects<br>
+     *
+     * @param baseDAO handle connection from Database
+     * @param preparedStatement execute query to Database
+     * @param resultSet get data from Database
+     * @param date get the date to search
+     * @param codition get the condition of search
+     * @param offset set offset for sql query
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     * @throws SQLException if an SQL error occurs
+     */
     @Override
     public List<Order> getOrderByDate(String date, String condition, int offset) throws Exception {
         List<Order> list = new ArrayList<>();
@@ -164,6 +221,19 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
         return list;
     }
 
+    /**
+     * Get a list of all Orders with paging<br>
+     * The result contain a list of <code>model.Order</code> objects<br>
+     *
+     * @param baseDAO handle connection from Database
+     * @param preparedStatement execute query to Database
+     * @param resultSet get data from Database
+     * @param offset set offset for sql query
+     * @param recordsPerPage set records size for 1 page
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     * @throws SQLException if an SQL error occurs
+     */
     @Override
     public List<Order> viewAllOrders(int offset, int recordsPerPage) throws Exception {
         String sql = "SELECT * FROM Orders "
@@ -203,6 +273,18 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
         return list;
     }
 
+    /**
+     * Get a number of records of Order table from Database<br>
+     * The result is type of Integer<br>
+     *
+     * @param baseDAO handle connection from Database
+     * @param preparedStatement execute query to Database
+     * @param resultSet get data from Database
+     * @param noOfRecords return a number of records
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     * @throws SQLException if an SQL error occurs
+     */
     @Override
     public int getNoOfRecords() throws Exception {
         int noOfRecords = 0;
@@ -227,7 +309,20 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
         }
         return noOfRecords;
     }
-    
+
+    /**
+     * Get a number of records of Order table with search condition from
+     * Database<br>
+     * The result is type of Integer<br>
+     *
+     * @param baseDAO handle connection from Database
+     * @param preparedStatement execute query to Database
+     * @param resultSet get data from Database
+     * @param noOfRecords return a number of records
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     * @throws SQLException if an SQL error occurs
+     */
     @Override
     public int getNoOfRecordsPost(String condition) throws Exception {
         int noOfRecords = 0;
