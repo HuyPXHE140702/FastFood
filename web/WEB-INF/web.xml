@@ -33,8 +33,8 @@
         <servlet-class>controller.EditProfileController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Menu</servlet-name>
-        <servlet-class>controller.Menu</servlet-class>
+        <servlet-name>ViewFoodMenu</servlet-name>
+        <servlet-class>controller.ViewFoodMenuController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DetailFood</servlet-name>
@@ -67,6 +67,10 @@
     <servlet>
         <servlet-name>DeleteShipper</servlet-name>
         <servlet-class>controller.DeleteShipper</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewDetailFood</servlet-name>
+        <servlet-class>controller.ViewDetailFoodController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DeleteSeller</servlet-name>
@@ -152,6 +156,14 @@
     <servlet-mapping>
         <servlet-name>loadAccount</servlet-name>
         <url-pattern>/loadAccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewDetailFood</servlet-name>
+        <url-pattern>/DetailFood</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewFoodMenu</servlet-name>
+        <url-pattern>/menu</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
