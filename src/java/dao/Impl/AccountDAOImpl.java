@@ -88,9 +88,9 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
             preparedStatement.setString(2, password);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                return new Account(resultSet.getInt(1),
-                        resultSet.getString(2),
-                        resultSet.getString(3),
+                return new Account(resultSet.getInt("ID"),
+                        resultSet.getString("Username"),
+                        resultSet.getString("Password"),
                         resultSet.getString(4),
                         resultSet.getString(5),
                         resultSet.getString(6),
