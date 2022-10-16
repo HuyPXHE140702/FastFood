@@ -17,7 +17,7 @@ import model.Account;
 /*
  * Authenticate for system
  * If user not login yet, method will redirect to login page
- * @author Pham Xuan Huy
+ * @author HuyPX
  */
 @WebFilter(filterName = "Authentication", urlPatterns = {"/carts", "/payment", "/profile", "/thank", "/foodList"})
 public class LoginAuthenticaion implements Filter {

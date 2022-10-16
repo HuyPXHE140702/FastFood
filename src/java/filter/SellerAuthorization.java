@@ -1,4 +1,11 @@
-
+/**
+ * The class contains method for view account list, add or update an account,
+ * search and paging <br>
+ * The method wil throw an object of  <code>java.lang.Exception</code> class if
+ * there is any error occurring when finding, inserting, or updating data <br>
+ *
+ * @author HuyPX
+ */
 package filter;
 
 import java.io.IOException;
@@ -17,7 +24,7 @@ import model.Account;
 /*
  * Authorize for user type Seller
  * If user is not type Seller, method will redirect to Error page
- * @author Pham Xuan Huy
+ * @author HuyPX
  */
 @WebFilter(filterName = "AuthorizationSeller", urlPatterns = {"/SellerFood", "/SellerOrder"})
 public class SellerAuthorization implements Filter {
