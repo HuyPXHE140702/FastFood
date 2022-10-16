@@ -275,9 +275,11 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
+        //create dao
         BaseDAO baseDAO = new BaseDAOImpl();
         try {
             connection = baseDAO.getConnection();
+            //connect sql querry
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, password);
