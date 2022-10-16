@@ -50,7 +50,7 @@
     </servlet>
     <servlet>
         <servlet-name>DeleteAccount</servlet-name>
-        <servlet-class>controller.DeleteAccount</servlet-class>
+        <servlet-class>controller.DeleteAccountController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddNewAccount</servlet-name>
@@ -187,6 +187,10 @@
     <servlet-mapping>
         <servlet-name>DeleteCart</servlet-name>
         <url-pattern>/DeleteCart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteAccount</servlet-name>
+        <url-pattern>/delete-account</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

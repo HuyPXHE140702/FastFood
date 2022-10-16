@@ -40,7 +40,7 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
      */
     @Override
     public List<Order> getOrderNotAcceptByShipperID() throws Exception {
-        List<Order> list = new ArrayList<>();
+        List<Order> orderList = new ArrayList<>();
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -51,16 +51,16 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
             preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                list.add(new Order(resultSet.getInt(1),
-                        resultSet.getInt(2),
-                        resultSet.getString(3),
-                        resultSet.getString(4),
-                        resultSet.getString(5),
-                        resultSet.getFloat(6),
-                        resultSet.getInt(7),
-                        resultSet.getInt(8),
-                        resultSet.getString(9),
-                        resultSet.getBoolean(10)));
+                orderList.add(new Order(resultSet.getInt("OrderID"),
+                        resultSet.getInt("account_id"),
+                        resultSet.getString("Name"),
+                        resultSet.getString("Phone"),
+                        resultSet.getString("Address"),
+                        resultSet.getFloat("TotalPrice"),
+                        resultSet.getInt("SellerID"),
+                        resultSet.getInt("ShipperID"),
+                        resultSet.getString("created_date"),
+                        resultSet.getBoolean("status")));
             }
         } catch (Exception e) {
             throw e;
@@ -69,7 +69,7 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
             baseDAO.closePreparedStatement(preparedStatement);
             baseDAO.closeConnection(connection);
         }
-        return list;
+        return orderList;
     }
 
     /**
@@ -85,7 +85,7 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
      */
     @Override
     public List<Order> getOrderAcceptByShipperID() throws Exception {
-        List<Order> list = new ArrayList<>();
+        List<Order> orderList = new ArrayList<>();
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -96,16 +96,16 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
             preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                list.add(new Order(resultSet.getInt(1),
-                        resultSet.getInt(2),
-                        resultSet.getString(3),
-                        resultSet.getString(4),
-                        resultSet.getString(5),
-                        resultSet.getFloat(6),
-                        resultSet.getInt(7),
-                        resultSet.getInt(8),
-                        resultSet.getString(9),
-                        resultSet.getBoolean(10)));
+                orderList.add(new Order(resultSet.getInt("OrderID"),
+                        resultSet.getInt("account_id"),
+                        resultSet.getString("Name"),
+                        resultSet.getString("Phone"),
+                        resultSet.getString("Address"),
+                        resultSet.getFloat("TotalPrice"),
+                        resultSet.getInt("SellerID"),
+                        resultSet.getInt("ShipperID"),
+                        resultSet.getString("created_date"),
+                        resultSet.getBoolean("status")));
             }
         } catch (Exception e) {
             throw e;
@@ -114,7 +114,7 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
             baseDAO.closePreparedStatement(preparedStatement);
             baseDAO.closeConnection(connection);
         }
-        return list;
+        return orderList;
     }
 
     /**
@@ -134,7 +134,7 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
      */
     @Override
     public List<Order> getOrderByDateToDate(String dateFrom, String dateTo, String condition, int offset) throws Exception {
-        List<Order> list = new ArrayList<>();
+        List<Order> orderList = new ArrayList<>();
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -149,16 +149,16 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
             preparedStatement.setString(2, dateTo);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                list.add(new Order(resultSet.getInt(1),
-                        resultSet.getInt(2),
-                        resultSet.getString(3),
-                        resultSet.getString(4),
-                        resultSet.getString(5),
-                        resultSet.getFloat(6),
-                        resultSet.getInt(7),
-                        resultSet.getInt(8),
-                        resultSet.getString(9),
-                        resultSet.getBoolean(10)));
+                orderList.add(new Order(resultSet.getInt("OrderID"),
+                        resultSet.getInt("account_id"),
+                        resultSet.getString("Name"),
+                        resultSet.getString("Phone"),
+                        resultSet.getString("Address"),
+                        resultSet.getFloat("TotalPrice"),
+                        resultSet.getInt("SellerID"),
+                        resultSet.getInt("ShipperID"),
+                        resultSet.getString("created_date"),
+                        resultSet.getBoolean("status")));
             }
         } catch (Exception e) {
             throw e;
@@ -167,7 +167,7 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
             baseDAO.closePreparedStatement(preparedStatement);
             baseDAO.closeConnection(connection);
         }
-        return list;
+        return orderList;
     }
 
     /**
@@ -186,7 +186,7 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
      */
     @Override
     public List<Order> getOrderByDate(String date, String condition, int offset) throws Exception {
-        List<Order> list = new ArrayList<>();
+        List<Order> orderList = new ArrayList<>();
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -200,16 +200,16 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
             preparedStatement.setString(1, date);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                list.add(new Order(resultSet.getInt(1),
-                        resultSet.getInt(2),
-                        resultSet.getString(3),
-                        resultSet.getString(4),
-                        resultSet.getString(5),
-                        resultSet.getFloat(6),
-                        resultSet.getInt(7),
-                        resultSet.getInt(8),
-                        resultSet.getString(9),
-                        resultSet.getBoolean(10)));
+                orderList.add(new Order(resultSet.getInt("OrderID"),
+                        resultSet.getInt("account_id"),
+                        resultSet.getString("Name"),
+                        resultSet.getString("Phone"),
+                        resultSet.getString("Address"),
+                        resultSet.getFloat("TotalPrice"),
+                        resultSet.getInt("SellerID"),
+                        resultSet.getInt("ShipperID"),
+                        resultSet.getString("created_date"),
+                        resultSet.getBoolean("status")));
             }
         } catch (Exception e) {
             throw e;
@@ -218,7 +218,7 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
             baseDAO.closePreparedStatement(preparedStatement);
             baseDAO.closeConnection(connection);
         }
-        return list;
+        return orderList;
     }
 
     /**
@@ -240,7 +240,7 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
                 + "WHERE ShipperID is NULL "
                 + "ORDER BY OrderID "
                 + "OFFSET " + offset + " ROWS FETCH NEXT " + recordsPerPage + " ROWS ONLY";
-        List<Order> list = new ArrayList<Order>();
+        List<Order> orderList = new ArrayList<Order>();
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -250,16 +250,16 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
             preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                list.add(new Order(resultSet.getInt(1),
-                        resultSet.getInt(2),
-                        resultSet.getString(3),
-                        resultSet.getString(4),
-                        resultSet.getString(5),
-                        resultSet.getFloat(6),
-                        resultSet.getInt(7),
-                        resultSet.getInt(8),
-                        resultSet.getString(9),
-                        resultSet.getBoolean(10)));
+                orderList.add(new Order(resultSet.getInt("OrderID"),
+                        resultSet.getInt("account_id"),
+                        resultSet.getString("Name"),
+                        resultSet.getString("Phone"),
+                        resultSet.getString("Address"),
+                        resultSet.getFloat("TotalPrice"),
+                        resultSet.getInt("SellerID"),
+                        resultSet.getInt("ShipperID"),
+                        resultSet.getString("created_date"),
+                        resultSet.getBoolean("status")));
             }
         } catch (SQLException e) {
             throw e;
@@ -270,7 +270,7 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
             baseDAO.closePreparedStatement(preparedStatement);
             baseDAO.closeConnection(connection);
         }
-        return list;
+        return orderList;
     }
 
     /**
