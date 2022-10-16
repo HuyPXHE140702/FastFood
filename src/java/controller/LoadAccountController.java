@@ -21,7 +21,7 @@ import model.Account;
  *
  * @author dmanh
  */
-public class loadAccount extends HttpServlet {
+public class LoadAccountController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -60,7 +60,7 @@ public class loadAccount extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(loadAccount.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LoadAccountController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -78,7 +78,7 @@ public class loadAccount extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(loadAccount.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LoadAccountController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

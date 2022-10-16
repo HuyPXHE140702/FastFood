@@ -78,11 +78,11 @@
     </servlet>
     <servlet>
         <servlet-name>EditAccount</servlet-name>
-        <servlet-class>controller.EditAccount</servlet-class>
+        <servlet-class>controller.EditAccountController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>loadAccount</servlet-name>
-        <servlet-class>controller.loadAccount</servlet-class>
+        <servlet-class>controller.LoadAccountController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Cart</servlet-name>
