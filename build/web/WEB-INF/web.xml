@@ -41,14 +41,6 @@
         <servlet-class>controller.DetailFood</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AddToCart</servlet-name>
-        <servlet-class>controller.AddToCart</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>Carts</servlet-name>
-        <servlet-class>controller.Carts</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>DeleteAccount</servlet-name>
         <servlet-class>controller.DeleteAccountController</servlet-class>
     </servlet>
@@ -85,16 +77,16 @@
         <servlet-class>controller.LoadAccountController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Cart</servlet-name>
-        <servlet-class>controller.Cart</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>AddToCarts</servlet-name>
-        <servlet-class>controller.AddToCarts</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>DeleteCart</servlet-name>
         <servlet-class>controller.DeleteCart</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>carts</servlet-name>
+        <servlet-class>controller.Carts</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddToCart</servlet-name>
+        <servlet-class>controller.AddToCart</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -127,14 +119,6 @@
     <servlet-mapping>
         <servlet-name>EditProfile</servlet-name>
         <url-pattern>/edit-profile</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AddToCart</servlet-name>
-        <url-pattern>/add-to-cart</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Carts</servlet-name>
-        <url-pattern>/carts</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DeleteAccount</servlet-name>
@@ -177,20 +161,20 @@
         <url-pattern>/menu</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Cart</servlet-name>
-        <url-pattern>/Cart</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AddToCarts</servlet-name>
-        <url-pattern>/AddToCarts</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>DeleteCart</servlet-name>
         <url-pattern>/DeleteCart</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DeleteAccount</servlet-name>
         <url-pattern>/delete-account</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>carts</servlet-name>
+        <url-pattern>/carts</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddToCart</servlet-name>
+        <url-pattern>/add-to-cart</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
