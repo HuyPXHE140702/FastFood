@@ -39,8 +39,8 @@ public class AddNewAccountController extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
+            String username = request.getParameter("username").trim();
+            String password = request.getParameter("password").trim();
             String name = request.getParameter("name");
             String address = request.getParameter("address");
             String phone = request.getParameter("phone");
