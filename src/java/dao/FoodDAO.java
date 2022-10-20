@@ -14,7 +14,7 @@ import model.Food;
  */
 public interface FoodDAO {
     
-    public List<Food> getallFood() throws Exception;
+    public List<Food> getAllFood() throws Exception;
     
     public List<Food> getFoodbyDateCreated(String dateCreated) throws Exception;
     

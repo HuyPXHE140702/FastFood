@@ -21,7 +21,7 @@ import model.Food;
 public class FoodDAOImpl extends BaseDAOImpl implements FoodDAO {
 
     @Override
-    public List<Food> getallFood() throws Exception {
+    public List<Food> getAllFood() throws Exception {
         List<Food> list = new ArrayList<>();
         Connection connection = null;
         PreparedStatement preparedStatement = null;

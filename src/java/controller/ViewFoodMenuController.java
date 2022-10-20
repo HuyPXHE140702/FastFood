@@ -1,10 +1,15 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright(C) 2005, FPT University
+ * Java MVC:
+ *  Fast Food Shop
+ *
+ * Record of change:
+ * DATE            Version             AUTHOR                   DESCRIPTION
+ * 2022-10-15      1.0                 DANGTMHE130893            First Implement
  */
 package controller;
 
+import dao.FoodDAO;
 import dao.Impl.FoodDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -38,8 +43,8 @@ public class ViewFoodMenuController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            FoodDAOImpl food = new FoodDAOImpl();
-            List<Food> list2 = food.getallFood();
+            FoodDAO food = new FoodDAOImpl();
+            List<Food> list2 = food.getAllFood();
             String indexPage = request.getParameter("index");
             //check database for pagination 
             if(indexPage == null){
