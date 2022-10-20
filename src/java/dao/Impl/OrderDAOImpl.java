@@ -31,7 +31,7 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
      * Get a list of available Orders for Shipper role to view<br>
      * The result contain a list of <code>model.Order</code> objects<br>
      *
-     * @param baseDAO handle connection from Database
+     *
      * @param preparedStatement execute query to Database
      * @param resultSet get data from Database
      * @throws ServletException if a servlet-specific error occurs
@@ -47,7 +47,7 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
         BaseDAO baseDAO = new BaseDAOImpl();
         try {
             String sql = "select * from Orders where ShipperID is null and status = 1";
-            connection = new BaseDAOImpl().getConnection();
+            connection = getConnection();
             preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -65,9 +65,9 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
         } catch (Exception e) {
             throw e;
         } finally {
-            baseDAO.closeResultSet(resultSet);
-            baseDAO.closePreparedStatement(preparedStatement);
-            baseDAO.closeConnection(connection);
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connection);
         }
         return orderList;
     }
@@ -76,7 +76,7 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
      * Get a list of accepted Order by ShipperID<br>
      * The result contain a list of <code>model.Order</code> objects<br>
      *
-     * @param baseDAO handle connection from Database
+     *
      * @param preparedStatement execute query to Database
      * @param resultSet get data from Database
      * @throws ServletException if a servlet-specific error occurs
@@ -92,7 +92,7 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
         BaseDAO baseDAO = new BaseDAOImpl();
         try {
             String sql = "Select * From Orders where ShipperID is not null and status = 1";
-            connection = new BaseDAOImpl().getConnection();
+            connection = getConnection();
             preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -110,9 +110,9 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
         } catch (Exception e) {
             throw e;
         } finally {
-            baseDAO.closeResultSet(resultSet);
-            baseDAO.closePreparedStatement(preparedStatement);
-            baseDAO.closeConnection(connection);
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connection);
         }
         return orderList;
     }
@@ -121,7 +121,7 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
      * Get a list of Order when search by date to date<br>
      * The result contain a list of <code>model.Order</code> objects<br>
      *
-     * @param baseDAO handle connection from Database
+     *
      * @param preparedStatement execute query to Database
      * @param resultSet get data from Database
      * @param dateFrom get the start date to search
@@ -143,7 +143,7 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
             String sql = "SELECT * from Orders WHERE ShipperID is NULL " + condition
                     + " ORDER BY OrderID "
                     + "OFFSET " + offset + " ROWS FETCH NEXT 3 ROWS ONLY";
-            connection = new BaseDAOImpl().getConnection();
+            connection = getConnection();
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, dateFrom);
             preparedStatement.setString(2, dateTo);
@@ -163,9 +163,9 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
         } catch (Exception e) {
             throw e;
         } finally {
-            baseDAO.closeResultSet(resultSet);
-            baseDAO.closePreparedStatement(preparedStatement);
-            baseDAO.closeConnection(connection);
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connection);
         }
         return orderList;
     }
@@ -174,7 +174,7 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
      * Get a list of Order when search by date<br>
      * The result contain a list of <code>model.Order</code> objects<br>
      *
-     * @param baseDAO handle connection from Database
+     *
      * @param preparedStatement execute query to Database
      * @param resultSet get data from Database
      * @param date get the date to search
@@ -195,7 +195,7 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
             String sql = "SELECT * from Orders WHERE ShipperID is NULL " + condition
                     + " ORDER BY OrderID "
                     + "OFFSET " + offset + " ROWS FETCH NEXT 3 ROWS ONLY";
-            connection = new BaseDAOImpl().getConnection();
+            connection = getConnection();
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, date);
             resultSet = preparedStatement.executeQuery();
@@ -214,9 +214,9 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
         } catch (Exception e) {
             throw e;
         } finally {
-            baseDAO.closeResultSet(resultSet);
-            baseDAO.closePreparedStatement(preparedStatement);
-            baseDAO.closeConnection(connection);
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connection);
         }
         return orderList;
     }
@@ -225,7 +225,7 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
      * Get a list of all Orders with paging<br>
      * The result contain a list of <code>model.Order</code> objects<br>
      *
-     * @param baseDAO handle connection from Database
+     *
      * @param preparedStatement execute query to Database
      * @param resultSet get data from Database
      * @param offset set offset for sql query
@@ -246,7 +246,7 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
         ResultSet resultSet = null;
         BaseDAO baseDAO = new BaseDAOImpl();
         try {
-            connection = new BaseDAOImpl().getConnection();
+            connection = getConnection();
             preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -266,9 +266,9 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
         } catch (ClassNotFoundException e) {
             throw e;
         } finally {
-            baseDAO.closeResultSet(resultSet);
-            baseDAO.closePreparedStatement(preparedStatement);
-            baseDAO.closeConnection(connection);
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connection);
         }
         return orderList;
     }
@@ -277,7 +277,7 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
      * Get a number of records of Order table from Database<br>
      * The result is type of Integer<br>
      *
-     * @param baseDAO handle connection from Database
+     *
      * @param preparedStatement execute query to Database
      * @param resultSet get data from Database
      * @param noOfRecords return a number of records
@@ -294,7 +294,7 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
         ResultSet resultSet = null;
         BaseDAO baseDAO = new BaseDAOImpl();
         try {
-            connection = new BaseDAOImpl().getConnection();
+            connection = getConnection();
             preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -303,9 +303,9 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
         } catch (SQLException e) {
             throw e;
         } finally {
-            baseDAO.closeResultSet(resultSet);
-            baseDAO.closePreparedStatement(preparedStatement);
-            baseDAO.closeConnection(connection);
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connection);
         }
         return noOfRecords;
     }
@@ -315,7 +315,7 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
      * Database<br>
      * The result is type of Integer<br>
      *
-     * @param baseDAO handle connection from Database
+     *
      * @param preparedStatement execute query to Database
      * @param resultSet get data from Database
      * @param noOfRecords return a number of records
@@ -332,7 +332,7 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
         ResultSet resultSet = null;
         BaseDAO baseDAO = new BaseDAOImpl();
         try {
-            connection = new BaseDAOImpl().getConnection();
+            connection = getConnection();
             preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -341,9 +341,9 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
         } catch (SQLException e) {
             throw e;
         } finally {
-            baseDAO.closeResultSet(resultSet);
-            baseDAO.closePreparedStatement(preparedStatement);
-            baseDAO.closeConnection(connection);
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connection);
         }
         return noOfRecords;
     }
