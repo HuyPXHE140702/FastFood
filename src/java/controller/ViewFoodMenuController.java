@@ -10,7 +10,7 @@
 package controller;
 
 import dao.FoodDAO;
-import dao.Impl.FoodDAOImpl;
+import dao.impl.FoodDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;

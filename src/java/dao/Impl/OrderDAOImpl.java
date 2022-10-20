@@ -7,9 +7,8 @@
  * DATE            Version             AUTHOR                   DESCRIPTION
  * 2022-10-12      1.0                 HuyPXHE140702            First Implement
  */
-package dao.Impl;
+package dao.impl;
 
-import dao.BaseDAO;
 import dao.OrderDAO;
 import java.sql.Connection;
 import java.util.List;
@@ -44,7 +43,7 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        BaseDAO baseDAO = new BaseDAOImpl();
+        
         try {
             String sql = "select * from Orders where ShipperID is null and status = 1";
             connection = getConnection();
@@ -89,7 +88,7 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        BaseDAO baseDAO = new BaseDAOImpl();
+        
         try {
             String sql = "Select * From Orders where ShipperID is not null and status = 1";
             connection = getConnection();
@@ -138,7 +137,7 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        BaseDAO baseDAO = new BaseDAOImpl();
+        
         try {
             String sql = "SELECT * from Orders WHERE ShipperID is NULL " + condition
                     + " ORDER BY OrderID "
@@ -190,7 +189,7 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        BaseDAO baseDAO = new BaseDAOImpl();
+        
         try {
             String sql = "SELECT * from Orders WHERE ShipperID is NULL " + condition
                     + " ORDER BY OrderID "
@@ -244,7 +243,7 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        BaseDAO baseDAO = new BaseDAOImpl();
+        
         try {
             connection = getConnection();
             preparedStatement = connection.prepareStatement(sql);
@@ -292,7 +291,7 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        BaseDAO baseDAO = new BaseDAOImpl();
+        
         try {
             connection = getConnection();
             preparedStatement = connection.prepareStatement(sql);
@@ -330,7 +329,7 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        BaseDAO baseDAO = new BaseDAOImpl();
+        
         try {
             connection = getConnection();
             preparedStatement = connection.prepareStatement(sql);
@@ -347,4 +346,25 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
         }
         return noOfRecords;
     }
+
+    @Override
+    public void closeConnection(Connection cnn) {
+        super.closeConnection(cnn); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void closePreparedStatement(PreparedStatement ps) {
+        super.closePreparedStatement(ps); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void closeResultSet(ResultSet rs) {
+        super.closeResultSet(rs); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Connection getConnection() throws Exception {
+        return super.getConnection(); //To change body of generated methods, choose Tools | Templates.
+    }
+    
 }
