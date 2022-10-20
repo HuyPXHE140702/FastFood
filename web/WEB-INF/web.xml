@@ -86,7 +86,7 @@
     </servlet>
     <servlet>
         <servlet-name>AddToCart</servlet-name>
-        <servlet-class>controller.AddToCart</servlet-class>
+        <servlet-class>controller.AddToCartController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -162,7 +162,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DeleteCart</servlet-name>
-        <url-pattern>/DeleteCart</url-pattern>
+        <url-pattern>/delete-cart</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DeleteAccount</servlet-name>

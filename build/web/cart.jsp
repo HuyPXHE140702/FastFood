@@ -89,7 +89,7 @@
                                     <tr>                               
                                     <input type="hidden" name="foodid" value="${C.value.product.foodid}">
                                     <th scope="row"><c:set var="count" value="${count+1}"></c:set>${count}</th>
-                                    <td><img style="width: 70px" src="${C.value.product.image}"></td>
+                                    <td><img style="width: 50px;height: 50px" src="${C.value.product.image}"></td>
                                     <td>${C.value.product.foodname}</td>
                                     <td>${C.value.product.unitprice} </td>
                                     <td ><input  onchange="this.form.submit()"  name="quantity" style="width: 50px" min="1" type="number" value="${C.value.quantity}"></td>
