@@ -186,11 +186,11 @@
                         <div class="modal-body">	
                             <div class="form-group">
                                 <label>User Name</label>
-                                <input  pattern="[a-z0-9]+$"  name="username" type="text" class="form-control" required>
+                                <input  pattern="[a-z0-9\s]+$"  name="username" type="text" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label>Password</label>
-                                <input  pattern="[a-z0-9]+$"  name="password" type="password" class="form-control" required>
+                                <input  pattern="[a-z0-9\s]+$"  name="password" type="password" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label>Name</label>

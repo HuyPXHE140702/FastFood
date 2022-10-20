@@ -48,25 +48,25 @@ public class AddNewAccountController extends HttpServlet {
                     
             AccountDAOImpl accdao = new AccountDAOImpl();
 
-            Account account = accdao.checkAccountExist(username);
+            Account account = accdao.checkAccountExist(username.trim());
             if (account == null) {
                 //dc add
                 switch (role) {
                     case 1:
                         //add customer
-                        accdao.addNewAccount(username, password, name, address, phone, 1, 0, 0);
+                        accdao.addNewAccount(username.trim(), password.trim(), name, address, phone, 1, 0, 0);
                         request.setAttribute("msg", "Add new account successfully!");
                         request.getRequestDispatcher("admin.jsp").forward(request, response);
                         break;
                     case 2:
                         //add seller
-                        accdao.addNewAccount(username, password, name, address, phone, 0, 0, 1);
+                        accdao.addNewAccount(username.trim(), password.trim(), name, address, phone, 0, 0, 1);
                         request.setAttribute("msg", "Add new account successfully!");
                         request.getRequestDispatcher("admin.jsp").forward(request, response);
                         break;
                     case 3:
                         //add shipper
-                        accdao.addNewAccount(username, password, name, address, phone, 0, 1, 0);
+                        accdao.addNewAccount(username.trim(), password.trim(), name, address, phone, 0, 1, 0);
                         request.setAttribute("msg", "Add new account successfully!");
                         request.getRequestDispatcher("admin.jsp").forward(request, response);
                         break;
