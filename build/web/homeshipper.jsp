@@ -110,10 +110,10 @@
                         </c:forEach>
                     </tbody>
                 </table>
-                    <%--For displaying Previous link except for the 1st page --%>
+                    <%--For displaying Previous link except for the 1st page 
                 <c:if test="${currentPage != 1}">
                     <td><a href="homeshipper?page=${currentPage - 1}">Previous</a></td>
-                </c:if>
+                </c:if>--%>
 
                 <%--For displaying Page numbers. 
                 The when condition does not display a link for the current page--%>
@@ -132,10 +132,10 @@
                     </tr>
                 </table>
 
-                <%--For displaying Next link --%>
+                <%--For displaying Next link 
                 <c:if test="${currentPage lt noOfPages}">
                     <td><a href="homeshipper?page=${currentPage + 1}">Next</a></td>
-                </c:if>
+                </c:if>--%>
             </div>
         </section>
 

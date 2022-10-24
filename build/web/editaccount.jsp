@@ -61,7 +61,7 @@
                                             <p class="mb-0">Username</p>
                                         </div>
                                         <div class="col-sm-9">
-                                            <input pattern="[a-z0-9]+$" value="${account.username}" name="username" type="text" class="form-control" required>
+                                            <input pattern="[a-z0-9\s]+$" value="${account.username}" name="username" type="text" class="form-control" required>
                                         </div>
                                     </div>
 
@@ -71,7 +71,7 @@
                                             <p class="mb-0">Password</p>
                                         </div>
                                         <div class="col-sm-9">
-                                            <input pattern="[a-z0-9]+$" value="${account.password}" name="password" type="password" class="form-control" required>
+                                            <input pattern="[a-z0-9\s]+$" value="${account.password}" name="password" type="password" class="form-control" required>
                                         </div>
                                     </div>
 

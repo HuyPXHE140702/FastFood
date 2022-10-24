@@ -145,10 +145,10 @@
 
                     </tbody>
                 </table>
-                <%--For displaying Previous link except for the 1st page --%>
+                <%--For displaying Previous link except for the 1st page 
                 <c:if test="${currentPage != 1}">
                     <td><a href="admin?page=${currentPage - 1}">Previous</a></td>
-                </c:if>
+                </c:if>--%>
 
                 <%--For displaying Page numbers. 
                 The when condition does not display a link for the current page--%>
@@ -167,10 +167,10 @@
                     </tr>
                 </table>
 
-                <%--For displaying Next link --%>
+                <%--For displaying Next link
                 <c:if test="${currentPage lt noOfPages}">
                     <td><a href="admin?page=${currentPage + 1}">Next</a></td>
-                </c:if>
+                </c:if> --%>
             </div>
 
         </section>
@@ -186,11 +186,11 @@
                         <div class="modal-body">	
                             <div class="form-group">
                                 <label>User Name</label>
-                                <input  pattern="[a-z0-9]+$"  name="username" type="text" class="form-control" required>
+                                <input  pattern="[a-z0-9\s]+$"  name="username" type="text" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label>Password</label>
-                                <input  pattern="[a-z0-9]+$"  name="password" type="password" class="form-control" required>
+                                <input  pattern="[a-z0-9\s]+$"  name="password" type="password" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label>Name</label>

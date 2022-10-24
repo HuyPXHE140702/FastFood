@@ -7,10 +7,9 @@
  * DATE            Version             AUTHOR                   DESCRIPTION
  * 2022-10-12      1.0                 HuyPXHE140702            First Implement
  */
-package dao.Impl;
+package dao.impl;
 
 import dao.AccountDAO;
-import dao.BaseDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -44,10 +43,10 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        BaseDAO baseDAO = new BaseDAOImpl();
+
         try {
             String sql = "select *from Account ";
-            connection = baseDAO.getConnection();
+            connection = getConnection();
             preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -66,9 +65,9 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         } catch (Exception e) {
             throw e;
         } finally {
-            baseDAO.closeResultSet(resultSet);
-            baseDAO.closePreparedStatement(preparedStatement);
-            baseDAO.closeConnection(connection);
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connection);
         }
         return list;
     }
@@ -80,9 +79,9 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        BaseDAO baseDAO = new BaseDAOImpl();
+
         try {
-            connection = baseDAO.getConnection();
+            connection = getConnection();
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, password);
@@ -103,9 +102,9 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
 
         } catch (Exception e) {
         } finally {
-            baseDAO.closeResultSet(resultSet);
-            baseDAO.closePreparedStatement(preparedStatement);
-            baseDAO.closeConnection(connection);
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connection);
         }
         return null;
     }
@@ -128,10 +127,10 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        BaseDAO baseDAO = new BaseDAOImpl();
+
         try {
             //connect db by dbcontext
-            connection = baseDAO.getConnection();
+            connection = getConnection();
             //use query 
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, username);
@@ -145,9 +144,9 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         } catch (Exception e) {
             throw e;
         } finally {
-            baseDAO.closeResultSet(resultSet);
-            baseDAO.closePreparedStatement(preparedStatement);
-            baseDAO.closeConnection(connection);
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connection);
         }
 
     }
@@ -158,9 +157,9 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        BaseDAO baseDAO = new BaseDAOImpl();
+
         try {
-            connection = baseDAO.getConnection();
+            connection = getConnection();
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, username);
             resultSet = preparedStatement.executeQuery();
@@ -180,9 +179,9 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
 
         } catch (Exception e) {
         } finally {
-            baseDAO.closeResultSet(resultSet);
-            baseDAO.closePreparedStatement(preparedStatement);
-            baseDAO.closeConnection(connection);
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connection);
         }
         return null;
     }
@@ -193,9 +192,9 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        BaseDAO baseDAO = new BaseDAOImpl();
+
         try {
-            connection = baseDAO.getConnection();
+            connection = getConnection();
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, id);
             resultSet = preparedStatement.executeQuery();
@@ -215,9 +214,9 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         } catch (Exception e) {
             throw e;
         } finally {
-            baseDAO.closeResultSet(resultSet);
-            baseDAO.closePreparedStatement(preparedStatement);
-            baseDAO.closeConnection(connection);
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connection);
         }
         return null;
     }
@@ -228,9 +227,9 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        BaseDAO baseDAO = new BaseDAOImpl();
+
         try {
-            connection = baseDAO.getConnection();
+            connection = getConnection();
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, id);
             resultSet = preparedStatement.executeQuery();
@@ -250,9 +249,9 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         } catch (Exception e) {
             throw e;
         } finally {
-            baseDAO.closeResultSet(resultSet);
-            baseDAO.closePreparedStatement(preparedStatement);
-            baseDAO.closeConnection(connection);
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connection);
         }
         return null;
     }
@@ -276,9 +275,9 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         //create dao
-        BaseDAO baseDAO = new BaseDAOImpl();
+
         try {
-            connection = baseDAO.getConnection();
+            connection = getConnection();
             //connect sql querry
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, username);
@@ -294,9 +293,9 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         } catch (Exception e) {
             throw e;
         } finally {
-            baseDAO.closeResultSet(resultSet);
-            baseDAO.closePreparedStatement(preparedStatement);
-            baseDAO.closeConnection(connection);
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connection);
         }
 
     }
@@ -318,9 +317,9 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        BaseDAO baseDAO = new BaseDAOImpl();
+
         try {
-            connection = baseDAO.getConnection();
+            connection = getConnection();
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, username);
             preparedStatement.setString(2, password);
@@ -335,9 +334,9 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
 
         } catch (Exception e) {
         } finally {
-            baseDAO.closeResultSet(resultSet);
-            baseDAO.closePreparedStatement(preparedStatement);
-            baseDAO.closeConnection(connection);
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connection);
         }
 
     }
@@ -353,9 +352,9 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        BaseDAO baseDAO = new BaseDAOImpl();
+
         try {
-            connection = baseDAO.getConnection();
+            connection = getConnection();
             preparedStatement = connection.prepareStatement(sql);
 
             preparedStatement.setString(1, password);
@@ -367,9 +366,9 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
 
         } catch (Exception e) {
         } finally {
-            baseDAO.closeResultSet(resultSet);
-            baseDAO.closePreparedStatement(preparedStatement);
-            baseDAO.closeConnection(connection);
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connection);
         }
     }
 
@@ -379,9 +378,9 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        BaseDAO baseDAO = new BaseDAOImpl();
+
         try {
-            connection = baseDAO.getConnection();
+            connection = getConnection();
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, id);
             resultSet = preparedStatement.executeQuery();
@@ -392,9 +391,9 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         } catch (Exception e) {
 
         } finally {
-            baseDAO.closeResultSet(resultSet);
-            baseDAO.closePreparedStatement(preparedStatement);
-            baseDAO.closeConnection(connection);
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connection);
         }
         return null;
     }
@@ -419,12 +418,12 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        BaseDAO baseDAO = new BaseDAOImpl();
+
         try {
             String sql = "SELECT * from Account WHERE Displayname like ? " + role
                     + "ORDER BY ID "
                     + "OFFSET " + offset + " ROWS FETCH NEXT 3 ROWS ONLY";
-            connection = baseDAO.getConnection();
+            connection = getConnection();
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, "%" + name + "%");
             resultSet = preparedStatement.executeQuery();
@@ -445,9 +444,9 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         } catch (Exception e) {
             throw e;
         } finally {
-            baseDAO.closeResultSet(resultSet);
-            baseDAO.closePreparedStatement(preparedStatement);
-            baseDAO.closeConnection(connection);
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connection);
         }
         return accountList;
     }
@@ -474,9 +473,9 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        BaseDAO baseDAO = new BaseDAOImpl();
+
         try {
-            connection = baseDAO.getConnection();
+            connection = getConnection();
             preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -499,9 +498,9 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } finally {
-            baseDAO.closeResultSet(resultSet);
-            baseDAO.closePreparedStatement(preparedStatement);
-            baseDAO.closeConnection(connection);
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connection);
         }
         return accountList;
     }
@@ -525,9 +524,9 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        BaseDAO baseDAO = new BaseDAOImpl();
+
         try {
-            connection = baseDAO.getConnection();
+            connection = getConnection();
             preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -536,9 +535,9 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         } catch (SQLException e) {
             throw e;
         } finally {
-            baseDAO.closeResultSet(resultSet);
-            baseDAO.closePreparedStatement(preparedStatement);
-            baseDAO.closeConnection(connection);
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connection);
         }
         return noOfRecords;
     }
@@ -563,7 +562,7 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        BaseDAO baseDAO = new BaseDAOImpl();
+
         try {
             connection = new BaseDAOImpl().getConnection();
             preparedStatement = connection.prepareStatement(sql);
@@ -576,9 +575,9 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            baseDAO.closeResultSet(resultSet);
-            baseDAO.closePreparedStatement(preparedStatement);
-            baseDAO.closeConnection(connection);
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connection);
         }
         return noOfRecords;
     }
@@ -600,9 +599,9 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        BaseDAO baseDAO = new BaseDAOImpl();
+
         try {
-            connection = baseDAO.getConnection();
+            connection = getConnection();
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, accountID);
             resultSet = preparedStatement.executeQuery();
@@ -622,10 +621,31 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            baseDAO.closeResultSet(resultSet);
-            baseDAO.closePreparedStatement(preparedStatement);
-            baseDAO.closeConnection(connection);
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connection);
         }
         return null;
     }
+
+    @Override
+    public void closeConnection(Connection cnn) {
+        super.closeConnection(cnn); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void closePreparedStatement(PreparedStatement ps) {
+        super.closePreparedStatement(ps); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void closeResultSet(ResultSet rs) {
+        super.closeResultSet(rs); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Connection getConnection() throws Exception {
+        return super.getConnection(); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

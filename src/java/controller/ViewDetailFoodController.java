@@ -1,11 +1,16 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright(C) 2005, FPT University
+ * Java MVC:
+ *  Fast Food Shop
+ *
+ * Record of change:
+ * DATE            Version             AUTHOR                   DESCRIPTION
+ * 2022-10-15      1.0                 DANGTMHE130893            First Implement
  */
 package controller;
 
-import dao.Impl.FoodDAOImpl;
+import dao.FoodDAO;
+import dao.impl.FoodDAOImpl;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,7 +40,8 @@ public class ViewDetailFoodController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         //show detail food
          int foodid = Integer.parseInt(request.getParameter("foodid"));
-         Food food =  new FoodDAOImpl().getFoodById(foodid);
+         FoodDAO foodDAO = new FoodDAOImpl();
+         Food food =  foodDAO.getFoodById(foodid);
          request.setAttribute("food",food);
          request.getSession().setAttribute("urlHistory", "DetailFood?foodid="+foodid);
          request.getRequestDispatcher("detailfood.jsp").forward(request, response);
