@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package controller;
 
 import java.io.IOException;
@@ -9,17 +14,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.Cart;
 
 /**
- * Copyright(C) 2005, FPT University
-* Java MVC:
-*  Fast Food Shop
-*
-* Record of change:
-* DATE            Version             AUTHOR                   DESCRIPTION
-* 2022-10-12      1.0                 NamVNHE140527            First Implement
+ * Copyright(C) 2005, FPT University Java MVC: Fast Food Shop
+ *
+ * Record of change: DATE Version AUTHOR DESCRIPTION 2022-10-14 1.0
+ * NamVNHE140527 First Implement
  */
-public class Carts extends HttpServlet {
+public class DeleteCartController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -30,30 +33,30 @@ public class Carts extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try {
+
+            int foodid = Integer.parseInt(request.getParameter("foodid"));
 
             HttpSession session = request.getSession();
-            Map<Integer, model.Cart> carts = (Map<Integer, model.Cart>) session.getAttribute("carts");
-            if (carts== null) {
-                carts = new LinkedHashMap<>();
+
+            Map<Integer, Cart> carts = (Map<Integer, Cart>) session.getAttribute("carts");
+            if (carts == null) {
+                carts = new LinkedHashMap<>();//linkedmap se sap xep theo thu tu
             }
-            //tinh total amout
-            float totalAmout = 0;
-            for (Map.Entry<Integer, model.Cart> entry : carts.entrySet()) {
-                model.Cart cart = entry.getValue();
-                
-                totalAmout+= cart.getQuantity()*cart.getProduct().getUnitprice();
+            if (carts.containsKey(foodid)) {
+                carts.remove(foodid);
             }
-            request.setAttribute("totalAmount", totalAmout);
-            request.setAttribute("carts", carts);
-            request.getRequestDispatcher("cart.jsp").forward(request, response);
+            session.setAttribute("carts", carts);
+            response.sendRedirect("carts");
+        } catch (Exception ex) {
+
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -91,4 +94,5 @@ public class Carts extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 }

@@ -5,23 +5,29 @@
  */
 package controller;
 
+import dao.Impl.FoodDAOImpl;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.Food;
 
-/**
+/*
 * Copyright(C) 2005, FPT University
 * Java MVC:
 *  Fast Food Shop
 *
 * Record of change:
 * DATE            Version             AUTHOR                   DESCRIPTION
-* 2022-10-14      1.0                 NamVNHE140527            First Implement
+* 2022-10-12      1.0                 NamVNHE140527            First Implement
  */
-public class DeleteCart extends HttpServlet {
+public class AddToCartController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,18 +41,44 @@ public class DeleteCart extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
+        try {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet DeleteCart</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet DeleteCart at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            int foodid = Integer.parseInt(request.getParameter("foodid"));
+            HttpSession session = request.getSession();
+            //checklogin
+//            Account account = (Account) session.getAttribute("acc");
+//            if(account ==null){
+//                response.sendRedirect("login.jsp");
+//                return;
+//            }
+            Map<Integer, model.Cart> carts = (Map<Integer, model.Cart>) session.getAttribute("carts");
+            if (carts == null) {
+                carts = new LinkedHashMap<>();//linkedmap se sap xep theo thu tu
+            }
+            //lau food voi id nhan dc
+            if (carts.containsKey(foodid)) {//th2
+                int oldQuantity = carts.get(foodid).getQuantity();
+                carts.get(foodid).setQuantity(oldQuantity + 1);
+            } else {//th1
+                Food food = new FoodDAOImpl().getFoodById(foodid);
+                carts.put(foodid, new model.Cart(food, 1));
+            }
+            //th1: sp chua co trong gio hang
+            //th2: san pham da co tren gio hang -> cap nhat lai so luong tren gio hang
+            session.setAttribute("carts", carts);
+//            response.getWriter().println(carts.size());
+            String urlHistory = (String) session.getAttribute("urlHistory");
+            if (urlHistory == null) {
+                urlHistory = "home";
+            }
+            response.sendRedirect(urlHistory);
+
+        } catch (Exception ex) {
+            Logger.getLogger(AddToCartController.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
