@@ -31,7 +31,7 @@ import model.Order;
  */
 public class HomeshipperController extends HttpServlet {
 
-    List<Order> orderList = null;
+    List<Order> orderList = new ArrayList<>();
     int noOfRecords = 0;
     int noOfPages = 0;
     String dateFrom = "";
@@ -67,12 +67,10 @@ public class HomeshipperController extends HttpServlet {
             }
             //get all available orders with paging
             List<Order> temp = new ArrayList<>();
-            if (orderList != null) {
-                if (orderList.size() > 0) {
-                    for (int i = 0; i < 3; i++) {
-                        if ((page - 1) * 3 + i < orderList.size()) {
-                            temp.add(orderList.get((page - 1) * 3 + i));
-                        }
+            if (orderList.size() > 0) {
+                for (int i = 0; i < 3; i++) {
+                    if ((page - 1) * 3 + i < orderList.size()) {
+                        temp.add(orderList.get((page - 1) * 3 + i));
                     }
                 }
             }
@@ -137,11 +135,9 @@ public class HomeshipperController extends HttpServlet {
                 //noOfRecords = orderDAO.getNoOfRecordsBetweenDate(condition, dateFrom, dateTo);
             }
             List<Order> temp = null;
-            if (orderList != null) {
-                if (orderList.size() > 0) {
-                    for (int i = 0; i < recordsPerPage; i++) {
-                        temp.add(orderList.get((page - 1) * recordsPerPage + i));
-                    }
+            if (orderList.size() > 0) {
+                for (int i = 0; i < recordsPerPage; i++) {
+                    temp.add(orderList.get((page - 1) * recordsPerPage + i));
                 }
             }
             noOfRecords = orderList.size();
