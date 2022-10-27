@@ -15,8 +15,12 @@ import java.util.List;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Order;
+import model.OrderDetail;
 
 /*
  * The class contains method for view order list, add or update an order, search and paging <br>
@@ -43,7 +47,7 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        
+
         try {
             String sql = "select * from Orders where ShipperID is null and status = 1";
             connection = getConnection();
@@ -88,7 +92,7 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        
+
         try {
             String sql = "Select * From Orders where ShipperID is not null and status = 1";
             connection = getConnection();
@@ -137,7 +141,7 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        
+
         try {
             String sql = "SELECT * from Orders WHERE ShipperID is NULL " + condition
                     + " ORDER BY OrderID "
@@ -189,7 +193,7 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        
+
         try {
             String sql = "SELECT * from Orders WHERE ShipperID is NULL " + condition
                     + " ORDER BY OrderID "
@@ -243,7 +247,7 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        
+
         try {
             connection = getConnection();
             preparedStatement = connection.prepareStatement(sql);
@@ -291,7 +295,7 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        
+
         try {
             connection = getConnection();
             preparedStatement = connection.prepareStatement(sql);
@@ -329,7 +333,7 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        
+
         try {
             connection = getConnection();
             preparedStatement = connection.prepareStatement(sql);
@@ -366,5 +370,44 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
     public Connection getConnection() throws Exception {
         return super.getConnection(); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
+    @Override
+    public int createReturnId(Order order) {
+        String sql = "String sql = \"INSERT INTO [dbo].[Orders]\\n\"\n"
+                + "                    + \"           ([account_id]\\n\"\n"
+                + "                    + \"           ,[Name]\\n\"\n"
+                + "                    + \"           ,[Phone]\\n\"\n"
+                + "                    + \"           ,[Address]\\n\"\n"
+                + "                    + \"           ,[TotalPrice]\\n\"\n"
+                + "                    + \"           ,[status])\\n\"\n"
+                + "                    + \"     VALUES\\n\"\n"
+                + "                    + \"           (?,?,?,?,?,0)\";";
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = getConnection();
+            PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, order.getAcount_id());
+            ps.setString(2, order.getName());
+            ps.setString(3, order.getPhone());
+            ps.setString(4, order.getAddress());
+            ps.setFloat(5, order.getTotalprice());
+            ps.executeUpdate();
+
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(OrderDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connection);
+        }
+        return 0;
+    }
+
 }

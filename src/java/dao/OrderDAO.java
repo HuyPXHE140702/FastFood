@@ -27,5 +27,7 @@ public interface OrderDAO {
     public int getNoOfRecords() throws Exception;
 
     public int getNoOfRecordsPost(String condition) throws Exception;
+    
+    public int createReturnId(Order order);
 
 }
