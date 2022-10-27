@@ -34,6 +34,8 @@ public class HomeshipperController extends HttpServlet {
     List<Order> orderList = null;
     int noOfRecords = 0;
     int noOfPages = 0;
+    String dateFrom = "";
+    String dateTo = "";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -66,15 +68,19 @@ public class HomeshipperController extends HttpServlet {
             //get all available orders with paging
             List<Order> temp = new ArrayList<>();
             if (orderList != null) {
-                for (int i = 0; i < 3; i++) {
-                    if ((page - 1) * 3 + i < orderList.size()) {
-                        temp.add(orderList.get((page - 1) * 3 + i));
+                if (orderList.size() > 0) {
+                    for (int i = 0; i < 3; i++) {
+                        if ((page - 1) * 3 + i < orderList.size()) {
+                            temp.add(orderList.get((page - 1) * 3 + i));
+                        }
                     }
                 }
             }
             request.setAttribute("listOrder", temp);
             request.setAttribute("noOfPages", noOfPages);
             request.setAttribute("currentPage", page);
+            request.setAttribute("dateF", dateFrom);
+            request.setAttribute("dateT", dateTo);
             request.getRequestDispatcher("homeshipper.jsp").forward(request, response);
         } catch (NumberFormatException | ServletException | IOException | IllegalStateException e) {
             e.printStackTrace();
@@ -99,8 +105,8 @@ public class HomeshipperController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            String dateFrom = (String) request.getParameter("DateFrom");
-            String dateTo = (String) request.getParameter("DateTo");
+            dateFrom = (String) request.getParameter("DateFrom");
+            dateTo = (String) request.getParameter("DateTo");
             int page = 1;
             int recordsPerPage = 3;
             if (request.getParameter("page") != null) {
@@ -130,10 +136,12 @@ public class HomeshipperController extends HttpServlet {
                 //orderList = orderDAO.getOrderByDateToDate(dateFrom, dateTo, condition, (page - 1) * recordsPerPage);
                 //noOfRecords = orderDAO.getNoOfRecordsBetweenDate(condition, dateFrom, dateTo);
             }
-            List<Order> temp = new ArrayList<>();
+            List<Order> temp = null;
             if (orderList != null) {
-                for (int i = 0; i < recordsPerPage; i++) {
-                    temp.add(orderList.get((page - 1) * recordsPerPage + i));
+                if (orderList.size() > 0) {
+                    for (int i = 0; i < recordsPerPage; i++) {
+                        temp.add(orderList.get((page - 1) * recordsPerPage + i));
+                    }
                 }
             }
             noOfRecords = orderList.size();
@@ -141,11 +149,11 @@ public class HomeshipperController extends HttpServlet {
             request.setAttribute("noOfPages", noOfPages);
             request.setAttribute("currentPage", page);
             request.setAttribute("listOrder", temp);
+            request.setAttribute("dateF", dateFrom);
+            request.setAttribute("dateT", dateTo);
             request.getRequestDispatcher("homeshipper.jsp").forward(request, response);
-
         } catch (Exception e) {
             e.printStackTrace();
-
             response.sendRedirect("error_Database.jsp");
         }
 

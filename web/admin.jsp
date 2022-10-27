@@ -62,34 +62,36 @@
                 <br>
                 <h1>Account List</h1>
                 <form action="admin" method="POST">
-                    <input type="text" id="myInput" name ="Displayname" placeholder="Search for names.." title="Type in a name">
+                    <input type="text" id="myInput" name ="Displayname" placeholder="Search for names.." title="Type in a name" value="${nameSearch}">
                     <select name="roles" id="cars">
-                        <option value="all">All roles</option>
-                        <option value="admin">Admin</option>
-                        <option value="customer">Customer</option>
-                        <option value="seller">Seller</option>
-                        <option value="shipper">Shipper</option>
-                    </select>
-                    <input type="submit" value="Search">
-                </form>
+                        <option value="all" <c:if test="${roleSelect == 'all'}"> selected </c:if>>All roles</option>
+                        <option value="admin"<c:if test="${roleSelect == 'admin'}"> selected </c:if>>Admin</option>
+                        <option value="customer"<c:if test="${roleSelect == 'customer'}"> selected </c:if>>Customer</option>
+                        <option value="seller"<c:if test="${roleSelect == 'seller'}"> selected </c:if>>Seller</option>
+                        <option value="shipper"<c:if test="${roleSelect == 'shipper'}"> selected </c:if>>Shipper</option>
+                        </select>
+                        <input type="submit" value="Search">
+                    </form>
 
-                <table class="table" >
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Username</th>
-                            <th scope="col">Password</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Phone</th>
-                            <th scope="col">Address</th>
-                            <th scope="col">Role</th>
-                            <th scope="col">Status</th>
-                            <th scope="col"></th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                    <table class="table" >
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Username</th>
+                                <th scope="col">Password</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Phone</th>
+                                <th scope="col">Address</th>
+                                <th scope="col">Role</th>
+                                <th scope="col">Status</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
                         <c:if test="${listAccounts == null}">
-                            <tr style="text-align:center">No search result found!</tr>
+                            <tr style="text-align:center">
+                                <td colspan="8">No search result found!</td>
+                            </tr>
                         </c:if>
                         <c:if test="${listAccounts != null}">
 

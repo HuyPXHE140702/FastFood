@@ -68,8 +68,8 @@
 
                 <h1>Order List</h1>
                 <form action="homeshipper" method="POST">
-                    From Date: <input type="date" id="myInput" name ="DateFrom" title="Type in a date from">
-                    - To Date: <input type="date" id="myInput" name ="DateTo" title="Type in a date to">
+                    From Date: <input type="date" id="myInput" name ="DateFrom" value="${dateF}" >
+                    - To Date: <input type="date" id="myInput" name ="DateTo" value="${dateT}">
                     <input type="submit" value="Search">
                 </form>
                 <table class="table">
@@ -90,7 +90,9 @@
                     </a>
                     <tbody>
                         <c:if test="${listOrder == null}">
-                            <tr style="text-align:center">No search result found!</tr>
+                            <tr style="text-align:center">
+                                <td colspan="8">No search result found!</td>
+                            </tr>
                         </c:if>
                         <c:if test="${listOrder != null}">
                             <c:forEach items="${listOrder}" var="l">
