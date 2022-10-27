@@ -49,7 +49,7 @@
 
                             <c:if test="${sessionScope.acc.isShipper == 1}">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="homeshipper?page=0">List Order Ship</a>
+                                    <a class="nav-link" href="homeshipper">List Order Ship</a>
                                 </li>
                             </c:if>
 

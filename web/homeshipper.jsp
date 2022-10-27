@@ -58,7 +58,7 @@
             <div class="container" style="min-height: 1000px">
                 <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
                     <div class="me-3">
-                        <label class="btn btn-outline-dark"><a class="nav-link" href="homeshipper?page=0">Available Orders</a></label>
+                        <label class="btn btn-outline-dark"><a class="nav-link" href="homeshipper">Available Orders</a></label>
                         <label class="btn btn-outline-dark"><a class="nav-link" href="Shipperacceptorder?accountid=${sessionScope.acc.id}">Accepcted Orders</a></label>
                     </div>
                 </div>

@@ -38,7 +38,6 @@ public class HomeshipperController extends HttpServlet {
     private int noOfPages = 0;
     private String dateFrom = "";
     private String dateTo = "";
-    private boolean check = true;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -70,17 +69,10 @@ public class HomeshipperController extends HttpServlet {
             }
             String checker = request.getParameter("checker");
             List<Order> temp = new ArrayList<>();
-            if (page == 0) {
-                orderList = null;
-                dateFrom = "dd/MM/yyyy";
-                dateTo = "dd/MM/yyyy";
-                noOfPages = 1;
-            } else {
-                if (orderList.size() > 0) {
-                    for (int i = 0; i < 3; i++) {
-                        if ((page - 1) * 3 + i < orderList.size()) {
-                            temp.add(orderList.get((page - 1) * 3 + i));
-                        }
+            if (orderList.size() > 0) {
+                for (int i = 0; i < 3; i++) {
+                    if ((page - 1) * 3 + i < orderList.size()) {
+                        temp.add(orderList.get((page - 1) * 3 + i));
                     }
                 }
             }
