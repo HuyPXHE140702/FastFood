@@ -88,61 +88,61 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
+                        <c:if test="${listAccounts == null}">
+                            <tr style="text-align:center">No search result found!</tr>
+                        </c:if>
+                        <c:if test="${listAccounts != null}">
+
 
                             <c:forEach items="${listAccounts}" var="a">
-
-                                <th hidden scope="row">${a.id}</th>
-                                <th scope="row"><c:set var="count" value="${count+1}"></c:set>${count}</th>
-                                <td>${a.username}</td>
-                                <td class="hidetext">${a.password}</td>
-                                <td>${a.displayName}</td>
-                                <td>${a.phone}</td>
-                                <td>${a.address}</td>
-                                <c:if test="${a.isAdmin==1}">
-                                    <td>Admin</td>   
-                                </c:if>
-                                <c:if test="${a.isCustomer == 1}">
-                                    <td>Customer</td>
-                                </c:if>
-                                <c:if test="${a.isSeller==1}">
-                                    <td>Seller</td>
-                                </c:if>
-                                <c:if test="${a.isShipper==1}">
-                                    <td>Shipper</td>
-                                </c:if>
-                                <td>
+                                <tr>
+                                    <th hidden scope="row">${a.id}</th>
+                                    <th scope="row"><c:set var="count" value="${count+1}"></c:set>${count}</th>
+                                    <td>${a.username}</td>
+                                    <td class="hidetext">${a.password}</td>
+                                    <td>${a.displayName}</td>
+                                    <td>${a.phone}</td>
+                                    <td>${a.address}</td>
+                                    <c:if test="${a.isAdmin==1}">
+                                        <td>Admin</td>   
+                                    </c:if>
+                                    <c:if test="${a.isCustomer == 1}">
+                                        <td>Customer</td>
+                                    </c:if>
+                                    <c:if test="${a.isSeller==1}">
+                                        <td>Seller</td>
+                                    </c:if>
                                     <c:if test="${a.isShipper==1}">
-                                        <c:if test="${a.status ==1}">
-                                            <a href="delete-shipper?accountid=${a.id}" class="btn btn-outline-danger">Block</a> 
-                                        </c:if>
-                                        <c:if test="${a.status ==0}">
-                                            <a href="insert-shipper?accountid=${a.id}" class="btn btn-outline-danger">Active</a> 
-                                        </c:if>
-
+                                        <td>Shipper</td>
                                     </c:if>
-                                    <c:if test="${ a.isSeller==1}">
-                                        <c:if test="${a.status ==1}">
-                                            <a href="delete-seller?accountid=${a.id}" class="btn btn-outline-danger">Block</a> 
+                                    <td>
+                                        <c:if test="${a.isShipper==1}">
+                                            <c:if test="${a.status ==1}">
+                                                <a href="delete-shipper?accountid=${a.id}" class="btn btn-outline-danger">Block</a> 
+                                            </c:if>
+                                            <c:if test="${a.status ==0}">
+                                                <a href="insert-shipper?accountid=${a.id}" class="btn btn-outline-danger">Active</a> 
+                                            </c:if>
                                         </c:if>
-                                        <c:if test="${a.status ==0}">
-                                            <a href="insert-seller?accountid=${a.id}" class="btn btn-outline-danger">Active</a>
+                                        <c:if test="${ a.isSeller==1}">
+                                            <c:if test="${a.status ==1}">
+                                                <a href="delete-seller?accountid=${a.id}" class="btn btn-outline-danger">Block</a> 
+                                            </c:if>
+                                            <c:if test="${a.status ==0}">
+                                                <a href="insert-seller?accountid=${a.id}" class="btn btn-outline-danger">Active</a>
+                                            </c:if>
                                         </c:if>
+                                    </td>
+                                    <td>
+                                        <c:if test="${a.isShipper==1 || a.isSeller==1 || a.isCustomer==1}">
+                                            <a href="loadAccount?accountid=${a.id}" class="btn btn-outline-dark"  ><i class="bi bi-pencil"></i> Edit</a>
+                                            <a href="delete-account?accountid=${a.id}" class="btn btn-outline-dark"><i class="bi bi-trash"></i></i> Delete</a>
+                                        </c:if>
+                                    </td>
 
-                                    </c:if>
-                                </td>
-
-                                <td>
-
-                                    <c:if test="${a.isShipper==1 || a.isSeller==1 || a.isCustomer==1}">
-                                        <a href="loadAccount?accountid=${a.id}" class="btn btn-outline-dark"  ><i class="bi bi-pencil"></i> Edit</a>
-                                        <a href="delete-account?accountid=${a.id}" class="btn btn-outline-dark"><i class="bi bi-trash"></i></i> Delete</a>
-                                    </c:if>
-                                </td>
-
-                            </tr>
-                        </c:forEach>
-
+                                </tr>
+                            </c:forEach>
+                        </c:if>
                     </tbody>
                 </table>
                 <%--For displaying Previous link except for the 1st page 

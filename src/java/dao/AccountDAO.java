@@ -43,4 +43,6 @@ public interface AccountDAO {
     public int getNoOfRecordsPost(String condition) throws Exception;
     
     public Account deleteAcountByID(int accountID);
+    
+    public List<Account> getAccountByNamePaging(String name, String role) throws Exception;
 }

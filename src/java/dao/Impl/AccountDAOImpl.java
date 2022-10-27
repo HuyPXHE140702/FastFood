@@ -629,6 +629,41 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
     }
 
     @Override
+    public List<Account> getAccountByNamePaging(String name, String role) throws Exception {
+        List<Account> accountList = new ArrayList<>();
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            String sql = "SELECT * from Account WHERE Displayname like ? " + role;
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, "%" + name + "%");
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                accountList.add(new Account(resultSet.getInt("ID"),
+                        resultSet.getString("Username"),
+                        resultSet.getString("Password"),
+                        resultSet.getString("Displayname"),
+                        resultSet.getString("Address"),
+                        resultSet.getString("Phone"),
+                        resultSet.getInt("isAdmin"),
+                        resultSet.getInt("isCustomer"),
+                        resultSet.getInt("IsShipper"),
+                        resultSet.getInt("IsSaller"),
+                        resultSet.getInt("status")));
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connection);
+        }
+        return accountList;
+    }
+
+    @Override
     public void closeConnection(Connection cnn) {
         super.closeConnection(cnn); //To change body of generated methods, choose Tools | Templates.
     }

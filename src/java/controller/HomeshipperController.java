@@ -34,7 +34,6 @@ public class HomeshipperController extends HttpServlet {
     List<Order> orderList = null;
     int noOfRecords = 0;
     int noOfPages = 0;
-    String condition = "and created_date BETWEEN ? and ?";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -64,13 +63,6 @@ public class HomeshipperController extends HttpServlet {
             if (request.getParameter("page") != null) {
                 page = Integer.parseInt(request.getParameter("page"));
             }
-            String dateFrom = (String) request.getParameter("DateFrom");
-            String dateTo = (String) request.getParameter("DateTo");
-            OrderDAO orderDAO = new OrderDAOImpl();
-            //List<Order> orderList;
-//            if (dateFrom.equals("") && dateTo.equals("")) {
-//                orderList = null;
-//            } else {
             //get all available orders with paging
             List<Order> temp = new ArrayList<>();
             if (orderList != null) {
@@ -80,9 +72,6 @@ public class HomeshipperController extends HttpServlet {
                     }
                 }
             }
-
-            //noOfRecords = orderDAO.getNoOfRecords();
-            //noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
             request.setAttribute("listOrder", temp);
             request.setAttribute("noOfPages", noOfPages);
             request.setAttribute("currentPage", page);
@@ -118,7 +107,7 @@ public class HomeshipperController extends HttpServlet {
                 page = Integer.parseInt(request.getParameter("page"));
             }
             OrderDAO orderDAO = new OrderDAOImpl();
-
+            String condition = "and created_date BETWEEN ? and ?";
             //if search form empty
             if (dateFrom.equals("") && dateTo.equals("")) {
                 orderList = orderDAO.getOrderNotAcceptByShipperID();
