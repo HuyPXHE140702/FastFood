@@ -89,31 +89,36 @@
                         <input value="${sessionScope.acc.id}" name="idShipper">
                     </a>
                     <tbody>
-                        <c:forEach items="${listOrder}" var="l">
-                            <tr>
+                        <c:if test="${listOrder == null}">
+                            <tr style="text-align:center">No search result found!</tr>
+                        </c:if>
+                        <c:if test="${listOrder != null}">
+                            <c:forEach items="${listOrder}" var="l">
+                                <tr>
 
-                                <th hidden scope="row">${l.orderid}</th>
-                                <th scope="row"><c:set var="count" value="${count+1}"></c:set>${count}</th>
-                                <td>${l.name}</td>
-                                <td>${l.address}</td>
-                                <td>${l.phone}</td>
-                                <td>$${l.totalprice}</td>
-                                <td>${l.created_date}</td>
-                                <td>
-                                    <a class="btn btn-outline-dark" href="viewBillByShipper?orderID=${l.orderid}&cusname=${l.name}">View</a>
-                                </td>
-                                <td>
-                                    <a class="btn btn-outline-dark" href="AcceptOrderShipper?accountid=${sessionScope.acc.id}&orderid=${l.orderid}&dedeliverymoney=${deliverymoney}" >Accept</a>
+                                    <th hidden scope="row">${l.orderid}</th>
+                                    <th scope="row"><c:set var="count" value="${count+1}"></c:set>${count}</th>
+                                    <td>${l.name}</td>
+                                    <td>${l.address}</td>
+                                    <td>${l.phone}</td>
+                                    <td>$${l.totalprice}</td>
+                                    <td>${l.created_date}</td>
+                                    <td>
+                                        <a class="btn btn-outline-dark" href="viewBillByShipper?orderID=${l.orderid}&cusname=${l.name}">View</a>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-outline-dark" href="AcceptOrderShipper?accountid=${sessionScope.acc.id}&orderid=${l.orderid}&dedeliverymoney=${deliverymoney}" >Accept</a>
 
-                                </td>
-                            </tr>
-                        </c:forEach>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </c:if>
                     </tbody>
                 </table>
-                    <%--For displaying Previous link except for the 1st page 
-                <c:if test="${currentPage != 1}">
-                    <td><a href="homeshipper?page=${currentPage - 1}">Previous</a></td>
-                </c:if>--%>
+                <%--For displaying Previous link except for the 1st page 
+            <c:if test="${currentPage != 1}">
+                <td><a href="homeshipper?page=${currentPage - 1}">Previous</a></td>
+            </c:if>--%>
 
                 <%--For displaying Page numbers. 
                 The when condition does not display a link for the current page--%>

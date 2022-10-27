@@ -14,6 +14,8 @@ import dao.OrderDAO;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,9 +31,15 @@ import model.Order;
  */
 public class HomeshipperController extends HttpServlet {
 
+    List<Order> orderList = null;
+    int noOfRecords = 0;
+    int noOfPages = 0;
+    String condition = "and created_date BETWEEN ? and ?";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        //request.getRequestDispatcher("homeshipper.jsp").forward(request, response);
     }
 
     /**
@@ -56,17 +64,34 @@ public class HomeshipperController extends HttpServlet {
             if (request.getParameter("page") != null) {
                 page = Integer.parseInt(request.getParameter("page"));
             }
+            String dateFrom = (String) request.getParameter("DateFrom");
+            String dateTo = (String) request.getParameter("DateTo");
             OrderDAO orderDAO = new OrderDAOImpl();
+            //List<Order> orderList;
+//            if (dateFrom.equals("") && dateTo.equals("")) {
+//                orderList = null;
+//            } else {
             //get all available orders with paging
-            List<Order> orderList = orderDAO.viewAllOrders((page - 1) * recordsPerPage, recordsPerPage);
-            int noOfRecords = orderDAO.getNoOfRecords();
-            int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-            request.setAttribute("listOrder", orderList);
+            List<Order> temp = new ArrayList<>();
+            if (orderList != null) {
+                for (int i = 0; i < 3; i++) {
+                    if ((page - 1) * 3 + i < orderList.size()) {
+                        temp.add(orderList.get((page - 1) * 3 + i));
+                    }
+                }
+            }
+
+            //noOfRecords = orderDAO.getNoOfRecords();
+            //noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+            request.setAttribute("listOrder", temp);
             request.setAttribute("noOfPages", noOfPages);
             request.setAttribute("currentPage", page);
             request.getRequestDispatcher("homeshipper.jsp").forward(request, response);
-        } catch (Exception e) {
+        } catch (NumberFormatException | ServletException | IOException | IllegalStateException e) {
+            e.printStackTrace();
             response.sendRedirect("error_Database.jsp");
+        } catch (Exception ex) {
+            Logger.getLogger(HomeshipperController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -87,35 +112,46 @@ public class HomeshipperController extends HttpServlet {
         try {
             String dateFrom = (String) request.getParameter("DateFrom");
             String dateTo = (String) request.getParameter("DateTo");
-            String condition = "and created_date BETWEEN ? and ?";
-
             int page = 1;
             int recordsPerPage = 3;
             if (request.getParameter("page") != null) {
                 page = Integer.parseInt(request.getParameter("page"));
             }
-            OrderDAO orderDao = new OrderDAOImpl();
+            OrderDAO orderDAO = new OrderDAOImpl();
 
-            List<Order> orderList = new ArrayList<>();
             //if search form empty
             if (dateFrom.equals("") && dateTo.equals("")) {
-                orderList = orderDao.viewAllOrders(page, recordsPerPage);
+                orderList = orderDAO.getOrderNotAcceptByShipperID();
+                //orderList = orderDAO.viewAllOrders((page - 1) * recordsPerPage, recordsPerPage);
+                //noOfRecords = orderDAO.getNoOfRecords();
                 //if shipper do not choose start date
             } else if (dateFrom.equals("")) {
                 condition = "and created_date <= ?";
-                orderList = orderDao.getOrderByDate(dateTo, condition, (page - 1) * recordsPerPage);
+                orderList = orderDAO.getOrderByDateNoOffset(dateTo, condition);
+                //orderList = orderDAO.getOrderByDate(dateTo, condition, (page - 1) * recordsPerPage);
+                //noOfRecords = orderDAO.getNoOfRecordsOneDate(condition, dateTo);
                 //if shipper do not choose end date
             } else if (dateTo.equals("")) {
                 condition = "and created_date >= ?";
-                orderList = orderDao.getOrderByDate(dateFrom, condition, (page - 1) * recordsPerPage);
+                orderList = orderDAO.getOrderByDateNoOffset(dateFrom, condition);
+                //orderList = orderDAO.getOrderByDate(dateFrom, condition, (page - 1) * recordsPerPage);
+                //noOfRecords = orderDAO.getNoOfRecordsOneDate(condition, dateFrom);
             } else {
-                orderList = orderDao.getOrderByDateToDate(dateFrom, dateTo, condition, (page - 1) * recordsPerPage);
+                orderList = orderDAO.getOrderByDateToDateNoOffset(dateFrom, dateTo, condition);
+                //orderList = orderDAO.getOrderByDateToDate(dateFrom, dateTo, condition, (page - 1) * recordsPerPage);
+                //noOfRecords = orderDAO.getNoOfRecordsBetweenDate(condition, dateFrom, dateTo);
             }
-            int noOfRecords = orderDao.getNoOfRecords();
-            int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+            List<Order> temp = new ArrayList<>();
+            if (orderList != null) {
+                for (int i = 0; i < recordsPerPage; i++) {
+                    temp.add(orderList.get((page - 1) * recordsPerPage + i));
+                }
+            }
+            noOfRecords = orderList.size();
+            noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
             request.setAttribute("noOfPages", noOfPages);
             request.setAttribute("currentPage", page);
-            request.setAttribute("listOrder", orderList);
+            request.setAttribute("listOrder", temp);
             request.getRequestDispatcher("homeshipper.jsp").forward(request, response);
 
         } catch (Exception e) {
