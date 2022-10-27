@@ -12,7 +12,9 @@ package controller;
 import dao.impl.OrderDAOImpl;
 import dao.OrderDAO;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -79,6 +81,7 @@ public class HomeshipperController extends HttpServlet {
             request.setAttribute("currentPage", page);
             request.setAttribute("dateF", dateFrom);
             request.setAttribute("dateT", dateTo);
+            request.setAttribute("maxDate", LocalDate.now());
             request.getRequestDispatcher("homeshipper.jsp").forward(request, response);
         } catch (NumberFormatException | ServletException | IOException | IllegalStateException e) {
             e.printStackTrace();
@@ -134,11 +137,13 @@ public class HomeshipperController extends HttpServlet {
                 //orderList = orderDAO.getOrderByDateToDate(dateFrom, dateTo, condition, (page - 1) * recordsPerPage);
                 //noOfRecords = orderDAO.getNoOfRecordsBetweenDate(condition, dateFrom, dateTo);
             }
-            List<Order> temp = null;
+            List<Order> temp = new ArrayList<>();
             if (orderList.size() > 0) {
                 for (int i = 0; i < recordsPerPage; i++) {
                     temp.add(orderList.get((page - 1) * recordsPerPage + i));
                 }
+            } else {
+                temp = null;
             }
             noOfRecords = orderList.size();
             noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
@@ -147,6 +152,7 @@ public class HomeshipperController extends HttpServlet {
             request.setAttribute("listOrder", temp);
             request.setAttribute("dateF", dateFrom);
             request.setAttribute("dateT", dateTo);
+            request.setAttribute("maxDate", LocalDate.now());
             request.getRequestDispatcher("homeshipper.jsp").forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();

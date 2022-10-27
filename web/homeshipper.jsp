@@ -68,8 +68,10 @@
 
                 <h1>Order List</h1>
                 <form action="homeshipper" method="POST">
-                    From Date: <input type="date" id="myInput" name ="DateFrom" value="${dateF}" >
-                    - To Date: <input type="date" id="myInput" name ="DateTo" value="${dateT}">
+                    From Date: <input type="date" id="myInput" name ="DateFrom" value="${dateF}" min="2000-01-01"
+                                      max="${maxDate}" required>
+                    - To Date: <input type="date" id="myInput" name ="DateTo" value="${dateT}" min="2000-01-01"
+                                      max="${maxDate}" required>
                     <input type="submit" value="Search">
                 </form>
                 <table class="table">
