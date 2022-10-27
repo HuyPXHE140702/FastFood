@@ -62,7 +62,7 @@
                 <br>
                 <h1>Account List</h1>
                 <form action="admin" method="POST">
-                    <input type="text" id="myInput" name ="Displayname" placeholder="Search for names.." title="Type in a name" value="${nameSearch}">
+                    <input type="text" id="myInput" name ="Displayname" placeholder="Search for names.." title="Type in a name" value="${nameSearch}" required>
                     <select name="roles" id="cars">
                         <option value="all" <c:if test="${roleSelect == 'all'}"> selected </c:if>>All roles</option>
                         <option value="admin"<c:if test="${roleSelect == 'admin'}"> selected </c:if>>Admin</option>
@@ -78,7 +78,6 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Username</th>
-                                <th scope="col">Password</th>
                                 <th scope="col">Name</th>
                                 <th scope="col">Phone</th>
                                 <th scope="col">Address</th>
@@ -95,13 +94,11 @@
                         </c:if>
                         <c:if test="${listAccounts != null}">
 
-
                             <c:forEach items="${listAccounts}" var="a">
                                 <tr>
                                     <th hidden scope="row">${a.id}</th>
                                     <th scope="row"><c:set var="count" value="${count+1}"></c:set>${count}</th>
                                     <td>${a.username}</td>
-                                    <td class="hidetext">${a.password}</td>
                                     <td>${a.displayName}</td>
                                     <td>${a.phone}</td>
                                     <td>${a.address}</td>
@@ -227,7 +224,7 @@
         </div>
         <!-- End add new account -->
 
-
+        <%@include file="component/footer.jsp" %>
         <!-- jQery -->
         <script src="js/jquery-3.4.1.min.js"></script>
         <!-- popper js -->
@@ -250,4 +247,5 @@
         <!-- Core theme JS-->
         <script src="js/scripts-1.js"></script>
     </body>
+
 </html>

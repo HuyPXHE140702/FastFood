@@ -32,9 +32,11 @@ import model.Order;
  */
 public class AdminController extends HttpServlet {
 
-    List<Account> accountList = null;
+    List<Account> accountList = new ArrayList<>();
     int noOfRecords = 0;
     int noOfPages = 0;
+    String name = "";
+    String role = "";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -64,7 +66,7 @@ public class AdminController extends HttpServlet {
             }
             //get all account with paging
             List<Account> temp = new ArrayList<>();
-            if (accountList != null) {
+            if (accountList.size() > 0) {
                 for (int i = 0; i < 3; i++) {
                     if ((page - 1) * 3 + i < accountList.size()) {
                         temp.add(accountList.get((page - 1) * 3 + i));
@@ -74,6 +76,8 @@ public class AdminController extends HttpServlet {
             request.setAttribute("listAccounts", temp);
             request.setAttribute("noOfPages", noOfPages);
             request.setAttribute("currentPage", page);
+            request.setAttribute("nameSearch", name);
+            request.setAttribute("roleSelect", role);
             request.getRequestDispatcher("admin.jsp").forward(request, response);
         } catch (Exception e) {
             response.sendRedirect("error_Database.jsp");
@@ -106,7 +110,7 @@ public class AdminController extends HttpServlet {
             //get role for sql purpose
             String role = (String) request.getParameter("roles");
             String setRole = "";
-            String condition = "WHERE Displayname like '%" + name + "%' ";
+            String condition = "WHERE Displayname like '%" + name.trim() + "%' ";
             if (role.equalsIgnoreCase("all")) {
                 setRole = "";
             } else if (role.equalsIgnoreCase("admin")) {
@@ -118,23 +122,26 @@ public class AdminController extends HttpServlet {
             } else if (role.equalsIgnoreCase("shipper")) {
                 setRole = "and isShipper = 1";
             }
-
             AccountDAO accountDAO = new AccountDAOImpl();
-            accountList = accountDAO.getAccountByNamePaging(name, setRole);
+            accountList = accountDAO.getAccountByNamePaging(name.trim(), setRole);
             //get all account with paging and name contain
             List<Account> temp = new ArrayList<>();
-            if (accountList != null) {
+            if (accountList.size() > 0) {
                 for (int i = 0; i < 3; i++) {
                     if ((page - 1) * 3 + i < accountList.size()) {
                         temp.add(accountList.get((page - 1) * 3 + i));
                     }
                 }
+            } else {
+                temp = null;
             }
             noOfRecords = new AccountDAOImpl().getNoOfRecordsPost(condition + setRole);
             noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
             request.setAttribute("noOfPages", noOfPages);
             request.setAttribute("currentPage", page);
             request.setAttribute("listAccounts", temp);
+            request.setAttribute("nameSearch", name);
+            request.setAttribute("roleSelect", role);
             request.getRequestDispatcher("admin.jsp").forward(request, response);
         } catch (Exception e) {
             response.sendRedirect("error_Database.jsp");

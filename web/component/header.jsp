@@ -65,10 +65,10 @@
                             <a class="btn btn-light " style="background-color: white"  href="carts">
                                 <i class="bi-cart-fill me-1"></i>
                                 Cart
-                                 
-                           
-                                    <span id="cart_number" class="badge bg-dark text-white ms-1 rounded-pill">${sessionScope.carts.size()}</span>    
-                                
+
+
+                                <span id="cart_number" class="badge bg-dark text-white ms-1 rounded-pill">${sessionScope.carts.size()}</span>    
+
 
                             </a>
                         </div>
@@ -89,7 +89,7 @@
 <!--                                     <li><a class="dropdown-item" href="viewBill?idCustomer=${sessionScope.acc.id}">View Bill</a></li>-->
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="logout">Logout</a></li>
-                                    
+
                                 </ul>
                             </li>
                         </c:if>

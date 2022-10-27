@@ -67,7 +67,6 @@ public class HomeshipperController extends HttpServlet {
             if (request.getParameter("page") != null) {
                 page = Integer.parseInt(request.getParameter("page"));
             }
-            //get all available orders with paging
             List<Order> temp = new ArrayList<>();
             if (orderList.size() > 0) {
                 for (int i = 0; i < 3; i++) {
@@ -76,6 +75,7 @@ public class HomeshipperController extends HttpServlet {
                     }
                 }
             }
+            //get all available orders with paging
             request.setAttribute("listOrder", temp);
             request.setAttribute("noOfPages", noOfPages);
             request.setAttribute("currentPage", page);
