@@ -32,11 +32,11 @@ import model.Order;
  */
 public class AdminController extends HttpServlet {
 
-    List<Account> accountList = new ArrayList<>();
-    int noOfRecords = 0;
-    int noOfPages = 0;
-    String name = "";
-    String role = "";
+    private List<Account> accountList = new ArrayList<>();
+    private int noOfRecords = 0;
+    private int noOfPages = 0;
+    private String name = "";
+    private String role = "";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

@@ -33,11 +33,12 @@ import model.Order;
  */
 public class HomeshipperController extends HttpServlet {
 
-    List<Order> orderList = new ArrayList<>();
-    int noOfRecords = 0;
-    int noOfPages = 0;
-    String dateFrom = "";
-    String dateTo = "";
+    private List<Order> orderList = new ArrayList<>();
+    private int noOfRecords = 0;
+    private int noOfPages = 0;
+    private String dateFrom = "";
+    private String dateTo = "";
+    private boolean check = true;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -67,15 +68,23 @@ public class HomeshipperController extends HttpServlet {
             if (request.getParameter("page") != null) {
                 page = Integer.parseInt(request.getParameter("page"));
             }
+            String checker = request.getParameter("checker");
             List<Order> temp = new ArrayList<>();
-            if (orderList.size() > 0) {
-                for (int i = 0; i < 3; i++) {
-                    if ((page - 1) * 3 + i < orderList.size()) {
-                        temp.add(orderList.get((page - 1) * 3 + i));
+            if (page == 0) {
+                orderList = null;
+                dateFrom = "dd/MM/yyyy";
+                dateTo = "dd/MM/yyyy";
+                noOfPages = 1;
+            } else {
+                if (orderList.size() > 0) {
+                    for (int i = 0; i < 3; i++) {
+                        if ((page - 1) * 3 + i < orderList.size()) {
+                            temp.add(orderList.get((page - 1) * 3 + i));
+                        }
                     }
                 }
             }
-            //get all available orders with paging
+            page = 1;
             request.setAttribute("listOrder", temp);
             request.setAttribute("noOfPages", noOfPages);
             request.setAttribute("currentPage", page);
