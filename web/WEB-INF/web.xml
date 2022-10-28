@@ -53,10 +53,6 @@
         <servlet-class>controller.InsertShipper</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>InsertSeller</servlet-name>
-        <servlet-class>controller.InsertSeller</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>DeleteShipper</servlet-name>
         <servlet-class>controller.DeleteShipper</servlet-class>
     </servlet>
@@ -131,10 +127,6 @@
     <servlet-mapping>
         <servlet-name>InsertShipper</servlet-name>
         <url-pattern>/insert-shipper</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>InsertSeller</servlet-name>
-        <url-pattern>/insert-seller</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DeleteShipper</servlet-name>

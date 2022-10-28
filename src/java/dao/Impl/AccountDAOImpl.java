@@ -628,4 +628,102 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         }
         return null;
     }
+     /**
+     * Get a number of records of Account table from Database<br>
+     * The result is type of Integer<br>
+     *
+     * @param baseDAO handle connection from Database
+     * @param preparedStatement execute query to Database
+     * @param resultSet get data from Database
+     * @param accountID get id of delete account
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     * @throws SQLException if an SQL error occurs
+     */
+    @Override
+    public Account updateStatusis1(int id)  {
+        String sql = "update Account \n"
+                + "set [status] =1\n"
+                + "where Account.ID=?";
+                Connection connection = null;
+                PreparedStatement preparedStatement = null;
+                ResultSet resultSet = null;
+                BaseDAO baseDAO = new BaseDAOImpl();
+        try {
+            connection = baseDAO.getConnection();
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+            resultSet = preparedStatement.executeQuery();
+          
+            while (resultSet.next()) {
+                return new Account(resultSet.getInt(1),
+                resultSet.getString(2),
+                resultSet.getString(3),
+                resultSet.getString(4),
+                resultSet.getString(5),
+                resultSet.getString(6),
+                resultSet.getInt(7),
+                resultSet.getInt(8),
+                resultSet.getInt(9),
+                resultSet.getInt(10),
+                resultSet.getInt(11));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            baseDAO.closeResultSet(resultSet);
+            baseDAO.closePreparedStatement(preparedStatement);
+            baseDAO.closeConnection(connection);
+        }
+        return null;
+    }
+ /**
+     * Get a number of records of Account table from Database<br>
+     * The result is type of Integer<br>
+     *
+     * @param baseDAO handle connection from Database
+     * @param preparedStatement execute query to Database
+     * @param resultSet get data from Database
+     * @param accountID get id of delete account
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     * @throws SQLException if an SQL error occurs
+     */
+    @Override
+    public Account updateStatusis0(int id)  {
+        String sql = "update Account \n"
+                + "set [status] =0\n"
+                + "where Account.ID=?";
+                Connection connection = null;
+                PreparedStatement preparedStatement = null;
+                ResultSet resultSet = null;
+                BaseDAO baseDAO = new BaseDAOImpl();
+        try {
+            connection = baseDAO.getConnection();
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+            resultSet = preparedStatement.executeQuery();
+          
+            while (resultSet.next()) {
+                return new Account(resultSet.getInt(1),
+                resultSet.getString(2),
+                resultSet.getString(3),
+                resultSet.getString(4),
+                resultSet.getString(5),
+                resultSet.getString(6),
+                resultSet.getInt(7),
+                resultSet.getInt(8),
+                resultSet.getInt(9),
+                resultSet.getInt(10),
+                resultSet.getInt(11));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            baseDAO.closeResultSet(resultSet);
+            baseDAO.closePreparedStatement(preparedStatement);
+            baseDAO.closeConnection(connection);
+        }
+        return null;
+    }
 }
