@@ -74,15 +74,15 @@
     </servlet>
     <servlet>
         <servlet-name>DeleteCart</servlet-name>
-        <servlet-class>controller.DeleteCart</servlet-class>
+        <servlet-class>controller.DeleteCartController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>carts</servlet-name>
-        <servlet-class>controller.Carts</servlet-class>
+        <servlet-class>controller.CartsController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddToCart</servlet-name>
-        <servlet-class>controller.AddToCart</servlet-class>
+        <servlet-class>controller.AddToCartController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -154,7 +154,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DeleteCart</servlet-name>
-        <url-pattern>/DeleteCart</url-pattern>
+        <url-pattern>/delete-cart</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>DeleteAccount</servlet-name>

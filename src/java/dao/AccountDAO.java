@@ -47,4 +47,5 @@ public interface AccountDAO {
     public Account updateStatusis0(int id);
 
     public Account updateStatusis1(int id);
+    public List<Account> getAccountByNamePaging(String name, String role) throws Exception;
 }

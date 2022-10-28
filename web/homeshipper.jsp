@@ -58,8 +58,8 @@
             <div class="container" style="min-height: 1000px">
                 <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
                     <div class="me-3">
-                        <label class="btn btn-outline-dark"><a class="nav-link" href="homeshipper">List Order</a></label>
-                        <label class="btn btn-outline-dark"><a class="nav-link" href="Shipperacceptorder?accountid=${sessionScope.acc.id}">Order has been accepted</a></label>
+                        <label class="btn btn-outline-dark"><a class="nav-link" href="homeshipper">Available Orders</a></label>
+                        <label class="btn btn-outline-dark"><a class="nav-link" href="Shipperacceptorder?accountid=${sessionScope.acc.id}">Accepcted Orders</a></label>
                     </div>
                 </div>
 
@@ -68,8 +68,10 @@
 
                 <h1>Order List</h1>
                 <form action="homeshipper" method="POST">
-                    From Date: <input type="date" id="myInput" name ="DateFrom" title="Type in a date from">
-                    - To Date: <input type="date" id="myInput" name ="DateTo" title="Type in a date to">
+                    From Date: <input type="date" id="myInput" name ="DateFrom" value="${dateF}" min="2000-01-01"
+                                      max="${maxDate}" required>
+                    - To Date: <input type="date" id="myInput" name ="DateTo" value="${dateT}" min="2000-01-01"
+                                      max="${maxDate}" required>
                     <input type="submit" value="Search">
                 </form>
                 <table class="table">
@@ -89,31 +91,38 @@
                         <input value="${sessionScope.acc.id}" name="idShipper">
                     </a>
                     <tbody>
-                        <c:forEach items="${listOrder}" var="l">
-                            <tr>
-
-                                <th hidden scope="row">${l.orderid}</th>
-                                <th scope="row"><c:set var="count" value="${count+1}"></c:set>${count}</th>
-                                <td>${l.name}</td>
-                                <td>${l.address}</td>
-                                <td>${l.phone}</td>
-                                <td>$${l.totalprice}</td>
-                                <td>${l.created_date}</td>
-                                <td>
-                                    <a class="btn btn-outline-dark" href="viewBillByShipper?orderID=${l.orderid}&cusname=${l.name}">View</a>
-                                </td>
-                                <td>
-                                    <a class="btn btn-outline-dark" href="AcceptOrderShipper?accountid=${sessionScope.acc.id}&orderid=${l.orderid}&dedeliverymoney=${deliverymoney}" >Accept</a>
-
-                                </td>
+                        <c:if test="${listOrder == null}">
+                            <tr style="text-align:center">
+                                <td colspan="8">No search result found!</td>
                             </tr>
-                        </c:forEach>
+                        </c:if>
+                        <c:if test="${listOrder != null}">
+                            <c:forEach items="${listOrder}" var="l">
+                                <tr>
+
+                                    <th hidden scope="row">${l.orderid}</th>
+                                    <th scope="row"><c:set var="count" value="${count+1}"></c:set>${count}</th>
+                                    <td>${l.name}</td>
+                                    <td>${l.address}</td>
+                                    <td>${l.phone}</td>
+                                    <td>$${l.totalprice}</td>
+                                    <td>${l.created_date}</td>
+                                    <td>
+                                        <a class="btn btn-outline-dark" href="viewBillByShipper?orderID=${l.orderid}&cusname=${l.name}">View</a>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-outline-dark" href="AcceptOrderShipper?accountid=${sessionScope.acc.id}&orderid=${l.orderid}&dedeliverymoney=${deliverymoney}" >Accept</a>
+
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </c:if>
                     </tbody>
                 </table>
-                    <%--For displaying Previous link except for the 1st page --%>
-                <c:if test="${currentPage != 1}">
-                    <td><a href="homeshipper?page=${currentPage - 1}">Previous</a></td>
-                </c:if>
+                <%--For displaying Previous link except for the 1st page 
+            <c:if test="${currentPage != 1}">
+                <td><a href="homeshipper?page=${currentPage - 1}">Previous</a></td>
+            </c:if>--%>
 
                 <%--For displaying Page numbers. 
                 The when condition does not display a link for the current page--%>
@@ -132,13 +141,13 @@
                     </tr>
                 </table>
 
-                <%--For displaying Next link --%>
+                <%--For displaying Next link 
                 <c:if test="${currentPage lt noOfPages}">
                     <td><a href="homeshipper?page=${currentPage + 1}">Next</a></td>
-                </c:if>
+                </c:if>--%>
             </div>
         </section>
-
+        <%@include file="component/footer.jsp" %>
         <!-- jQery -->
         <script src="js/jquery-3.4.1.min.js"></script>
         <!-- popper js -->

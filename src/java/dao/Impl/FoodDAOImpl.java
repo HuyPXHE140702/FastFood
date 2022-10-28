@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dao.Impl;
+package dao.impl;
 
-import dao.BaseDAO;
 import dao.FoodDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -21,15 +20,15 @@ import model.Food;
 public class FoodDAOImpl extends BaseDAOImpl implements FoodDAO {
 
     @Override
-    public List<Food> getallFood() throws Exception {
+    public List<Food> getAllFood() throws Exception {
         List<Food> list = new ArrayList<>();
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        BaseDAO baseDAO = new BaseDAOImpl();
+
         try {
             String sql = "select * from Foods";
-            connection = baseDAO.getConnection();
+            connection = getConnection();
             preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -47,9 +46,9 @@ public class FoodDAOImpl extends BaseDAOImpl implements FoodDAO {
         } catch (Exception e) {
             throw e;
         } finally {
-            baseDAO.closeResultSet(resultSet);
-            baseDAO.closePreparedStatement(preparedStatement);
-            baseDAO.closeConnection(connection);
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connection);
         }
         return list;
     }
@@ -60,10 +59,10 @@ public class FoodDAOImpl extends BaseDAOImpl implements FoodDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        BaseDAO baseDAO = new BaseDAOImpl();
+
         try {
             String sql = "select *from Foods where DateCreated = ?";
-            connection = baseDAO.getConnection();
+            connection = getConnection();
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, dateCreated);
             resultSet = preparedStatement.executeQuery();
@@ -82,9 +81,9 @@ public class FoodDAOImpl extends BaseDAOImpl implements FoodDAO {
         } catch (Exception e) {
             throw e;
         } finally {
-            baseDAO.closeResultSet(resultSet);
-            baseDAO.closePreparedStatement(preparedStatement);
-            baseDAO.closeConnection(connection);
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connection);
         }
         return list;
     }
@@ -94,10 +93,10 @@ public class FoodDAOImpl extends BaseDAOImpl implements FoodDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        BaseDAO baseDAO = new BaseDAOImpl();
+
         try {
             String sql = "select *from Foods where FoodID = ?";
-            connection = baseDAO.getConnection();
+            connection = getConnection();
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, foodid);
             resultSet = preparedStatement.executeQuery();
@@ -117,9 +116,9 @@ public class FoodDAOImpl extends BaseDAOImpl implements FoodDAO {
         } catch (Exception e) {
             throw e;
         } finally {
-            baseDAO.closeResultSet(resultSet);
-            baseDAO.closePreparedStatement(preparedStatement);
-            baseDAO.closeConnection(connection);
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connection);
         }
         return null;
     }
@@ -130,10 +129,10 @@ public class FoodDAOImpl extends BaseDAOImpl implements FoodDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-        BaseDAO baseDAO = new BaseDAOImpl();
+
         try {
             String sql = "select * from Foods order by CategoryID offset ? row fetch next 9 rows only";
-            connection = baseDAO.getConnection();
+            connection = getConnection();
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, (index - 1) * 9);
             resultSet = preparedStatement.executeQuery();
@@ -153,10 +152,31 @@ public class FoodDAOImpl extends BaseDAOImpl implements FoodDAO {
         } catch (Exception e) {
             throw e;
         } finally {
-            baseDAO.closeResultSet(resultSet);
-            baseDAO.closePreparedStatement(preparedStatement);
-            baseDAO.closeConnection(connection);
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connection);
         }
         return list;
     }
+
+    @Override
+    public void closeConnection(Connection cnn) {
+        super.closeConnection(cnn); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void closePreparedStatement(PreparedStatement ps) {
+        super.closePreparedStatement(ps); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void closeResultSet(ResultSet rs) {
+        super.closeResultSet(rs); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Connection getConnection() throws Exception {
+        return super.getConnection(); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

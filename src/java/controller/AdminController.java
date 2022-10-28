@@ -10,15 +10,17 @@
 package controller;
 
 import dao.AccountDAO;
-import dao.Impl.AccountDAOImpl;
+import dao.impl.AccountDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Account;
+import model.Order;
 
 /**
  * The class contains method for view account list, add or update an account,
@@ -29,6 +31,12 @@ import model.Account;
  * @author HuyPX
  */
 public class AdminController extends HttpServlet {
+
+    private List<Account> accountList = new ArrayList<>();
+    private int noOfRecords = 0;
+    private int noOfPages = 0;
+    private String name = "";
+    private String role = "";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -56,15 +64,20 @@ public class AdminController extends HttpServlet {
             if (request.getParameter("page") != null) {
                 page = Integer.parseInt(request.getParameter("page"));
             }
-            String role = (String) request.getParameter("roles");
-            AccountDAO accountDAO = new AccountDAOImpl();
             //get all account with paging
-            List<Account> accountList = accountDAO.viewAllAccounts((page - 1) * recordsPerPage, recordsPerPage);
-            int noOfRecords = accountDAO.getNoOfRecords();
-            int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-            request.setAttribute("listAccounts", accountList);
+            List<Account> temp = new ArrayList<>();
+            if (accountList.size() > 0) {
+                for (int i = 0; i < 3; i++) {
+                    if ((page - 1) * 3 + i < accountList.size()) {
+                        temp.add(accountList.get((page - 1) * 3 + i));
+                    }
+                }
+            }
+            request.setAttribute("listAccounts", temp);
             request.setAttribute("noOfPages", noOfPages);
             request.setAttribute("currentPage", page);
+            request.setAttribute("nameSearch", name);
+            request.setAttribute("roleSelect", role);
             request.getRequestDispatcher("admin.jsp").forward(request, response);
         } catch (Exception e) {
             response.sendRedirect("error_Database.jsp");
@@ -97,7 +110,7 @@ public class AdminController extends HttpServlet {
             //get role for sql purpose
             String role = (String) request.getParameter("roles");
             String setRole = "";
-            String condition = "WHERE Displayname like '%" + name + "%' ";
+            String condition = "WHERE Displayname like '%" + name.trim() + "%' ";
             if (role.equalsIgnoreCase("all")) {
                 setRole = "";
             } else if (role.equalsIgnoreCase("admin")) {
@@ -109,14 +122,26 @@ public class AdminController extends HttpServlet {
             } else if (role.equalsIgnoreCase("shipper")) {
                 setRole = "and isShipper = 1";
             }
-            //get all account with paging and name contain
             AccountDAO accountDAO = new AccountDAOImpl();
-            List<Account> accountList = accountDAO.getAccountByName(name, setRole, (page - 1) * recordsPerPage);
-            int noOfRecords = new AccountDAOImpl().getNoOfRecordsPost(condition + setRole);
-            int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+            accountList = accountDAO.getAccountByNamePaging(name.trim(), setRole);
+            //get all account with paging and name contain
+            List<Account> temp = new ArrayList<>();
+            if (accountList.size() > 0) {
+                for (int i = 0; i < 3; i++) {
+                    if ((page - 1) * 3 + i < accountList.size()) {
+                        temp.add(accountList.get((page - 1) * 3 + i));
+                    }
+                }
+            } else {
+                temp = null;
+            }
+            noOfRecords = new AccountDAOImpl().getNoOfRecordsPost(condition + setRole);
+            noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
             request.setAttribute("noOfPages", noOfPages);
             request.setAttribute("currentPage", page);
-            request.setAttribute("listAccounts", accountList);
+            request.setAttribute("listAccounts", temp);
+            request.setAttribute("nameSearch", name);
+            request.setAttribute("roleSelect", role);
             request.getRequestDispatcher("admin.jsp").forward(request, response);
         } catch (Exception e) {
             response.sendRedirect("error_Database.jsp");
