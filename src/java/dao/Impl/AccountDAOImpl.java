@@ -7,7 +7,7 @@
  * DATE            Version             AUTHOR                   DESCRIPTION
  * 2022-10-12      1.0                 HuyPXHE140702            First Implement
  */
-package dao.impl;
+package dao.Impl;
 
 import dao.AccountDAO;
 import java.sql.Connection;
@@ -647,9 +647,9 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
                 Connection connection = null;
                 PreparedStatement preparedStatement = null;
                 ResultSet resultSet = null;
-                BaseDAO baseDAO = new BaseDAOImpl();
+               
         try {
-            connection = baseDAO.getConnection();
+            connection = getConnection();
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, id);
             resultSet = preparedStatement.executeQuery();
@@ -670,9 +670,9 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            baseDAO.closeResultSet(resultSet);
-            baseDAO.closePreparedStatement(preparedStatement);
-            baseDAO.closeConnection(connection);
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connection);
         }
         return null;
     }
@@ -696,9 +696,9 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
                 Connection connection = null;
                 PreparedStatement preparedStatement = null;
                 ResultSet resultSet = null;
-                BaseDAO baseDAO = new BaseDAOImpl();
+               
         try {
-            connection = baseDAO.getConnection();
+            connection = getConnection();
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, id);
             resultSet = preparedStatement.executeQuery();
@@ -719,9 +719,9 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            baseDAO.closeResultSet(resultSet);
-            baseDAO.closePreparedStatement(preparedStatement);
-            baseDAO.closeConnection(connection);
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connection);
         }
         return null;
     }
