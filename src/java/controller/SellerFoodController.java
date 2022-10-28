@@ -1,22 +1,17 @@
 /*
- * Copyright(C) 2005, FPT University
- * Java MVC:
- *  Fast Food Shop
- *
- * Record of change:
- * DATE            Version             AUTHOR                   DESCRIPTION
- * 2022-10-15      1.0                 DANGTMHE130893            First Implement
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package controller;
 
 import dao.FoodDAO;
-import dao.Impl.FoodDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,9 +20,10 @@ import model.Food;
 
 /**
  *
- * @author dangtm
+ * @author ASUS
  */
-public class ViewFoodMenuController extends HttpServlet {
+@WebServlet(name = "SellerFoodController", urlPatterns = {"/SellerFood"})
+public class SellerFoodController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,34 +35,39 @@ public class ViewFoodMenuController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, Exception {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            FoodDAO food = new FoodDAOImpl();
-            List<Food> list2 = food.getAllFood();
+             FoodDAO food = new FoodDAO();
+            List<Food> list2 = food.getallFood();
             String indexPage = request.getParameter("index");
-            //check database for pagination 
+            String searchName = request.getParameter("searchName");
+            List<Food> list = new ArrayList<>();
             if(indexPage == null){
                 indexPage = "1";
             }
+          
             int index = Integer.parseInt(indexPage);
             
             int count = list2.size();
             int endPage = count / 9;
             if (count % 9 != 0) {
                 endPage++;
+            } 
+            if(searchName == null){
+                 list = food.getProductwithpagging(index);
+            }else{
+                list = food.getProductwithpaggingByName(index, searchName);
             }
-            //get food to pagging
-            List<Food> list = food.getProductwithpagging(index);
+            
             request.setAttribute("page", indexPage);//de khi an vao trang 2 thi trang 2 mau den
             request.setAttribute("endP", endPage);
              
             HttpSession session = request.getSession();
             session.setAttribute("listfood", list);
             session.setAttribute("urlHistory", "menu");
-            //show food in menu
-            request.getRequestDispatcher("menu.jsp").forward(request, response);
+            
+            request.getRequestDispatcher("sellerFood.jsp").forward(request, response);
         }
     }
 
@@ -82,11 +83,7 @@ public class ViewFoodMenuController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (Exception ex) {
-            Logger.getLogger(ViewFoodMenuController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -100,11 +97,7 @@ public class ViewFoodMenuController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (Exception ex) {
-            Logger.getLogger(ViewFoodMenuController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
