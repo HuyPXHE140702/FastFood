@@ -5,26 +5,18 @@
  */
 package controller;
 
-import dao.Impl.OrderDetailDAOImpl;
-import dao.OrderDAO;
-import dao.impl.OrderDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import model.Cart;
-import model.Order;
 
 /**
  *
  * @author ACER
  */
-public class CheckOutController extends HttpServlet {
+public class ThankForPaymentController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,22 +32,7 @@ public class CheckOutController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            HttpSession session = request.getSession();
-            Map<Integer, Cart> carts = (Map<Integer, Cart>) session.getAttribute("carts");
-            if (carts == null) {
-                carts = new LinkedHashMap<>();
-            }
-            //tinh total amout
-            double totalAmout = 0;
-            for (Map.Entry<Integer, Cart> entry : carts.entrySet()) {
-                Integer foodid = entry.getKey();
-                Cart cart = entry.getValue();
-
-                totalAmout += cart.getQuantity() * cart.getProduct().getUnitprice();
-            }
-            request.setAttribute("totalAmount", totalAmout);
-            request.getRequestDispatcher("checkout.jsp").forward(request, response);
-
+             request.getRequestDispatcher("thankforpayment.jsp").forward(request, response);
         }
     }
 
@@ -85,40 +62,7 @@ public class CheckOutController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int id = Integer.parseInt(request.getParameter("id"));
-        String name = request.getParameter("name");
-        String phone = request.getParameter("phone");
-        String address = request.getParameter("address");
-
-        //luu order
-        HttpSession session = request.getSession();
-        Map<Integer, Cart> carts = (Map<Integer, Cart>) session.getAttribute("carts");
-        if (carts == null) {
-
-            carts = new LinkedHashMap<>();
-        }
-
-        //tinh total amout
-        float totalAmout = 0;
-        for (Map.Entry<Integer, Cart> entry : carts.entrySet()) {
-            Integer foodid = entry.getKey();
-            Cart cart = entry.getValue();
-
-            totalAmout += cart.getQuantity() * cart.getProduct().getUnitprice();
-        }
-        Order order = new Order();
-        order.setAcount_id(id);
-        order.setName(name);
-        order.setPhone(phone);
-        order.setAddress(address);
-        order.setTotalprice(totalAmout);
-        int orderId = new OrderDAOImpl().createReturnId(order);
-        //luu order detail
-        new OrderDetailDAOImpl().saveCart(orderId, carts);
-
-        //sau khi payment xoa khoi gio hang
-        session.removeAttribute("carts");
-        response.sendRedirect("thank");
+        processRequest(request, response);
     }
 
     /**

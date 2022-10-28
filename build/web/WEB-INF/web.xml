@@ -96,6 +96,10 @@
         <servlet-name>CheckOutController</servlet-name>
         <servlet-class>controller.CheckOutController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ThankForPayment</servlet-name>
+        <servlet-class>controller.ThankForPaymentController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -191,6 +195,10 @@
     <servlet-mapping>
         <servlet-name>CheckOutController</servlet-name>
         <url-pattern>/CheckOut</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ThankForPayment</servlet-name>
+        <url-pattern>/thank</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

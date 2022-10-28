@@ -64,7 +64,7 @@
             <div class="container" style="min-height: 1000px">
 
                 <div class="row">
-                    <h3>Payment</h3>
+                    <h3>Bill Items</h3>
                     <div class="col-md-8" style="border: 1px solid #ccc;border-radius: 5px ; padding: 1rem">
                         <h5>List Food</h5>
 
@@ -97,11 +97,11 @@
 
                             </tbody>
                         </table>
-                        <h2>Total Amount: $${totalAmount}</h2>
+                        <h2>Total Amount: $ ${totalAmount}</h2>
                     </div>
                     <div class="col-md-4" style="border: 1px solid #ccc;border-radius: 5px ; padding: 1rem">
                         <h3>Billing Information</h3>
-                        <form action="payment" method="POST">
+                        <form action="CheckOut" method="POST">
 
                             <div class="mb-3">
                                 <a hidden>
