@@ -9,13 +9,14 @@
  */
 package controller;
 
-import dao.FoodDAO;
-import dao.Impl.FoodDAOImpl;
 
+import dao.Impl.FoodDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,7 +42,7 @@ public class SellerFoodController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
              FoodDAOImpl foodDAOImpl = new FoodDAOImpl();
@@ -50,25 +51,24 @@ public class SellerFoodController extends HttpServlet {
             String searchName = request.getParameter("searchName");
             List<Food> list = new ArrayList<>();
             if(indexPage == null){
+                //init index of page = 1 
                 indexPage = "1";
             }
-          
             int index = Integer.parseInt(indexPage);
-            
             int count = list2.size();
             int endPage = count / 9;
             if (count % 9 != 0) {
                 endPage++;
             } 
             if(searchName == null){
+                //neu khong co name thi search all 
                  list = foodDAOImpl.getProductwithPagging(index);
             }else{
+                //search %like% theo name
                 list = foodDAOImpl.getProductWithPaggingByName(index, searchName);
             }
-            
-            request.setAttribute("page", indexPage);//de khi an vao trang 2 thi trang 2 mau den
+            request.setAttribute("page", indexPage); //hightligh page active 
             request.setAttribute("endP", endPage);
-             
             HttpSession session = request.getSession();
             session.setAttribute("listfood", list);
             session.setAttribute("urlHistory", "menu");
@@ -89,7 +89,11 @@ public class SellerFoodController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(SellerFoodController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -103,7 +107,11 @@ public class SellerFoodController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(SellerFoodController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
