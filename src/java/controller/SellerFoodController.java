@@ -1,11 +1,17 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright(C) 2005, FPT University
+ * Java MVC:
+ *  Fast Food Shop
+ *
+ * Record of change:
+ * DATE            Version             AUTHOR                   DESCRIPTION
+ * 2022-10-28      1.0                 Vinh                     Implement
  */
 package controller;
 
 import dao.FoodDAO;
+import dao.Impl.FoodDAOImpl;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -38,8 +44,8 @@ public class SellerFoodController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-             FoodDAO food = new FoodDAO();
-            List<Food> list2 = food.getallFood();
+             FoodDAOImpl foodDAOImpl = new FoodDAOImpl();
+            List<Food> list2 = foodDAOImpl.getAllFood();
             String indexPage = request.getParameter("index");
             String searchName = request.getParameter("searchName");
             List<Food> list = new ArrayList<>();
@@ -55,9 +61,9 @@ public class SellerFoodController extends HttpServlet {
                 endPage++;
             } 
             if(searchName == null){
-                 list = food.getProductwithpagging(index);
+                 list = foodDAOImpl.getProductwithPagging(index);
             }else{
-                list = food.getProductwithpaggingByName(index, searchName);
+                list = foodDAOImpl.getProductWithPaggingByName(index, searchName);
             }
             
             request.setAttribute("page", indexPage);//de khi an vao trang 2 thi trang 2 mau den

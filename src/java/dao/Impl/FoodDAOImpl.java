@@ -124,7 +124,7 @@ public class FoodDAOImpl extends BaseDAOImpl implements FoodDAO {
     }
 
     @Override
-    public List<Food> getProductwithpagging(int index) throws Exception {
+    public List<Food> getProductwithPagging(int index) throws Exception {
         List<Food> list = new ArrayList<Food>();
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -152,6 +152,44 @@ public class FoodDAOImpl extends BaseDAOImpl implements FoodDAO {
         } catch (Exception e) {
             throw e;
         } finally {
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connection);
+        }
+        return list;
+    }
+
+    @Override 
+    public List<Food> getProductWithPaggingByName(int index, String name) throws Exception {
+       
+        List<Food> list = new ArrayList<Food>();
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            String sql = "select * from Foods where FoodName like '%"+name+"%' order by FoodName offset ? row fetch next 9 rows only";
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, (index - 1) * 6);
+            resultSet = preparedStatement.executeQuery();
+
+           
+            while (resultSet.next()) {
+                int FoodID = resultSet.getInt(1);
+                String FoodName = resultSet.getString(2);
+                int CategoryID = resultSet.getInt(3);
+                String Image = resultSet.getString(4);
+                int Quantity = resultSet.getInt(5);
+                float UnitPrice = resultSet.getFloat(6);
+                String Description = resultSet.getString(7);
+                boolean Status = resultSet.getBoolean(8);
+                String DateCreated = resultSet.getString(9);
+                Food food = new Food(FoodID, FoodName, CategoryID, Image, Quantity, UnitPrice, Description, Status, DateCreated);
+                list.add(food);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
             closeResultSet(resultSet);
             closePreparedStatement(preparedStatement);
             closeConnection(connection);

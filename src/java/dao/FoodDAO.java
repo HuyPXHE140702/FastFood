@@ -20,5 +20,7 @@ public interface FoodDAO {
     
     public Food getFoodById(int foodid) throws Exception;
     
-    public List<Food> getProductwithpagging(int index) throws Exception;
+    public List<Food> getProductwithPagging(int index) throws Exception;
+
+    public List<Food> getProductWithPaggingByName(int index, String Name) throws Exception;
 }
