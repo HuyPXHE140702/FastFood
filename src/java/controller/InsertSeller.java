@@ -10,8 +10,10 @@
 package controller;
 
 
+import dao.AccountDAO;
 import dao.Impl.AccountDAOImpl;
 import dao.Impl.SellerDAOImpl;
+import dao.SellerDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
@@ -43,8 +45,8 @@ public class InsertSeller extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             int accountid = Integer.parseInt(request.getParameter("accountid"));
-            SellerDAOImpl sellerDAOImpl = new SellerDAOImpl();
-            AccountDAOImpl accdao = new AccountDAOImpl();
+            SellerDAO sellerDAOImpl = new SellerDAOImpl();
+            AccountDAO accdao = new AccountDAOImpl();
             Seller seller = sellerDAOImpl.checkSellerExist(accountid);
             if (seller == null) {
               accdao.updateStatusis1(accountid);

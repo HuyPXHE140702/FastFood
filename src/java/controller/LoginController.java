@@ -1,8 +1,11 @@
 package controller;
 
+import dao.AccountDAO;
 import dao.Impl.AccountDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -80,21 +83,25 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        AccountDAOImpl dao = new AccountDAOImpl();
-        Account account = dao.login(username, password);
-        //check input 
-        if (account == null) {
-            //get fail request 
-            request.setAttribute("msg", "Wrong username or password.");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-        } else {
-            //create session and save
-            HttpSession session = request.getSession();
-            session.setAttribute("acc", account);
-            // session.setMaxInactiveInterval(300);
-            response.sendRedirect("home");
+        try {
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            AccountDAO dao = new AccountDAOImpl();
+            Account account = dao.login(username, password);
+            //check input
+            if (account == null) {
+                //get fail request
+                request.setAttribute("msg", "Wrong username or password.");
+                request.getRequestDispatcher("login.jsp").forward(request, response);
+            } else {
+                //create session and save
+                HttpSession session = request.getSession();
+                session.setAttribute("acc", account);
+                // session.setMaxInactiveInterval(300);
+                response.sendRedirect("home");
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

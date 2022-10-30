@@ -62,7 +62,7 @@
                 <br>
                 <h1>Account List</h1>
                 <form action="admin" method="POST">
-                    <input type="text" id="myInput" name ="Displayname" placeholder="Search for names.." title="Type in a name" value="${nameSearch}" required>
+                    <input type="text" id="myInput" name ="Displayname" placeholder="Search for names.." title="Type in a name" value="${nameSearch}">
                     <select name="roles" id="cars">
                         <option value="all" <c:if test="${roleSelect == 'all'}"> selected </c:if>>All roles</option>
                         <option value="admin"<c:if test="${roleSelect == 'admin'}"> selected </c:if>>Admin</option>

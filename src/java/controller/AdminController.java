@@ -67,11 +67,25 @@ public class AdminController extends HttpServlet {
             //get all account with paging
             List<Account> temp = new ArrayList<>();
             if (accountList.size() > 0) {
-                for (int i = 0; i < recordsPerPage; i++) {
-                    if ((page - 1) * 3 + i < accountList.size()) {
-                        temp.add(accountList.get((page - 1) * 3 + i));
+                if (page == 1) {
+                    for (int i = 0; i < recordsPerPage; i++) {
+                        temp.add(accountList.get((page - 1) * recordsPerPage + i));
+                    }
+                } else if (page > 1) {
+                    int remainSize = accountList.size() - recordsPerPage * (page - 1);
+                    if (remainSize >= 0 && remainSize <= recordsPerPage) {
+                        for (int i = 0; i < remainSize; i++) {
+                            temp.add(accountList.get((page - 1) * recordsPerPage + i));
+                        }
+                    } else if (remainSize >= 0 && remainSize > recordsPerPage) {
+                        for (int i = 0; i < recordsPerPage; i++) {
+                            temp.add(accountList.get((page - 1) * recordsPerPage + i));
+                        }
                     }
                 }
+            }
+            if (accountList.size() <= 0) {
+                temp = null;
             }
             request.setAttribute("listAccounts", temp);
             request.setAttribute("noOfPages", noOfPages);
@@ -127,9 +141,13 @@ public class AdminController extends HttpServlet {
             accountList = accountDAO.getAccountByNamePaging(name.trim(), setRole);
             List<Account> temp = new ArrayList<>();
             if (accountList.size() > 0) {
-                for (int i = 0; i <recordsPerPage; i++) {
-                    if ((page - 1) * 3 + i < accountList.size()) {
-                        temp.add(accountList.get((page - 1) * 3 + i));
+                if (accountList.size() <= recordsPerPage) {
+                    for (int i = 0; i < accountList.size(); i++) {
+                        temp.add(accountList.get((page - 1) * recordsPerPage + i));
+                    }
+                } else if (accountList.size() > recordsPerPage) {
+                    for (int i = 0; i < recordsPerPage; i++) {
+                        temp.add(accountList.get((page - 1) * recordsPerPage + i));
                     }
                 }
             } else {
