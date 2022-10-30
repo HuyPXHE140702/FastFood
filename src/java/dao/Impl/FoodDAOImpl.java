@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dao.Impl;
+package dao.impl;
 
 import dao.FoodDAO;
 import java.sql.Connection;

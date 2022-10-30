@@ -1,7 +1,7 @@
 package controller;
 
 import dao.AccountDAO;
-import dao.Impl.AccountDAOImpl;
+import dao.impl.AccountDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;

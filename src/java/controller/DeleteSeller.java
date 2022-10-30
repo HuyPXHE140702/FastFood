@@ -9,8 +9,8 @@
  */
 package controller;
 
-import dao.Impl.AccountDAOImpl;
-import dao.Impl.SellerDAOImpl;
+import dao.impl.AccountDAOImpl;
+import dao.impl.SellerDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
