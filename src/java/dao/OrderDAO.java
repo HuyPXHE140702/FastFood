@@ -33,4 +33,6 @@ public interface OrderDAO {
     public List<Order> getOrderByDateNoOffset(String date, String condition) throws Exception;
 
     public List<Order> getOrderByDateToDateNoOffset(String dateFrom, String dateTo, String condition) throws Exception;
+
+    public List<Order> DisplayOrderByShipperID(int accountID) throws Exception;
 }
