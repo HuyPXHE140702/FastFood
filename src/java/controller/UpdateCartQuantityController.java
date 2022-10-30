@@ -6,6 +6,7 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import javax.servlet.ServletException;
@@ -68,14 +69,15 @@ public class UpdateCartQuantityController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
+         response.setContentType("text/html;charset=UTF-8");
         try {
             /* TODO output your page here. You may use following sample code. */
             int foodid = Integer.parseInt(request.getParameter("foodid"));
             String RequestQuantity = request.getParameter("quantity").trim();
-
+          
+            
             int quantity = Integer.parseInt(RequestQuantity);
-
+            
 //            int quantity = Integer.parseInt(request.getParameter("quantity"));
             HttpSession session = request.getSession();
             Map<Integer, Cart> carts = (Map<Integer, Cart>) session.getAttribute("carts");
