@@ -1,6 +1,6 @@
 package controller;
 
-import dao.impl.AccountDAOImpl;
+import dao.mpl.AccountDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;

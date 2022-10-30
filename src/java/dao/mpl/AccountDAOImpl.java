@@ -7,7 +7,7 @@
  * DATE            Version             AUTHOR                   DESCRIPTION
  * 2022-10-12      1.0                 HuyPXHE140702            First Implement
  */
-package dao.impl;
+package dao.mpl;
 
 import dao.AccountDAO;
 import java.sql.Connection;
