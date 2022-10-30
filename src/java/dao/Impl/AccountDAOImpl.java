@@ -50,7 +50,7 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
             preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                list.add(new Account(resultSet.getInt(1),
+                list.add(new Account(resultSet.getInt("ID"),
                         resultSet.getString("Username"),
                         resultSet.getString("Password"),
                         resultSet.getString("Displayname"),
@@ -91,14 +91,15 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
                 return new Account(resultSet.getInt("ID"),
                         resultSet.getString("Username"),
                         resultSet.getString("Password"),
-                        resultSet.getString(4),
-                        resultSet.getString(5),
-                        resultSet.getString(6),
-                        resultSet.getInt(7),
-                        resultSet.getInt(8),
-                        resultSet.getInt(9),
-                        resultSet.getInt(10),
-                        resultSet.getInt(11));
+                        resultSet.getString("Displayname"),
+                        resultSet.getString("Address"),
+                        resultSet.getString("Phone"),
+                        resultSet.getInt("isAdmin"),
+                        resultSet.getInt("isCustomer"),
+                        resultSet.getInt("IsShipper"),
+                        resultSet.getInt("IsSaller"),
+                        resultSet.getInt("status")
+                );
             }
 
         } catch (Exception e) {

@@ -32,7 +32,7 @@ public class FoodDAOImpl extends BaseDAOImpl implements FoodDAO {
             preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                list.add(new Food(resultSet.getInt(1),
+                list.add(new Food(resultSet.getInt("FoodID"),
                         resultSet.getString("FoodName"),
                         resultSet.getInt("CategoryID"),
                         resultSet.getString("Image"),
@@ -67,15 +67,15 @@ public class FoodDAOImpl extends BaseDAOImpl implements FoodDAO {
             preparedStatement.setString(1, dateCreated);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                list.add(new Food(resultSet.getInt(1),
-                        resultSet.getString(2),
-                        resultSet.getInt(3),
-                        resultSet.getString(4),
-                        resultSet.getInt(5),
-                        resultSet.getFloat(6),
-                        resultSet.getString(7),
-                        resultSet.getBoolean(8),
-                        resultSet.getString(9)));
+                list.add(new Food(resultSet.getInt("FoodID"),
+                        resultSet.getString("FoodName"),
+                        resultSet.getInt("CategoryID"),
+                        resultSet.getString("Image"),
+                        resultSet.getInt("Quantity"),
+                        resultSet.getFloat("UnitPrice"),
+                        resultSet.getString("Description"),
+                        resultSet.getBoolean("Status"),
+                        resultSet.getString("DateCreated")));
             }
 
         } catch (Exception e) {
@@ -101,15 +101,15 @@ public class FoodDAOImpl extends BaseDAOImpl implements FoodDAO {
             preparedStatement.setInt(1, foodid);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                Food food = new Food(resultSet.getInt(1),
-                        resultSet.getString(2),
-                        resultSet.getInt(3),
-                        resultSet.getString(4),
-                        resultSet.getInt(5),
-                        resultSet.getFloat(6),
-                        resultSet.getString(7),
-                        resultSet.getBoolean(8),
-                        resultSet.getString(9));
+                Food food = new Food(resultSet.getInt("FoodID"),
+                        resultSet.getString("FoodName"),
+                        resultSet.getInt("CategoryID"),
+                        resultSet.getString("Image"),
+                        resultSet.getInt("Quantity"),
+                        resultSet.getFloat("UnitPrice"),
+                        resultSet.getString("Description"),
+                        resultSet.getBoolean("Status"),
+                        resultSet.getString("DateCreated"));
                 return food;
             }
 
