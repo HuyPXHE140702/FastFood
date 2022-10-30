@@ -26,8 +26,15 @@ public interface OrderDAO {
 
     public int getNoOfRecords() throws Exception;
 
-    public int getNoOfRecordsPost(String condition) throws Exception;
-    
-    public int createReturnId(Order order);
+    public int getNoOfRecordsBetweenDate(String condition, String dateFrom, String dateTo) throws Exception;
 
+    public int getNoOfRecordsOneDate(String condition, String date) throws Exception;
+
+    public List<Order> getOrderByDateNoOffset(String date, String condition) throws Exception;
+
+    public List<Order> getOrderByDateToDateNoOffset(String dateFrom, String dateTo, String condition) throws Exception;
+
+    public List<Order> DisplayOrderByShipperID(int accountID) throws Exception;
+
+    public List<Order> ViewAccpectedOrder(int accountID, String condition) throws Exception;
 }
