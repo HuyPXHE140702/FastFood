@@ -16,8 +16,6 @@ import model.OrderDetail;
 
 public interface OrderDetailDAO {
 
-    public void saveCart(int orderId);
-
     public void saveCart(int orderId, Map<Integer, Cart> carts);
 
     public List<OrderDetail> getOrderDetailByAccountID(int id);

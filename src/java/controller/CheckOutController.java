@@ -7,6 +7,7 @@ package controller;
 
 import dao.Impl.OrderDetailDAOImpl;
 import dao.OrderDAO;
+import dao.OrderDetailDAO;
 import dao.impl.OrderDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -85,6 +86,10 @@ public class CheckOutController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        response.setCharacterEncoding("UTF-8");
+        
+        // lay ve thong tin order cua customer
         int id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");
         String phone = request.getParameter("phone");
@@ -97,8 +102,8 @@ public class CheckOutController extends HttpServlet {
 
             carts = new LinkedHashMap<>();
         }
-
-        //tinh total amout
+        
+        //tinh total amount
         float totalAmout = 0;
         for (Map.Entry<Integer, Cart> entry : carts.entrySet()) {
             Integer foodid = entry.getKey();
@@ -107,11 +112,11 @@ public class CheckOutController extends HttpServlet {
             totalAmout += cart.getQuantity() * cart.getProduct().getUnitprice();
         }
         Order order = new Order();
-        order.setAcount_id(id);
+        order.setAccountId(id);
         order.setName(name);
         order.setPhone(phone);
         order.setAddress(address);
-        order.setTotalprice(totalAmout);
+        order.setTotalPrice(totalAmout);
         int orderId = new OrderDAOImpl().createReturnId(order);
         //luu order detail
         new OrderDetailDAOImpl().saveCart(orderId, carts);

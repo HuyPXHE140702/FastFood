@@ -1,3 +1,12 @@
+<%-- 
+* Copyright(C) 2005, FPT University
+* Java MVC:
+*  Fast Food Shop
+*
+* Record of change:
+* DATE            Version             AUTHOR                   DESCRIPTION
+* 2022-10-20      1.0                             First Implement
+--%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

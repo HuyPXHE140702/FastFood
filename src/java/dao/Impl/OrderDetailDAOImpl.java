@@ -22,10 +22,6 @@ import java.util.ArrayList;
 public class OrderDetailDAOImpl extends dao.impl.BaseDAOImpl implements OrderDetailDAO {
 
     @Override
-    public void saveCart(int orderId) {
-    }
-
-    @Override
     public void saveCart(int orderId, Map<Integer, Cart> carts) {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -41,7 +37,6 @@ public class OrderDetailDAOImpl extends dao.impl.BaseDAOImpl implements OrderDet
                     + "           (?,?,?,?,?)";
             connection = getConnection();
             preparedStatement = connection.prepareStatement(sql);
-            
 
             for (Map.Entry<Integer, Cart> entry : carts.entrySet()) {
                 Integer foodid = entry.getKey();
@@ -59,7 +54,7 @@ public class OrderDetailDAOImpl extends dao.impl.BaseDAOImpl implements OrderDet
             closePreparedStatement(preparedStatement);
             closeConnection(connection);
         }
-        
+
     }
 
     @Override
@@ -93,7 +88,32 @@ public class OrderDetailDAOImpl extends dao.impl.BaseDAOImpl implements OrderDet
 
     @Override
     public List<OrderDetail> getOrderDetailByOrderID(int id) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        List<OrderDetail> list = new ArrayList<>();
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            String sql = "select * from OrderDetail where  OrderID = " + id;
+             connection = getConnection();
+            preparedStatement = connection.prepareStatement(sql);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                list.add(new OrderDetail(
+                        resultSet.getInt(1),
+                        resultSet.getInt(2),
+                        resultSet.getString(3),
+                        resultSet.getString(4),
+                        resultSet.getFloat(5),
+                        resultSet.getInt(6)));
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connection);
+        }
+        return list;
     }
 
 }

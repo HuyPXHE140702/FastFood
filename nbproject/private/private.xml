@@ -3,12 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ACER/OneDrive/Documents/GitHub/FastFood/src/java/controller/EditProfileController.java</file>
-            <file>file:/C:/Users/ACER/OneDrive/Documents/GitHub/FastFood/src/java/controller/ViewFoodMenuController.java</file>
-            <file>file:/C:/Users/ACER/OneDrive/Documents/GitHub/FastFood/web/cart.jsp</file>
-            <file>file:/C:/Users/ACER/OneDrive/Documents/GitHub/FastFood/src/java/model/Cart.java</file>
-            <file>file:/C:/Users/ACER/OneDrive/Documents/GitHub/FastFood/web/menu.jsp</file>
-            <file>file:/C:/Users/ACER/OneDrive/Documents/GitHub/FastFood/src/java/controller/CartsController.java</file>
+            <file>file:/C:/Users/ACER/OneDrive/Documents/GitHub/FastFood/web/home.jsp</file>
+            <file>file:/C:/Users/ACER/OneDrive/Documents/GitHub/FastFood/web/component/header.jsp</file>
         </group>
     </open-files>
 </project-private>
