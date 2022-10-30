@@ -5,7 +5,7 @@
 *
 * Record of change:
 * DATE            Version             AUTHOR                   DESCRIPTION
-* 2022-10-12      1.0                 NamVNHE140527            First Implement
+* 2022-10-20      1.0                 NamVNHE140527            First Implement
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -26,7 +26,7 @@
         <meta name="author" content="" />
         <link rel="shortcut icon" href="images/favicon.png" type="">
 
-        <title> Cart </title>
+        <title> Check Out </title>
 
         <!-- bootstrap core css -->
         <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
@@ -58,19 +58,16 @@
             <!-- header section strats -->
             <%@include file="component/header.jsp" %>
             <!-- end header section -->
-        </div>    
+        </div>
         <section class="py-5">
-            <div class="container" style="min-height: 1000px">
-                <c:choose>
-                    <c:when test="${sessionScope.carts == null || sessionScope.carts.size()== 0}">
-                        <h1 style="text-align: center">List Cart is Empty</h1>
-                    </c:when>
-                    <c:otherwise>
-                        <br>
 
-                        <br>
-                        <h1>Shopping Cart</h1>
-                       
+            <div class="container" style="min-height: 1000px">
+
+                <div class="row">
+                    <h3>Bill Items</h3>
+                    <div class="col-md-8" style="border: 1px solid #ccc;border-radius: 5px ; padding: 1rem">
+                        <h5>List Food</h5>
+
                         <table class="table" >
                             <thead>
                                 <tr>
@@ -80,37 +77,61 @@
                                     <th scope="col">Price</th>
                                     <th scope="col">Quantity</th>
                                     <th scope="col">Total Price</th>
-                                    <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
+
                                 <c:forEach items="${carts}" var="C">
                                 <form action="update-quantity" method="get">
-                                    <tr>                               
+                                    <tr>
                                     <input type="hidden" name="foodid" value="${C.value.product.foodid}">
                                     <th scope="row"><c:set var="count" value="${count+1}"></c:set>${count}</th>
-                                    <td><img style="width: 50px;height: 50px" src="${C.value.product.image}"></td>
+                                    <td><img style="width: 70px" src="${C.value.product.image}"></td>
                                     <td>${C.value.product.foodname}</td>
                                     <td>${C.value.product.unitprice} </td>
-                                    <td ><input  onchange="this.form.submit()"  name="quantity" style="width: 50px" min="1" type="number" value="${C.value.quantity}"></td>
+                                    <td>${C.value.quantity}</td>
                                     <td>${C.value.product.unitprice*C.value.quantity}</td>
-                                    <td>
-                                        <a href="delete-cart?foodid=${C.value.product.foodid}" class="btn btn-outline-danger "
-                                           style="background-color: white; color: red"  >
-                                            <i class="bi bi-trash"></i> Delete
-                                        </a>
-                                    </td>
-
                                     </tr>
                                 </form>
                             </c:forEach>
 
                             </tbody>
                         </table>
-                        <h2>Total Amount: $${totalAmount}</h2>
-                        <a href="CheckOut" class="btn btn-success" style="color: white">Check out</a>
-                    </c:otherwise>
-                </c:choose>
+                        <h2>Total Amount: $ ${totalAmount}</h2>
+                    </div>
+                    <div class="col-md-4" style="border: 1px solid #ccc;border-radius: 5px ; padding: 1rem">
+                        <h3>Billing Information</h3>
+                        <form action="CheckOut" method="POST">
+
+                            <div class="mb-3">
+                                <a hidden>
+                                    <input value="${sessionScope.acc.id}" name="id" type="text" class="form-control" required>
+                                </a>
+                                <label for="name" class="form-label">Name</label>
+                                <input pattern="[^!@#$%^&*()_+\-=\[\]{};':\\|,.<>\/?]+$" type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="phone" class="form-label">Phone</label>
+                                <input pattern="^0[0-9]{9}" type="text" class="form-control" id="phone" name="phone" aria-describedby="emailHelp" required> 
+                            </div>
+                            <div class="mb-3">
+                                <label for="address" class="form-label">Address</label>
+                                <input  type="text" class="form-control" id="address" name="address" aria-describedby="emailHelp" required>
+                            </div>   
+                            <div class="form-group row">
+                                <div class="col-md-6">
+                                    <button   class="btn btn-default btn-lg btn-block" style="background-color: #CDD0D2"><a style="color:white;text-decoration: none" href="carts">Cancel</a></button>
+                                </div>
+                                <div class="col-md-6">
+                                    <button  type="submit" class="btn btn-success btn-lg btn-block" >Submit</button>
+                                </div>
+                            </div> 
+
+                        </form>
+                    </div>
+                </div>
+
+
 
             </div>
         </section>
@@ -136,3 +157,4 @@
         <script src="js/scripts-1.js"></script>
     </body>
 </html>
+

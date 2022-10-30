@@ -5,17 +5,18 @@
 *
 * Record of change:
 * DATE            Version             AUTHOR                   DESCRIPTION
-* 2022-10-02      1.0                 NamVNHE140527            First Implement
+* 2022-10-20      1.0                 NamVNHE140527            First Implement
 --%>
 
-
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
+
     <head>
         <!-- Basic -->
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <!-- Mobile Metas -->
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -39,20 +40,15 @@
 
         <!-- Custom styles for this template -->
         <link href="css/style.css" rel="stylesheet" />
+        <link href="css/styles-1.css" rel="stylesheet" />
         <!-- responsive style -->
         <link href="css/responsive.css" rel="stylesheet" />
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />
-        <link href="css/styles-1.css" rel="stylesheet" />
 
     </head>
-    <body class="sub_page">
-        <!-- Navigation-->
-        <div class="hero_area">
+
+    <body class="sub_page" >
+
+        <div class="hero_area ">
             <div class="bg-box">
                 <img src="images/hero-bg.jpg" alt="">
             </div>
@@ -60,40 +56,74 @@
             <%@include file="component/header.jsp" %>
             <!-- end header section -->
         </div>
-        <!-- Product section-->
-        <section class="py-5" style="min-height: 700px">
-            <div class="container px-4 px-lg-5 my-5">
 
-                <div class="row gx-4 gx-lg-5 align-items-center">
-                    <div class="col-md-6 " ><img class="card-img-top mb-5 mb-md-0 " src=${food.image} alt="..."></div>
-                    <div class="col-md-6">
-                        <h3 class="display-5 fw-bolder">${food.foodname}</h3>
-                        <div class="fs-5 mb-5">
-                            <span>$${food.unitprice}</span>
-                        </div>
-                        <p class="lead">${food.description}</p>
-                        <div class="d-flex">
-                               
-                                    <a href="add-to-cart?foodid=${food.foodid}" class="btn btn-success  " style="color: white" >
-                                        <i class="bi-cart-fill "></i>
-                                        Add to cart
-                                    </a>
-                              
-                               
-                        </div>
-                    </div>
+        <!-- food section -->
+        <style>
+            .button {
+                display: inline-block;
+                border-radius: 8px;
+                background-color: red;
+                border: none;
+                color: white;
+                text-align: center;
+                font-size: 24px;
+                padding: 20px;
+                width: 240px;
+                transition: all 0.5s;
+                cursor: pointer;
+                margin-top: 5px;
+                margin: 0 auto;
+
+            }
+
+            .button span {
+                cursor: pointer;
+                display: inline-block;
+                position: relative;
+                transition: 0.5s;
+            }
+
+            .button span:after {
+                content: '\00bb';
+                position: absolute;
+                opacity: 0;
+                top: 0;
+                right: -20px;
+                transition: 0.5s;
+            }
+
+            .button:hover span {
+                padding-right: 25px;
+            }
+
+            .button:hover span:after {
+                opacity: 1;
+                right: 0;
+            }
+        </style>
+        <a hidden>
+            <input value="${sessionScope.acc.id}" name="idCustomer">
+        </a>
+        <section class="food_section layout_padding" style="min-height: 450px" >
+            <div class="container">
+                <div class="text-center" >
+                    <h1 style="font-size: 150px">Thank you!</h1>
+                    <h4>Your payment has been received</h4>
                 </div>
 
             </div>
+            <form action="viewBill?idCustomer=${sessionScope.acc.id}" method="post">
+                <button class="button btn-box" style="vertical-align:middle"><span>View my bill</span></button>
+            </form>
         </section>
 
+        <!-- end food section -->
 
-        <!-- Bootstrap core JS-->
         <!-- footer section -->
         <%@include file="component/footer.jsp" %>
         <!-- footer section -->
 
-       <!-- jQery -->
+        <!-- jQery -->
         <script src="js/jquery-3.4.1.min.js"></script>
         <!-- popper js -->
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
@@ -109,12 +139,12 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
         <!-- custom js -->
         <script src="js/custom.js"></script>
-
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts-1.js"></script>
 
-
     </body>
+
 </html>
+

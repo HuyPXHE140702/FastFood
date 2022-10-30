@@ -5,13 +5,13 @@
 *
 * Record of change:
 * DATE            Version             AUTHOR                   DESCRIPTION
-* 2022-10-12      1.0                 NamVNHE140527            First Implement
+* 2022-10-25      1.0                 NamVNHE140527            First Implement
 --%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!DOCTYPE html>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -26,7 +26,7 @@
         <meta name="author" content="" />
         <link rel="shortcut icon" href="images/favicon.png" type="">
 
-        <title> Cart </title>
+        <title> Payment </title>
 
         <!-- bootstrap core css -->
         <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
@@ -58,19 +58,18 @@
             <!-- header section strats -->
             <%@include file="component/header.jsp" %>
             <!-- end header section -->
-        </div>    
+        </div>
         <section class="py-5">
-            <div class="container" style="min-height: 1000px">
-                <c:choose>
-                    <c:when test="${sessionScope.carts == null || sessionScope.carts.size()== 0}">
-                        <h1 style="text-align: center">List Cart is Empty</h1>
-                    </c:when>
-                    <c:otherwise>
-                        <br>
 
-                        <br>
-                        <h1>Shopping Cart</h1>
-                       
+            <div class="container" style="min-height: 1000px">
+
+                <div class="row">
+                    <h3>Bill</h3>
+                    <div class="col-md-8" style="border: 1px solid #ccc;border-radius: 5px ; padding: 1rem">
+                        <h5>List Food</h5>
+                        <a hidden>
+                            <input value="${sessionScope.acc.id}" name="idCustomer">
+                        </a>
                         <table class="table" >
                             <thead>
                                 <tr>
@@ -80,38 +79,24 @@
                                     <th scope="col">Price</th>
                                     <th scope="col">Quantity</th>
                                     <th scope="col">Total Price</th>
-                                    <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <c:forEach items="${carts}" var="C">
-                                <form action="update-quantity" method="get">
-                                    <tr>                               
-                                    <input type="hidden" name="foodid" value="${C.value.product.foodid}">
-                                    <th scope="row"><c:set var="count" value="${count+1}"></c:set>${count}</th>
-                                    <td><img style="width: 50px;height: 50px" src="${C.value.product.image}"></td>
-                                    <td>${C.value.product.foodname}</td>
-                                    <td>${C.value.product.unitprice} </td>
-                                    <td ><input  onchange="this.form.submit()"  name="quantity" style="width: 50px" min="1" type="number" value="${C.value.quantity}"></td>
-                                    <td>${C.value.product.unitprice*C.value.quantity}</td>
-                                    <td>
-                                        <a href="delete-cart?foodid=${C.value.product.foodid}" class="btn btn-outline-danger "
-                                           style="background-color: white; color: red"  >
-                                            <i class="bi bi-trash"></i> Delete
-                                        </a>
-                                    </td>
-
+                                <c:forEach items="${list}" var="c">
+                                    <tr>
+                                        <th scope="row">${c.id - idBill}</th>
+                                        <td><img style="width: 70px" src="${c.imagefood}"></td>
+                                        <td>${c.namefood}</td>
+                                        <td>${c.pricefood} </td>
+                                        <td>${c.quantity}</td>
+                                        <td>${c.pricefood*c.quantity}</td>
                                     </tr>
-                                </form>
-                            </c:forEach>
-
+                                </c:forEach>
                             </tbody>
                         </table>
-                        <h2>Total Amount: $${totalAmount}</h2>
-                        <a href="CheckOut" class="btn btn-success" style="color: white">Check out</a>
-                    </c:otherwise>
-                </c:choose>
-
+                        <h2>Total: $${totalAmout}</h2>
+                    </div>
+                </div>
             </div>
         </section>
         <!-- jQery -->

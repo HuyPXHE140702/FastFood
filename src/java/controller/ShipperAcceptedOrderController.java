@@ -131,8 +131,7 @@ public class ShipperAcceptedOrderController extends HttpServlet {
                 sortBy = "ORDER BY TotalPrice Desc";
             }
 
-            orderList = orderDAOImpl.ViewAccpectedOrder(accountId, sortBy);
-
+            //         orderList = orderDAOImpl.ViewAccpectedOrder(accountId, sortBy);
             List<Order> temp = new ArrayList<>();
             if (orderList.size() > 0) {
                 if (page == 1) {
