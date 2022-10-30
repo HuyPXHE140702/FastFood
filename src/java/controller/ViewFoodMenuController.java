@@ -10,7 +10,7 @@
 package controller;
 
 import dao.FoodDAO;
-import dao.impl.FoodDAOImpl;
+import dao.Impl.FoodDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -58,7 +58,7 @@ public class ViewFoodMenuController extends HttpServlet {
                 endPage++;
             }
             //get food to pagging
-            List<Food> list = food.getProductwithpagging(index);
+            List<Food> list = food.getProductwithPagging(index);
             request.setAttribute("page", indexPage);//de khi an vao trang 2 thi trang 2 mau den
             request.setAttribute("endP", endPage);
              

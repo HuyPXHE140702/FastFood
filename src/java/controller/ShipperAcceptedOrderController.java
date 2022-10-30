@@ -1,18 +1,13 @@
 /*
- * Copyright(C) 2005, FPT University
- * Java MVC:
- *  Fast Food Shop
- *
- * Record of change:
- * DATE            Version             AUTHOR                   DESCRIPTION
- * 2022-10-02      1.0                 HuyPXHE140702            First Implement
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
 package controller;
 
 import dao.Impl.OrderDAOImpl;
 import dao.OrderDAO;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -24,42 +19,43 @@ import javax.servlet.http.HttpServletResponse;
 import model.Order;
 
 /**
- * The class contains method for view order list, search and paging <br>
- * The method wil throw an object of  <code>java.lang.Exception</code> class if
- * there is any error occurring when finding data <br>
  *
- * @author HuyPX
+ * @author Admin
  */
-public class HomeshipperController extends HttpServlet {
+public class ShipperAcceptedOrderController extends HttpServlet {
 
     private List<Order> orderList = new ArrayList<>();
     private int noOfRecords = 0;
     private int noOfPages = 0;
-    private String dateFrom = "";
-    private String dateTo = "";
+    private String name = "";
+    private String role = "";
 
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        //request.getRequestDispatcher("homeshipper.jsp").forward(request, response);
     }
 
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
-     * Get a list of Order for Shipper role to view, accept order with paging
-     * <br>
-     * The result contain a list of <code>model.Account </code> objects <br>
+     * Handles the HTTP <code>GET</code> method.
      *
-     * @param baseDAO get connection from Database
-     * @param orderList request data from Database
-     * @param request set attribute for jsp page
+     * @param request servlet request
+     * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     * @throws SQLException if an SQL error occurs
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
         try {
             int page = 1;
             int recordsPerPage = 3;
@@ -85,13 +81,15 @@ public class HomeshipperController extends HttpServlet {
                     }
                 }
             }
+            if (orderList.size() <= 0) {
+                temp = null;
+            }
             request.setAttribute("listOrder", temp);
             request.setAttribute("noOfPages", noOfPages);
             request.setAttribute("currentPage", page);
-            request.setAttribute("dateF", dateFrom);
-            request.setAttribute("dateT", dateTo);
-            request.setAttribute("maxDate", LocalDate.now());
-            request.getRequestDispatcher("homeshipper.jsp").forward(request, response);
+            request.setAttribute("currentPage", name);
+            request.setAttribute("roleSelect", role);
+            request.getRequestDispatcher("shipperacceptorder.jsp").forward(request, response);
         } catch (NumberFormatException | ServletException | IOException | IllegalStateException e) {
             e.printStackTrace();
             response.sendRedirect("error_Database.jsp");
@@ -101,61 +99,56 @@ public class HomeshipperController extends HttpServlet {
     }
 
     /**
-     * Get a list of Order for Shipper when search by date <br>
-     * The result contain a list of <code>model.Order </code> objects <br>
+     * Handles the HTTP <code>POST</code> method.
      *
-     * @param baseDAO get connection from Database
-     * @param orderList request data from Database
-     * @param request set attribute for jsp page
+     * @param request servlet request
+     * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     * @throws SQLException if an SQL error occurs
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            dateFrom = (String) request.getParameter("DateFrom");
-            dateTo = (String) request.getParameter("DateTo");
             int page = 1;
             int recordsPerPage = 3;
             if (request.getParameter("page") != null) {
                 page = Integer.parseInt(request.getParameter("page"));
             }
-            OrderDAO orderDAO = new OrderDAOImpl();
-            String condition = "and created_date BETWEEN ? and ?";
-            //if search form empty
-            if (dateFrom.equals("") && dateTo.equals("")) {
-                orderList = orderDAO.getOrderNotAcceptByShipperID();
-                //orderList = orderDAO.viewAllOrders((page - 1) * recordsPerPage, recordsPerPage);
-                //noOfRecords = orderDAO.getNoOfRecords();
-                //if shipper do not choose start date
-            } else if (dateFrom.equals("")) {
-                condition = "and created_date <= ?";
-                orderList = orderDAO.getOrderByDateNoOffset(dateTo, condition);
-                //orderList = orderDAO.getOrderByDate(dateTo, condition, (page - 1) * recordsPerPage);
-                //noOfRecords = orderDAO.getNoOfRecordsOneDate(condition, dateTo);
-                //if shipper do not choose end date
-            } else if (dateTo.equals("")) {
-                condition = "and created_date >= ?";
-                orderList = orderDAO.getOrderByDateNoOffset(dateFrom, condition);
-                //orderList = orderDAO.getOrderByDate(dateFrom, condition, (page - 1) * recordsPerPage);
-                //noOfRecords = orderDAO.getNoOfRecordsOneDate(condition, dateFrom);
-            } else {
-                orderList = orderDAO.getOrderByDateToDateNoOffset(dateFrom, dateTo, condition);
-                //orderList = orderDAO.getOrderByDateToDate(dateFrom, dateTo, condition, (page - 1) * recordsPerPage);
-                //noOfRecords = orderDAO.getNoOfRecordsBetweenDate(condition, dateFrom, dateTo);
+            OrderDAO orderDAOImpl = new OrderDAOImpl();
+            int accountId = Integer.parseInt(request.getParameter("accountid"));
+            String name = request.getParameter("customerName");
+            String role = (String) request.getParameter("roles");
+            String sortBy = "";
+            String condition = "and Name like '%" + name.trim() + "%' ";
+            if (role.equalsIgnoreCase("all")) {
+                sortBy = "";
+            } else if (role.equalsIgnoreCase("newest")) {
+                sortBy = "ORDER BY created_date Desc";
+            } else if (role.equalsIgnoreCase("priceAsc")) {
+                sortBy = "ORDER BY TotalPrice Asc";
+            } else if (role.equalsIgnoreCase("priceDes")) {
+                sortBy = "ORDER BY TotalPrice Desc";
             }
+
+            orderList = orderDAOImpl.ViewAccpectedOrder(accountId, sortBy);
 
             List<Order> temp = new ArrayList<>();
             if (orderList.size() > 0) {
-                if (orderList.size() <= recordsPerPage) {
-                    for (int i = 0; i < orderList.size(); i++) {
-                        temp.add(orderList.get((page - 1) * recordsPerPage + i));
-                    }
-                } else if (orderList.size() > recordsPerPage) {
+                if (page == 1) {
                     for (int i = 0; i < recordsPerPage; i++) {
                         temp.add(orderList.get((page - 1) * recordsPerPage + i));
+                    }
+                } else if (page > 1) {
+                    int remainSize = orderList.size() - recordsPerPage * (page - 1);
+                    if (remainSize >= 0 && remainSize <= recordsPerPage) {
+                        for (int i = 0; i < remainSize; i++) {
+                            temp.add(orderList.get((page - 1) * recordsPerPage + i));
+                        }
+                    } else if (remainSize >= 0 && remainSize > recordsPerPage) {
+                        for (int i = 0; i < recordsPerPage; i++) {
+                            temp.add(orderList.get((page - 1) * recordsPerPage + i));
+                        }
                     }
                 }
             } else {
@@ -166,15 +159,15 @@ public class HomeshipperController extends HttpServlet {
             request.setAttribute("noOfPages", noOfPages);
             request.setAttribute("currentPage", page);
             request.setAttribute("listOrder", temp);
-            request.setAttribute("dateF", dateFrom);
-            request.setAttribute("dateT", dateTo);
-            request.setAttribute("maxDate", LocalDate.now());
-            request.getRequestDispatcher("homeshipper.jsp").forward(request, response);
-        } catch (Exception e) {
+            request.setAttribute("currentPage", name);
+            request.setAttribute("roleSelect", role);
+            request.getRequestDispatcher("shipperacceptorder.jsp").forward(request, response);
+        } catch (NumberFormatException | ServletException | IOException | IllegalStateException e) {
             e.printStackTrace();
             response.sendRedirect("error_Database.jsp");
+        } catch (Exception ex) {
+            Logger.getLogger(HomeshipperController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     /**

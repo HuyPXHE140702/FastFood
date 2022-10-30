@@ -1,27 +1,36 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright(C) 2005, FPT University
+ * Java MVC:
+ *  Fast Food Shop
+ *
+ * Record of change:
+ * DATE            Version             AUTHOR                   DESCRIPTION
+ * 2022-10-28      1.0                 Vinh                     Implement
  */
 package controller;
 
-import dao.AccountDAO;
-import dao.Impl.AccountDAOImpl;
+
+import dao.Impl.FoodDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Account;
+import javax.servlet.http.HttpSession;
+import model.Food;
 
 /**
  *
- * @author dangtm
+ * @author ASUS
  */
-public class LoadAccountController extends HttpServlet {
+@WebServlet(name = "SellerFoodController", urlPatterns = {"/SellerFood"})
+public class SellerFoodController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,13 +45,35 @@ public class LoadAccountController extends HttpServlet {
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-             int accountid = Integer.parseInt(request.getParameter("accountid"));
-             AccountDAOImpl dao = new AccountDAOImpl();
-            //get account by id
-            Account account =  dao.getAccountByID(accountid);
-            request.setAttribute("account", account);
-            request.getRequestDispatcher("editaccount.jsp").forward(request, response);
+             FoodDAOImpl foodDAOImpl = new FoodDAOImpl();
+            List<Food> list2 = foodDAOImpl.getAllFood();
+            String indexPage = request.getParameter("index");
+            String searchName = request.getParameter("searchName");
+            List<Food> list = new ArrayList<>();
+            if(indexPage == null){
+                //init index of page = 1 
+                indexPage = "1";
+            }
+            int index = Integer.parseInt(indexPage);
+            int count = list2.size();
+            int endPage = count / 9;
+            if (count % 9 != 0) {
+                endPage++;
+            } 
+            if(searchName == null){
+                //neu khong co name thi search all 
+                 list = foodDAOImpl.getProductwithPagging(index);
+            }else{
+                //search %like% theo name
+                list = foodDAOImpl.getProductWithPaggingByName(index, searchName);
+            }
+            request.setAttribute("page", indexPage); //hightligh page active 
+            request.setAttribute("endP", endPage);
+            HttpSession session = request.getSession();
+            session.setAttribute("listfood", list);
+            session.setAttribute("urlHistory", "menu");
+            
+            request.getRequestDispatcher("sellerFood.jsp").forward(request, response);
         }
     }
 
@@ -61,7 +92,7 @@ public class LoadAccountController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(LoadAccountController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SellerFoodController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -79,7 +110,7 @@ public class LoadAccountController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(LoadAccountController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SellerFoodController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

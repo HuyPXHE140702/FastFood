@@ -94,9 +94,5 @@ public class Seller {
         return "Seller{" + "sellerid=" + sellerid + ", sellername=" + sellername + ", address=" + address + ", phone=" + phone + ", receivemoney=" + receivemoney + ", accountid=" + accountid + ", status=" + status + '}';
     }
 
-   
-    
-
-  
 
 }
