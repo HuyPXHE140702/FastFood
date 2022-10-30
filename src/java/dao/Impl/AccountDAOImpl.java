@@ -166,17 +166,17 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
             preparedStatement.setString(1, username);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                return new Account(resultSet.getInt(1),
-                        resultSet.getString(2),
-                        resultSet.getString(3),
-                        resultSet.getString(4),
-                        resultSet.getString(5),
-                        resultSet.getString(6),
-                        resultSet.getInt(7),
-                        resultSet.getInt(8),
-                        resultSet.getInt(9),
-                        resultSet.getInt(10),
-                        resultSet.getInt(11));
+                return new Account(resultSet.getInt("ID"),
+                        resultSet.getString("Username"),
+                        resultSet.getString("Password"),
+                        resultSet.getString("Displayname"),
+                        resultSet.getString("Address"),
+                        resultSet.getString("Phone"),
+                        resultSet.getInt("isAdmin"),
+                        resultSet.getInt("isCustomer"),
+                        resultSet.getInt("IsShipper"),
+                        resultSet.getInt("IsSaller"),
+                        resultSet.getInt("status"));
             }
 
         } catch (Exception e) {
@@ -201,17 +201,17 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
             preparedStatement.setInt(1, id);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                return new Account(resultSet.getInt(1),
-                        resultSet.getString(2),
-                        resultSet.getString(3),
-                        resultSet.getString(4),
-                        resultSet.getString(5),
-                        resultSet.getString(6),
-                        resultSet.getInt(7),
-                        resultSet.getInt(8),
-                        resultSet.getInt(9),
-                        resultSet.getInt(10),
-                        resultSet.getInt(11));
+                return new Account(resultSet.getInt("ID"),
+                        resultSet.getString("Username"),
+                        resultSet.getString("Password"),
+                        resultSet.getString("Displayname"),
+                        resultSet.getString("Address"),
+                        resultSet.getString("Phone"),
+                        resultSet.getInt("isAdmin"),
+                        resultSet.getInt("isCustomer"),
+                        resultSet.getInt("IsShipper"),
+                        resultSet.getInt("IsSaller"),
+                        resultSet.getInt("status"));
             }
         } catch (Exception e) {
             throw e;
@@ -236,17 +236,17 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
             preparedStatement.setInt(1, id);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                return new Account(resultSet.getInt(1),
-                        resultSet.getString(2),
-                        resultSet.getString(3),
-                        resultSet.getString(4),
-                        resultSet.getString(5),
-                        resultSet.getString(6),
-                        resultSet.getInt(7),
-                        resultSet.getInt(8),
-                        resultSet.getInt(9),
-                        resultSet.getInt(10),
-                        resultSet.getInt(11));
+                return new Account(resultSet.getInt("ID"),
+                        resultSet.getString("Username"),
+                        resultSet.getString("Password"),
+                        resultSet.getString("Displayname"),
+                        resultSet.getString("Address"),
+                        resultSet.getString("Phone"),
+                        resultSet.getInt("isAdmin"),
+                        resultSet.getInt("isCustomer"),
+                        resultSet.getInt("IsShipper"),
+                        resultSet.getInt("IsSaller"),
+                        resultSet.getInt("status"));
             }
         } catch (Exception e) {
             throw e;
@@ -657,17 +657,17 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
             resultSet = preparedStatement.executeQuery();
           
             while (resultSet.next()) {
-                return new Account(resultSet.getInt(1),
-                resultSet.getString(2),
-                resultSet.getString(3),
-                resultSet.getString(4),
-                resultSet.getString(5),
-                resultSet.getString(6),
-                resultSet.getInt(7),
-                resultSet.getInt(8),
-                resultSet.getInt(9),
-                resultSet.getInt(10),
-                resultSet.getInt(11));
+                return new Account(resultSet.getInt("ID"),
+                resultSet.getString("Username"),
+                        resultSet.getString("Password"),
+                        resultSet.getString("Displayname"),
+                        resultSet.getString("Address"),
+                        resultSet.getString("Phone"),
+                        resultSet.getInt("isAdmin"),
+                        resultSet.getInt("isCustomer"),
+                        resultSet.getInt("IsShipper"),
+                        resultSet.getInt("IsSaller"),
+                        resultSet.getInt("status"));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -706,17 +706,17 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
             resultSet = preparedStatement.executeQuery();
           
             while (resultSet.next()) {
-                return new Account(resultSet.getInt(1),
-                resultSet.getString(2),
-                resultSet.getString(3),
-                resultSet.getString(4),
-                resultSet.getString(5),
-                resultSet.getString(6),
-                resultSet.getInt(7),
-                resultSet.getInt(8),
-                resultSet.getInt(9),
-                resultSet.getInt(10),
-                resultSet.getInt(11));
+                return new Account(resultSet.getInt("ID"),
+                resultSet.getString("Username"),
+                        resultSet.getString("Password"),
+                        resultSet.getString("Displayname"),
+                        resultSet.getString("Address"),
+                        resultSet.getString("Phone"),
+                        resultSet.getInt("isAdmin"),
+                        resultSet.getInt("isCustomer"),
+                        resultSet.getInt("IsShipper"),
+                        resultSet.getInt("IsSaller"),
+                        resultSet.getInt("status"));
             }
         } catch (Exception e) {
             e.printStackTrace();
