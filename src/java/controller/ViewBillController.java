@@ -5,7 +5,7 @@
  */
 package controller;
 
-import dao.mpl.OrderDetailDAOImpl;
+import dao.impl.OrderDetailDAOImpl;
 import dao.OrderDetailDAO;
 import java.io.IOException;
 import java.util.List;

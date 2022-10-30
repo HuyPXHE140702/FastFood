@@ -5,10 +5,8 @@
  */
 package controller;
 
-import dao.mpl.OrderDetailDAOImpl;
-import dao.OrderDAO;
-import dao.OrderDetailDAO;
-import dao.mpl.OrderDAOImpl;
+import dao.impl.OrderDetailDAOImpl;
+import dao.impl.OrderDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.LinkedHashMap;

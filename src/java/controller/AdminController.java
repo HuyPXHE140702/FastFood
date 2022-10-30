@@ -10,7 +10,7 @@
 package controller;
 
 import dao.AccountDAO;
-import dao.mpl.AccountDAOImpl;
+import dao.impl.AccountDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;

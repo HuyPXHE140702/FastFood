@@ -11,8 +11,8 @@ package controller;
 
 
 import dao.AccountDAO;
-import dao.mpl.AccountDAOImpl;
-import dao.mpl.SellerDAOImpl;
+import dao.impl.AccountDAOImpl;
+import dao.impl.SellerDAOImpl;
 import dao.SellerDAO;
 import java.io.IOException;
 import java.io.PrintWriter;

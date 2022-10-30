@@ -5,7 +5,7 @@
  */
 package controller;
 
-import dao.mpl.AccountDAOImpl;
+import dao.impl.AccountDAOImpl;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
