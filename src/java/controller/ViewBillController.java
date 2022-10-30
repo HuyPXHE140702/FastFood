@@ -5,10 +5,9 @@
  */
 package controller;
 
-import dao.Impl.OrderDetailDAOImpl;
+import dao.impl.OrderDetailDAOImpl;
 import dao.OrderDetailDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
