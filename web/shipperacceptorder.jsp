@@ -68,7 +68,7 @@
 
                 <form action="Shipperacceptorder" method="POST">
                     <input type="hidden" name="accountid" value="${sessionScope.acc.id}">
-                    <input type="text" id="myInput" name ="customerName" placeholder="Search customer names.." title="Type in a name" value="${nameSearch}">
+                    <input type="text" id="noWhiteSpaceAtTheStart" name ="customerName" placeholder="Search customer names.." title="Type in a name" value="${nameSearch}">
                     <select name="roles" id="cars">
                         <option value="all" <c:if test="${roleSelect == 'all'}"> selected </c:if>>All orders</option>
                         <option value="newest"<c:if test="${roleSelect == 'newest'}"> selected </c:if>>Newest Date</option>
@@ -149,5 +149,15 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts-1.js"></script>
+        <script>
+            var inp = document.querySelector('#noWhiteSpaceAtTheStart');
+            inp.addEventListener("keypress", function (e) {
+                var key = e.keyCode;
+                if (key === 32) {
+                    e.preventDefault();
+                    return false;
+                }
+            })
+        </script>
     </body>
 </html>

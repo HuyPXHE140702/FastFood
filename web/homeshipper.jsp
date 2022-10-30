@@ -179,5 +179,15 @@
         <script src="js/scrollax.min.js"></script>
         <script src="js/main.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script>
+            var inp = document.querySelector('#noWhiteSpaceAtTheStart');
+            inp.addEventListener("keypress", function (e) {
+                var key = e.keyCode;
+                if (key === 32) {
+                    e.preventDefault();
+                    return false;
+                }
+            })
+        </script>
     </body>
 </html>

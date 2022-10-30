@@ -62,7 +62,7 @@
                 <br>
                 <h1>Account List</h1>
                 <form action="admin" method="POST">
-                    <input type="text" id="myInput" name ="Displayname" placeholder="Search for names.." title="Type in a name" value="${nameSearch}">
+                    <input type="text" id="noWhiteSpaceAtTheStart" name ="Displayname" placeholder="Search for names.." title="Type in a name" value="${nameSearch}">
                     <select name="roles" id="cars">
                         <option value="all" <c:if test="${roleSelect == 'all'}"> selected </c:if>>All roles</option>
                         <option value="admin"<c:if test="${roleSelect == 'admin'}"> selected </c:if>>Admin</option>
@@ -246,6 +246,16 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts-1.js"></script>
+        <script>
+            var inp = document.querySelector('#noWhiteSpaceAtTheStart');
+            inp.addEventListener("keypress", function (e) {
+                var key = e.keyCode;
+                if (key === 32) {
+                    e.preventDefault();
+                    return false;
+                }
+            })
+        </script>
     </body>
 
 </html>
