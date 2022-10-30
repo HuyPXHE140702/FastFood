@@ -1,10 +1,17 @@
 package controller;
 
+<<<<<<< HEAD:src/java/controller/CartsController.java
 <<<<<<< HEAD:src/java/controller/CheckOutController.java
 import dao.impl.OrderDetailDAOImpl;
 import dao.impl.OrderDAOImpl;
 =======
 >>>>>>> main:src/java/controller/CartsController.java
+=======
+import dao.mpl.OrderDetailDAOImpl;
+import dao.OrderDAO;
+import dao.OrderDetailDAO;
+import dao.mpl.OrderDAOImpl;
+>>>>>>> parent of b851e16 (.):src/java/controller/CheckOutController.java
 import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;

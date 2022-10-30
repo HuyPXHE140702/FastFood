@@ -5,19 +5,21 @@
  */
 package controller;
 
-import dao.mpl.AccountDAOImpl;
+import dao.mpl.OrderDetailDAOImpl;
+import dao.OrderDetailDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.OrderDetail;
 
 /**
  *
- * @author NamVN
+ * @author ACER
  */
-public class EditProfileController extends HttpServlet {
+public class ViewBillController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -25,25 +27,41 @@ public class EditProfileController extends HttpServlet {
      *
      * @param request servlet request
      * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
+     * @throws ServletException if idBill servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     */
+    /*
+    * ProcessRequest lay id cua customer va lay ra order detail ma customer vua order
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            int id = Integer.parseInt(request.getParameter("id"));
-            String name = request.getParameter("name");
-            String address = request.getParameter("address");
-            String phone = request.getParameter("phone");
-            String password = request.getParameter("userpass");
-            AccountDAOImpl accdao = new AccountDAOImpl();
-            accdao.editProfileById(password.trim(), name.trim(), address, phone, id);
-            String url = "profile?id=" + id;
-            request.getRequestDispatcher(url).forward(request, response);
+        OrderDetailDAO orderDetailDAO = new OrderDetailDAOImpl();
+        try {
+            //lay ve id customer vua thuc hien bill
+            int id = Integer.parseInt(request.getParameter("idCustomer"));
+
+            double totalAmout = 0; // khoi tao tong tien
+            int idBill=0; // khoi tao gia tri cua id item dau tien cua bill list
+            List<OrderDetail> list = orderDetailDAO.getOrderDetailByAccountID(id); // lay ra list bill trong orderdetail
+
+            // tinh tong tien
+            for (OrderDetail list1 : list) {
+                totalAmout += list1.getPricefood() * list1.getQuantity();
+            }
+
+            //lay ra gia tri cua id item dau tien trong bill hien tai
+            for (OrderDetail list1 : list) {
+                idBill = list1.getId() - 1;
+                break;
+            }
+
+            // tao attribute gui toi page viewBill
+            request.setAttribute("idBill", idBill);
+            request.setAttribute("totalAmout", totalAmout);
+            request.setAttribute("list", list);
+            request.getRequestDispatcher("viewBill.jsp").forward(request, response);
+        } catch (IOException | NumberFormatException | ServletException exception) {
         }
     }
 
@@ -53,7 +71,7 @@ public class EditProfileController extends HttpServlet {
      *
      * @param request servlet request
      * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
+     * @throws ServletException if idBill servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     @Override
@@ -67,7 +85,7 @@ public class EditProfileController extends HttpServlet {
      *
      * @param request servlet request
      * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
+     * @throws ServletException if idBill servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     @Override
@@ -77,9 +95,9 @@ public class EditProfileController extends HttpServlet {
     }
 
     /**
-     * Returns a short description of the servlet.
+     * Returns idBill short description of the servlet.
      *
-     * @return a String containing servlet description
+     * @return idBill String containing servlet description
      */
     @Override
     public String getServletInfo() {

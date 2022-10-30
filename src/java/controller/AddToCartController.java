@@ -5,7 +5,7 @@
  */
 package controller;
 
-import dao.impl.FoodDAOImpl;
+import dao.mpl.FoodDAOImpl;
 import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
