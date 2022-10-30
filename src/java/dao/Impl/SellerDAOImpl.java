@@ -90,12 +90,12 @@ public class SellerDAOImpl extends BaseDAOImpl implements SellerDAO {
       resultSet = preparedStatement.executeQuery();
       while (resultSet.next()) {
         return new Seller(resultSet.getInt(1),
-            resultSet.getString(2),
-            resultSet.getString(3),
-            resultSet.getString(4),
-            resultSet.getFloat(5),
-            resultSet.getInt(6),
-            resultSet.getInt(7));
+            resultSet.getString("SallerName"),
+            resultSet.getString("Address"),
+            resultSet.getString("Phone"),
+            resultSet.getFloat("ReceiveMoney"),
+            resultSet.getInt("AccountID"),
+            resultSet.getInt("Status"));
       }
 
     } catch (Exception e) {

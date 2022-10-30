@@ -33,14 +33,14 @@ public class FoodDAOImpl extends BaseDAOImpl implements FoodDAO {
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 list.add(new Food(resultSet.getInt(1),
-                        resultSet.getString(2),
-                        resultSet.getInt(3),
-                        resultSet.getString(4),
-                        resultSet.getInt(5),
-                        resultSet.getFloat(6),
-                        resultSet.getString(7),
-                        resultSet.getBoolean(8),
-                        resultSet.getString(9)));
+                        resultSet.getString("FoodName"),
+                        resultSet.getInt("CategoryID"),
+                        resultSet.getString("Image"),
+                        resultSet.getInt("Quantity"),
+                        resultSet.getFloat("UnitPrice"),
+                        resultSet.getString("Description"),
+                        resultSet.getBoolean("Status"),
+                        resultSet.getString("DateCreated")));
             }
 
         } catch (Exception e) {
