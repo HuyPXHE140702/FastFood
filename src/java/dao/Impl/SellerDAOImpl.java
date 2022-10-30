@@ -7,7 +7,7 @@
  * DATE            Version             AUTHOR                   DESCRIPTION
  * 2022-10-27      1.0                 VinhNVHE140897            Seller Implement
  */
-package dao.mpl;
+package dao.impl;
 
 import dao.SellerDAO;
 import java.sql.Connection;

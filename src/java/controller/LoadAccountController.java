@@ -5,12 +5,8 @@
  */
 package controller;
 
-<<<<<<< HEAD
 import dao.AccountDAO;
 import dao.impl.AccountDAOImpl;
-=======
-import dao.mpl.AccountDAOImpl;
->>>>>>> parent of b851e16 (.)
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;

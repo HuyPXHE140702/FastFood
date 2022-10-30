@@ -24,6 +24,8 @@ public interface OrderDAO {
 
     public List<Order> viewAllOrders(int offset, int recordsPerPage) throws Exception;
 
+    public int createReturnId(Order order);
+
     public int getNoOfRecords() throws Exception;
 
     public int getNoOfRecordsBetweenDate(String condition, String dateFrom, String dateTo) throws Exception;

@@ -10,7 +10,7 @@
 package controller;
 
 import dao.AccountDAO;
-import dao.mpl.AccountDAOImpl;
+import dao.impl.AccountDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -20,7 +20,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Account;
-import model.Order;
 
 /**
  * The class contains method for view account list, add or update an account,

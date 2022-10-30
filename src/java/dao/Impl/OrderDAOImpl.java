@@ -7,7 +7,7 @@
  * DATE            Version             AUTHOR                   DESCRIPTION
  * 2022-10-12      1.0                 HuyPXHE140702            First Implement
  */
-package dao.mpl;
+package dao.impl;
 
 import dao.OrderDAO;
 import java.sql.Connection;
@@ -15,7 +15,10 @@ import java.util.List;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Order;
 
 /*
@@ -270,6 +273,60 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
             closeConnection(connection);
         }
         return orderList;
+    }
+
+    /**
+     * Create a record and insert into Order table in Database<br>
+     * The result is type of integer<br>
+     *
+     *
+     * @param order
+     * @param preparedStatement execute query to Database
+     * @param resultSet get data from Database
+     * @param noOfRecords return a number of records
+     * @return
+     * @throws IOException if an I/O error occurs
+     * @throws SQLException if an SQL error occurs
+     */
+    @Override
+    public int createReturnId(Order order) {
+
+        String sql = "INSERT INTO [dbo].[Orders]\n"
+                + "           ([account_id]\n"
+                + "           ,[Name]\n"
+                + "           ,[Phone]\n"
+                + "           ,[Address]\n"
+                + "           ,[TotalPrice]\n"
+                + "           ,[status])\n"
+                + "     VALUES\n"
+                + "           (?,?,?,?,?,0)";
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setInt(1, order.getAcount_id());
+            preparedStatement.setString(2, order.getName());
+            preparedStatement.setString(3, order.getPhone());
+            preparedStatement.setString(4, order.getAddress());
+            preparedStatement.setFloat(5, order.getTotalprice());
+            preparedStatement.executeUpdate();
+            ResultSet rs = preparedStatement.getGeneratedKeys();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(OrderDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connection);
+        }
+        return 0;
     }
 
     /**

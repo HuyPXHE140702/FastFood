@@ -5,8 +5,8 @@
  */
 package controller;
 
-import dao.mpl.OrderDetailDAOImpl;
 import dao.OrderDetailDAO;
+import dao.impl.OrderDetailDAOImpl;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -27,11 +27,8 @@ public class ViewBillController extends HttpServlet {
      *
      * @param request servlet request
      * @param response servlet response
-     * @throws ServletException if idBill servlet-specific error occurs
+     * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     */
-    /*
-    * ProcessRequest lay id cua customer va lay ra order detail ma customer vua order
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -42,7 +39,7 @@ public class ViewBillController extends HttpServlet {
             int id = Integer.parseInt(request.getParameter("idCustomer"));
 
             double totalAmout = 0; // khoi tao tong tien
-            int idBill=0; // khoi tao gia tri cua id item dau tien cua bill list
+            int idBill = 0; // khoi tao gia tri cua id item dau tien cua bill list
             List<OrderDetail> list = orderDetailDAO.getOrderDetailByAccountID(id); // lay ra list bill trong orderdetail
 
             // tinh tong tien
@@ -71,7 +68,7 @@ public class ViewBillController extends HttpServlet {
      *
      * @param request servlet request
      * @param response servlet response
-     * @throws ServletException if idBill servlet-specific error occurs
+     * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     @Override
@@ -85,7 +82,7 @@ public class ViewBillController extends HttpServlet {
      *
      * @param request servlet request
      * @param response servlet response
-     * @throws ServletException if idBill servlet-specific error occurs
+     * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     @Override
@@ -95,9 +92,9 @@ public class ViewBillController extends HttpServlet {
     }
 
     /**
-     * Returns idBill short description of the servlet.
+     * Returns a short description of the servlet.
      *
-     * @return idBill String containing servlet description
+     * @return a String containing servlet description
      */
     @Override
     public String getServletInfo() {

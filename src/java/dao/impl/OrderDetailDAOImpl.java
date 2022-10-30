@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dao.mpl;
+package dao.impl;
 
 import dao.OrderDetailDAO;
 import java.sql.Connection;
@@ -19,7 +19,7 @@ import java.util.ArrayList;
  *
  * @author ACER
  */
-public class OrderDetailDAOImpl extends dao.mpl.BaseDAOImpl implements OrderDetailDAO {
+public class OrderDetailDAOImpl extends dao.impl.BaseDAOImpl implements OrderDetailDAO {
 
     /**
      * save order bill into orderDetail table
