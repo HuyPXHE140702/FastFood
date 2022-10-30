@@ -19,8 +19,13 @@ import java.util.ArrayList;
  *
  * @author ACER
  */
-public class OrderDetailDAOImpl extends dao.impl.BaseDAOImpl implements OrderDetailDAO {
+public class OrderDetailDAOImpl extends dao.Impl.BaseDAOImpl implements OrderDetailDAO {
 
+    /**
+     * save order bill into orderDetail table
+     * @param orderId
+     * @param carts
+     */
     @Override
     public void saveCart(int orderId, Map<Integer, Cart> carts) {
         Connection connection = null;
@@ -47,6 +52,7 @@ public class OrderDetailDAOImpl extends dao.impl.BaseDAOImpl implements OrderDet
                 preparedStatement.setFloat(4, cart.getProduct().getUnitprice());
                 preparedStatement.setInt(5, cart.getQuantity());
                 preparedStatement.executeUpdate();
+                
             }
         } catch (Exception ex) {
         } finally {

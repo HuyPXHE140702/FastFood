@@ -84,7 +84,7 @@
                             <tbody>
                                 <c:forEach items="${list}" var="c">
                                     <tr>
-                                        <th scope="row">${c.id - a}</th>
+                                        <th scope="row">${c.id - idBill}</th>
                                         <td><img style="width: 70px" src="${c.imagefood}"></td>
                                         <td>${c.namefood}</td>
                                         <td>${c.pricefood} </td>

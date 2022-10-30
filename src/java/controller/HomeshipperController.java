@@ -132,18 +132,19 @@ public class HomeshipperController extends HttpServlet {
                 //if shipper do not choose start date
             } else if (dateFrom.equals("")) {
                 condition = "and created_date <= ?";
-                orderList = orderDAO.getOrderByDateNoOffset(dateTo, condition);
+                //               orderList = orderDAO.getOrderByDateNoOffset(dateTo, condition);
                 //orderList = orderDAO.getOrderByDate(dateTo, condition, (page - 1) * recordsPerPage);
                 //noOfRecords = orderDAO.getNoOfRecordsOneDate(condition, dateTo);
                 //if shipper do not choose end date
             } else if (dateTo.equals("")) {
                 condition = "and created_date >= ?";
-                orderList = orderDAO.getOrderByDateNoOffset(dateFrom, condition);
+//                orderList = orderDAO.getOrderByDateNoOffset(dateFrom, condition);
                 //orderList = orderDAO.getOrderByDate(dateFrom, condition, (page - 1) * recordsPerPage);
                 //noOfRecords = orderDAO.getNoOfRecordsOneDate(condition, dateFrom);
             } else {
-                orderList = orderDAO.getOrderByDateToDateNoOffset(dateFrom, dateTo, condition);
-                //orderList = orderDAO.getOrderByDateToDate(dateFrom, dateTo, condition, (page - 1) * recordsPerPage);
+
+                //               orderList = orderDAO.getOrderByDateToDateNoOffset(dateFrom, dateTo, condition);
+//orderList = orderDAO.getOrderByDateToDate(dateFrom, dateTo, condition, (page - 1) * recordsPerPage);
                 //noOfRecords = orderDAO.getNoOfRecordsBetweenDate(condition, dateFrom, dateTo);
             }
 

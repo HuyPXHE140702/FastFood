@@ -26,7 +26,7 @@
     </servlet>
     <servlet>
         <servlet-name>Profile</servlet-name>
-        <servlet-class>controller.ProfileController</servlet-class>
+        <servlet-class>controller.ViewProfileController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>EditProfile</servlet-name>
@@ -82,7 +82,7 @@
     </servlet>
     <servlet>
         <servlet-name>carts</servlet-name>
-        <servlet-class>controller.CartsController</servlet-class>
+        <servlet-class>controller.ViewCartsController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddToCart</servlet-name>
@@ -99,6 +99,10 @@
     <servlet>
         <servlet-name>ThankForPayment</servlet-name>
         <servlet-class>controller.ThankForPaymentController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewBillController</servlet-name>
+        <servlet-class>controller.ViewBillController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -199,6 +203,10 @@
     <servlet-mapping>
         <servlet-name>ThankForPayment</servlet-name>
         <url-pattern>/thank</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewBillController</servlet-name>
+        <url-pattern>/viewBill</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

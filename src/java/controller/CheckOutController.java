@@ -8,7 +8,7 @@ package controller;
 import dao.Impl.OrderDetailDAOImpl;
 import dao.OrderDAO;
 import dao.OrderDetailDAO;
-import dao.impl.OrderDAOImpl;
+import dao.Impl.OrderDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.LinkedHashMap;
@@ -118,6 +118,7 @@ public class CheckOutController extends HttpServlet {
         order.setAddress(address);
         order.setTotalPrice(totalAmout);
         int orderId = new OrderDAOImpl().createReturnId(order);
+        
         //luu order detail
         new OrderDetailDAOImpl().saveCart(orderId, carts);
 
