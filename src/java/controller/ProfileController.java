@@ -1,26 +1,26 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package controller;
 
+import dao.impl.AccountDAOImpl;
 import java.io.IOException;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import model.Account;
 
-/*
-* Copyright(C) 2005, FPT University
-* Java MVC:
-*  Fast Food Shop
-*
-* Record of change:
-* DATE            Version             AUTHOR                   DESCRIPTION
-* 2022-10-12      1.0                 NamVNHE140527            First Implement
+/**
+ *
+ * @author NamVN
  */
-public class ViewCartsController extends HttpServlet {
+public class ProfileController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,28 +32,15 @@ public class ViewCartsController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
-        try {
-
-            HttpSession session = request.getSession();
-            Map<Integer, model.Cart> carts = (Map<Integer, model.Cart>) session.getAttribute("carts");
-            if (carts == null) {
-                carts = new LinkedHashMap<>();
-            }
-            //tinh total amout
-            float totalAmout = 0;
-            for (Map.Entry<Integer, model.Cart> entry : carts.entrySet()) {
-                model.Cart cart = entry.getValue();
-
-                totalAmout += cart.getQuantity() * cart.getProduct().getUnitprice();
-            }
-            request.setAttribute("totalAmount", totalAmout);
-            request.setAttribute("carts", carts);
-            request.getRequestDispatcher("cart.jsp").forward(request, response);
-        } catch (Exception ex) {
-            Logger.getLogger(ViewCartsController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        AccountDAOImpl dao = new AccountDAOImpl();
+        String id1 = request.getParameter("id");
+        int id = Integer.parseInt(id1);
+        Account profile = dao.getAccountByID(id);
+        //System.out.println(profile);
+        request.setAttribute("profile", profile);
+        request.getRequestDispatcher("profile.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -68,7 +55,11 @@ public class ViewCartsController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(ProfileController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -82,7 +73,11 @@ public class ViewCartsController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(ProfileController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -94,4 +89,5 @@ public class ViewCartsController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 }

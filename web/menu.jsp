@@ -1,13 +1,8 @@
 <%-- 
-* Copyright(C) 2005, FPT University
-* Java MVC:
-*  Fast Food Shop
-*
-* Record of change:
-* DATE            Version             AUTHOR                   DESCRIPTION
-* 2022-10-02      1.0                 NamVNHE140527            First Implement
+Document   : menu
+Created on : Jun 2, 2022, 1:37:22 AM
+Author     : dmanh
 --%>
-
 
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

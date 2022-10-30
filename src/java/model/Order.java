@@ -54,7 +54,7 @@ public class Order {
         return acount_id;
     }
 
-    public void setAccountId(int acount_id) {
+    public void setAcount_id(int acount_id) {
         this.acount_id = acount_id;
     }
 
@@ -86,7 +86,7 @@ public class Order {
         return totalprice;
     }
 
-    public void setTotalPrice(float totalprice) {
+    public void setTotalprice(float totalprice) {
         this.totalprice = totalprice;
     }
 

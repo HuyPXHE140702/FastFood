@@ -108,7 +108,7 @@
                             </tbody>
                         </table>
                         <h2>Total Amount: $${totalAmount}</h2>
-                        <a href="CheckOut" class="btn btn-success" style="color: white">Check out</a>
+                        <a href="payment" class="btn btn-success" style="color: white">Check out</a>
                     </c:otherwise>
                 </c:choose>
 
