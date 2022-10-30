@@ -1,4 +1,4 @@
-<!--/*
+<%--
 * Copyright(C) 2005, FPT University
 * Java MVC:
 *  Fast Food Shop
@@ -6,7 +6,7 @@
 * Record of change:
 * DATE            Version             AUTHOR                   DESCRIPTION
 * 2022-10-02      1.0                 NamVNHE140527            First Implement
-*/ -->
+--%>
 
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>

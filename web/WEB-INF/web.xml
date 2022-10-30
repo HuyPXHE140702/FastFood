@@ -26,7 +26,7 @@
     </servlet>
     <servlet>
         <servlet-name>Profile</servlet-name>
-        <servlet-class>controller.ProfileController</servlet-class>
+        <servlet-class>controller.ViewProfileController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>EditProfile</servlet-name>
@@ -78,7 +78,7 @@
     </servlet>
     <servlet>
         <servlet-name>carts</servlet-name>
-        <servlet-class>controller.CartsController</servlet-class>
+        <servlet-class>controller.ViewCartsController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddToCart</servlet-name>
@@ -88,7 +88,22 @@
         <servlet-name>ShipperAcceptedOrderController</servlet-name>
         <servlet-class>controller.ShipperAcceptedOrderController</servlet-class>
     </servlet>
-    
+    <servlet>
+        <servlet-name>UpdateCartQuantityController</servlet-name>
+        <servlet-class>controller.UpdateCartQuantityController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CheckOutController</servlet-name>
+        <servlet-class>controller.CheckOutController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ThankForPaymentController</servlet-name>
+        <servlet-class>controller.ThankForPaymentController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewBillController</servlet-name>
+        <servlet-class>controller.ViewBillController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ShipperAcceptedOrderController</servlet-name>
         <url-pattern>/Shipperacceptorder</url-pattern>
@@ -176,6 +191,22 @@
     <servlet-mapping>
         <servlet-name>AddToCart</servlet-name>
         <url-pattern>/add-to-cart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateCartQuantityController</servlet-name>
+        <url-pattern>/update-quantity</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckOutController</servlet-name>
+        <url-pattern>/checkOut</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ThankForPaymentController</servlet-name>
+        <url-pattern>/thank</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewBillController</servlet-name>
+        <url-pattern>/viewBill</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
