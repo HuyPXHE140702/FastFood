@@ -67,7 +67,7 @@ public class AdminController extends HttpServlet {
             //get all account with paging
             List<Account> temp = new ArrayList<>();
             if (accountList.size() > 0) {
-                for (int i = 0; i < 3; i++) {
+                for (int i = 0; i < recordsPerPage; i++) {
                     if ((page - 1) * 3 + i < accountList.size()) {
                         temp.add(accountList.get((page - 1) * 3 + i));
                     }
@@ -123,11 +123,11 @@ public class AdminController extends HttpServlet {
                 setRole = "and isShipper = 1";
             }
             AccountDAO accountDAO = new AccountDAOImpl();
-            accountList = accountDAO.getAccountByNamePaging(name.trim(), setRole);
             //get all account with paging and name contain
+            accountList = accountDAO.getAccountByNamePaging(name.trim(), setRole);
             List<Account> temp = new ArrayList<>();
             if (accountList.size() > 0) {
-                for (int i = 0; i < 3; i++) {
+                for (int i = 0; i <recordsPerPage; i++) {
                     if ((page - 1) * 3 + i < accountList.size()) {
                         temp.add(accountList.get((page - 1) * 3 + i));
                     }
@@ -135,7 +135,7 @@ public class AdminController extends HttpServlet {
             } else {
                 temp = null;
             }
-            noOfRecords = new AccountDAOImpl().getNoOfRecordsPost(condition + setRole);
+            noOfRecords = accountDAO.getNoOfRecordsPost(condition + setRole);
             noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
             request.setAttribute("noOfPages", noOfPages);
             request.setAttribute("currentPage", page);

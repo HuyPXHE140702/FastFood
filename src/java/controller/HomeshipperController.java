@@ -70,13 +70,27 @@ public class HomeshipperController extends HttpServlet {
             String checker = request.getParameter("checker");
             List<Order> temp = new ArrayList<>();
             if (orderList.size() > 0) {
-                for (int i = 0; i < 3; i++) {
-                    if ((page - 1) * 3 + i < orderList.size()) {
-                        temp.add(orderList.get((page - 1) * 3 + i));
+                if (page == 1) {
+                    for (int i = 0; i < recordsPerPage; i++) {
+                        temp.add(orderList.get((page - 1) * recordsPerPage + i));
+                    }
+                } else if (page > 1) {
+                    int remainSize = orderList.size() - recordsPerPage * (page - 1);
+                    if (remainSize >= 0 && remainSize <= recordsPerPage) {
+                        for (int i = 0; i < remainSize; i++) {
+                            temp.add(orderList.get((page - 1) * recordsPerPage + i));
+                        }
+                    } else if (remainSize >= 0 && remainSize > recordsPerPage) {
+                        for (int i = 0; i < recordsPerPage; i++) {
+                            temp.add(orderList.get((page - 1) * recordsPerPage + i));
+                        }
                     }
                 }
             }
-            page = 1;
+            if (orderList.size() <= 0) {
+                temp = null;
+            }
+            //page = 1;
             request.setAttribute("listOrder", temp);
             request.setAttribute("noOfPages", noOfPages);
             request.setAttribute("currentPage", page);
@@ -138,10 +152,17 @@ public class HomeshipperController extends HttpServlet {
                 //orderList = orderDAO.getOrderByDateToDate(dateFrom, dateTo, condition, (page - 1) * recordsPerPage);
                 //noOfRecords = orderDAO.getNoOfRecordsBetweenDate(condition, dateFrom, dateTo);
             }
+
             List<Order> temp = new ArrayList<>();
             if (orderList.size() > 0) {
-                for (int i = 0; i < recordsPerPage; i++) {
-                    temp.add(orderList.get((page - 1) * recordsPerPage + i));
+                if (orderList.size() <= recordsPerPage) {
+                    for (int i = 0; i < orderList.size(); i++) {
+                        temp.add(orderList.get((page - 1) * recordsPerPage + i));
+                    }
+                } else if (orderList.size() > recordsPerPage) {
+                    for (int i = 0; i < recordsPerPage; i++) {
+                        temp.add(orderList.get((page - 1) * recordsPerPage + i));
+                    }
                 }
             } else {
                 temp = null;
