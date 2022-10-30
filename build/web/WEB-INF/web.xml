@@ -85,12 +85,12 @@
         <servlet-class>controller.AddToCartController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ShipperAcceptedOrder</servlet-name>
-        <servlet-class>controller.ShipperAcceptedOrder</servlet-class>
+        <servlet-name>ShipperAcceptedOrderController</servlet-name>
+        <servlet-class>controller.ShipperAcceptedOrderController</servlet-class>
     </servlet>
     
     <servlet-mapping>
-        <servlet-name>ShipperAcceptedOrder</servlet-name>
+        <servlet-name>ShipperAcceptedOrderController</servlet-name>
         <url-pattern>/Shipperacceptorder</url-pattern>
     </servlet-mapping>
     <servlet-mapping>

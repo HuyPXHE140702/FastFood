@@ -64,26 +64,38 @@
                 <br>
                 <br>
 
-                <h1>List</h1>
+                <h1>List Accepted Order</h1>
 
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Name Customer</th>
-                            <th scope="col">Address</th>
-                            <th scope="col">Phone</th>
-                            <th scope="col">Total Price</th>
-                            <!--                            <th scope="col">ShipperID</th>-->
-                            <!--                            <th scope="col">Money</th>-->
-                            <th scope="col">Status</th>
-                            <!--                            <th scope="col">ShipperID</th>-->
-                            <!--                            <th scope="col">Money</th>-->
-                        </tr>
-                    </thead>
-                    <tbody>
+                <form action="Shipperacceptorder" method="POST">
+                    <input type="hidden" name="accountid" value="${sessionScope.acc.id}">
+                    <input type="text" id="myInput" name ="customerName" placeholder="Search customer names.." title="Type in a name" value="${nameSearch}">
+                    <select name="roles" id="cars">
+                        <option value="all" <c:if test="${roleSelect == 'all'}"> selected </c:if>>All orders</option>
+                        <option value="newest"<c:if test="${roleSelect == 'newest'}"> selected </c:if>>Newest Date</option>
+                        <option value="priceAsc"<c:if test="${roleSelect == 'priceAsc'}"> selected </c:if>>Price Ascending</option>
+                        <option value="priceDes"<c:if test="${roleSelect == 'priceDes'}"> selected </c:if>>Price Descending</option>
+                        </select>
+                        <input type="submit" value="Search">
+                    </form>
+                    </br>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name Customer</th>
+                                <th scope="col">Address</th>
+                                <th scope="col">Phone</th>
+                                <th scope="col">Total Price</th>
+                                <!--                            <th scope="col">ShipperID</th>-->
+                                <!--                            <th scope="col">Money</th>-->
+                                <th scope="col">Status</th>
+                                <!--                            <th scope="col">ShipperID</th>-->
+                                <!--                            <th scope="col">Money</th>-->
+                            </tr>
+                        </thead>
+                        <tbody>
 
-                        <c:forEach items="${list}" var="l">
+                        <c:forEach items="${listOrder}" var="l">
                             <tr>
                                 <th hidden scope="row">${l.orderid}</th>
                                 <th scope="row"><c:set var="count" value="${count+1}"></c:set>${count}</th>

@@ -446,13 +446,49 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
         return orderList;
     }
 
+    @Override
     public List<Order> DisplayOrderByShipperID(int accountID) throws Exception {
         List<Order> orderList = new ArrayList<>();
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
-            String sql = "select * from orders where ShipperID = ? and status = 1";
+            String sql = "select * from Orders where ShipperID = (select ShipperID from Shipper where AccountID = ?)";
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, accountID);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                orderList.add(new Order(resultSet.getInt("OrderID"),
+                        resultSet.getInt("account_id"),
+                        resultSet.getString("Name"),
+                        resultSet.getString("Phone"),
+                        resultSet.getString("Address"),
+                        resultSet.getFloat("TotalPrice"),
+                        resultSet.getInt("SellerID"),
+                        resultSet.getInt("ShipperID"),
+                        resultSet.getString("created_date"),
+                        resultSet.getBoolean("status")));
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connection);
+        }
+        return orderList;
+    }
+
+    @Override
+    public List<Order> ViewAccpectedOrder(int accountID, String condition) throws Exception {
+        List<Order> orderList = new ArrayList<>();
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            String sql = "select * from Orders where ShipperID = (select ShipperID from Shipper where AccountID = ?) "
+                    + condition;
             connection = getConnection();
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, accountID);

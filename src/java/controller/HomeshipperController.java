@@ -14,7 +14,6 @@ import dao.OrderDAO;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -67,7 +66,6 @@ public class HomeshipperController extends HttpServlet {
             if (request.getParameter("page") != null) {
                 page = Integer.parseInt(request.getParameter("page"));
             }
-            String checker = request.getParameter("checker");
             List<Order> temp = new ArrayList<>();
             if (orderList.size() > 0) {
                 if (page == 1) {
@@ -87,10 +85,6 @@ public class HomeshipperController extends HttpServlet {
                     }
                 }
             }
-            if (orderList.size() <= 0) {
-                temp = null;
-            }
-            //page = 1;
             request.setAttribute("listOrder", temp);
             request.setAttribute("noOfPages", noOfPages);
             request.setAttribute("currentPage", page);

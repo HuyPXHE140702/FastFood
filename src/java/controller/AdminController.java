@@ -84,9 +84,6 @@ public class AdminController extends HttpServlet {
                     }
                 }
             }
-            if (accountList.size() <= 0) {
-                temp = null;
-            }
             request.setAttribute("listAccounts", temp);
             request.setAttribute("noOfPages", noOfPages);
             request.setAttribute("currentPage", page);
