@@ -97,7 +97,6 @@ public class SellerDAOImpl extends BaseDAOImpl implements SellerDAO {
             resultSet.getInt("AccountID"),
             resultSet.getInt("Status"));
       }
-
     } catch (Exception e) {
       throw e;
     } finally {

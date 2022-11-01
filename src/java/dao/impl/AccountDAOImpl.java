@@ -43,7 +43,7 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
-
+ 
         try {
             String sql = "select *from Account ";
             connection = getConnection();
@@ -387,7 +387,7 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
             preparedStatement.setInt(1, id);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
-                return resultSet.getString(1);
+                return resultSet.getString("Username");
             }
 
         } catch (Exception e) {

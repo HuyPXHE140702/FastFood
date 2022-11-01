@@ -1,7 +1,11 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright(C) 2005, FPT University
+ * Java MVC:
+ *  Fast Food Shop
+ *
+ * Record of change:
+ * DATE            Version             AUTHOR                   DESCRIPTION
+ * 2022-10-20      1.0                 NamVNHE140527            First Implement
  */
 package dao.impl;
 
@@ -15,14 +19,11 @@ import model.OrderDetail;
 import java.util.List;
 import java.util.ArrayList;
 
-/**
- *
- * @author ACER
- */
 public class OrderDetailDAOImpl extends dao.impl.BaseDAOImpl implements OrderDetailDAO {
 
     /**
      * save order bill into orderDetail table
+     *
      * @param orderId
      * @param carts
      */
@@ -52,7 +53,7 @@ public class OrderDetailDAOImpl extends dao.impl.BaseDAOImpl implements OrderDet
                 preparedStatement.setFloat(4, cart.getProduct().getUnitprice());
                 preparedStatement.setInt(5, cart.getQuantity());
                 preparedStatement.executeUpdate();
-                
+
             }
         } catch (Exception ex) {
         } finally {
@@ -63,6 +64,12 @@ public class OrderDetailDAOImpl extends dao.impl.BaseDAOImpl implements OrderDet
 
     }
 
+    /**
+     * get list of order by from a account by accountId
+     *
+     * @param id
+     * @return
+     */
     @Override
     public List<OrderDetail> getOrderDetailByAccountID(int id) {
         List<OrderDetail> list = new ArrayList<>();
@@ -76,12 +83,12 @@ public class OrderDetailDAOImpl extends dao.impl.BaseDAOImpl implements OrderDet
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 list.add(new OrderDetail(
-                        resultSet.getInt(1),
-                        resultSet.getInt(2),
-                        resultSet.getString(3),
-                        resultSet.getString(4),
-                        resultSet.getFloat(5),
-                        resultSet.getInt(6)));
+                        resultSet.getInt("ID"),
+                        resultSet.getInt("OrderID"),
+                        resultSet.getString("NameFood"),
+                        resultSet.getString("ImageFood"),
+                        resultSet.getFloat("PriceFood"),
+                        resultSet.getInt("Quantity")));
             }
         } catch (Exception ex) {
         } finally {
@@ -92,6 +99,12 @@ public class OrderDetailDAOImpl extends dao.impl.BaseDAOImpl implements OrderDet
         return list;
     }
 
+    /**
+     * get list of a order by orderId
+     *
+     * @param id
+     * @return
+     */
     @Override
     public List<OrderDetail> getOrderDetailByOrderID(int id) {
         List<OrderDetail> list = new ArrayList<>();
@@ -100,17 +113,17 @@ public class OrderDetailDAOImpl extends dao.impl.BaseDAOImpl implements OrderDet
         ResultSet resultSet = null;
         try {
             String sql = "select * from OrderDetail where  OrderID = " + id;
-             connection = getConnection();
+            connection = getConnection();
             preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 list.add(new OrderDetail(
-                        resultSet.getInt(1),
-                        resultSet.getInt(2),
-                        resultSet.getString(3),
-                        resultSet.getString(4),
-                        resultSet.getFloat(5),
-                        resultSet.getInt(6)));
+                        resultSet.getInt("ID"),
+                        resultSet.getInt("OrderID"),
+                        resultSet.getString("NameFood"),
+                        resultSet.getString("ImageFood"),
+                        resultSet.getFloat("PriceFood"),
+                        resultSet.getInt("Quantity")));
             }
         } catch (Exception e) {
             System.out.println(e);

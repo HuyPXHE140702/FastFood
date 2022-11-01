@@ -275,10 +275,9 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
         return orderList;
     }
 
-    /**
+    /*
      * Create a record and insert into Order table in Database<br>
      * The result is type of integer<br>
-     *
      *
      * @param order
      * @param preparedStatement execute query to Database
