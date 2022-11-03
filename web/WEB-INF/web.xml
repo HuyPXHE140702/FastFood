@@ -17,6 +17,10 @@
         <servlet-class>controller.HomeController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>CateContro</servlet-name>
+        <servlet-class>controller.CateContro</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>Admin</servlet-name>
         <servlet-class>controller.AdminController</servlet-class>
     </servlet>
@@ -131,6 +135,10 @@
     <servlet-mapping>
         <servlet-name>Admin</servlet-name>
         <url-pattern>/admin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CateContro</servlet-name>
+        <url-pattern>/CateContro</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Homeshipper</servlet-name>

@@ -9,8 +9,10 @@ import dao.FoodDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 import model.Food;
 
 /**
@@ -88,6 +90,35 @@ public class FoodDAOImpl extends BaseDAOImpl implements FoodDAO {
         return list;
     }
 
+    public Vector<Food> SearchByCategory(int categoryID) throws Exception {
+        Vector<Food> vector = new Vector<Food>();
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            String sql = "select * from Foods where CategoryID = '" + categoryID + "'";            
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement(sql);     
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int FoodID = resultSet.getInt(1);
+                String FoodName = resultSet.getString(2);
+                int CategoryID = resultSet.getInt(3);
+                String Image = resultSet.getString(4);
+                int Quantity = resultSet.getInt(5);
+                float UnitPrice = resultSet.getFloat(6);
+                String Description = resultSet.getString(7);
+                boolean Status = resultSet.getBoolean(8);
+                String DateCreated = resultSet.getString(9);
+                Food food = new Food(FoodID, FoodName, CategoryID, Image, Quantity, UnitPrice, Description, Status, DateCreated);
+                vector.add(food);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return vector;
+    }
+
     @Override
     public Food getFoodById(int foodid) throws Exception {
         Connection connection = null;
@@ -134,7 +165,43 @@ public class FoodDAOImpl extends BaseDAOImpl implements FoodDAO {
             String sql = "select * from Foods order by CategoryID offset ? row fetch next 9 rows only";
             connection = getConnection();
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, (index - 1) * 9); 
+            preparedStatement.setInt(1, (index - 1) * 9);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int FoodID = resultSet.getInt(1);
+                String FoodName = resultSet.getString(2);
+                int CategoryID = resultSet.getInt(3);
+                String Image = resultSet.getString(4);
+                int Quantity = resultSet.getInt(5);
+                float UnitPrice = resultSet.getFloat(6);
+                String Description = resultSet.getString(7);
+                boolean Status = resultSet.getBoolean(8);
+                String DateCreated = resultSet.getString(9);
+                Food food = new Food(FoodID, FoodName, CategoryID, Image, Quantity, UnitPrice, Description, Status, DateCreated);
+                list.add(food);
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connection);
+        }
+        return list;
+    }
+    
+    
+    public List<Food> getProductwithpagging1(int index, int categoryID) throws Exception {
+        List<Food> list = new ArrayList<Food>();
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            String sql = "select * from Foods where CategoryID = '"+categoryID+"' order by CategoryID offset ? row fetch next 9 rows only";
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, (index - 1) * 6);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int FoodID = resultSet.getInt(1);
@@ -159,30 +226,31 @@ public class FoodDAOImpl extends BaseDAOImpl implements FoodDAO {
         return list;
     }
 
-      /**
-   * Get a number of records of Food table from Database<br>
-   * The result is type of Integer<br>
-   *
-   * @param baseDAO           handle connection from Database
-   * @param preparedStatement execute query to Database
-   * @param resultSet         get data from Database
-   * @param accountID         get id of delete account
-   * @throws ServletException if a servlet-specific error occurs
-   * @throws IOException      if an I/O error occurs
-   * @throws SQLException     if an SQL error occurs
-   */
-    @Override 
+
+    /**
+     * Get a number of records of Food table from Database<br>
+     * The result is type of Integer<br>
+     *
+     * @param baseDAO handle connection from Database
+     * @param preparedStatement execute query to Database
+     * @param resultSet get data from Database
+     * @param accountID get id of delete account
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     * @throws SQLException if an SQL error occurs
+     */
+    @Override
     public List<Food> getProductWithPaggingByName(int index, String name) throws Exception {
-       
+
         List<Food> list = new ArrayList<Food>();
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
-            String sql = "select * from Foods where FoodName like '%"+name+"%' order by FoodName offset ? row fetch next 9 rows only";
+            String sql = "select * from Foods where FoodName like '%" + name + "%' order by FoodName offset ? row fetch next 9 rows only";
             connection = getConnection();
             preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, (index - 1) * 6); 
+            preparedStatement.setInt(1, (index - 1) * 6);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int FoodID = resultSet.getInt(1);
@@ -199,7 +267,7 @@ public class FoodDAOImpl extends BaseDAOImpl implements FoodDAO {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             closeResultSet(resultSet);
             closePreparedStatement(preparedStatement);
             closeConnection(connection);
@@ -227,4 +295,5 @@ public class FoodDAOImpl extends BaseDAOImpl implements FoodDAO {
         return super.getConnection(); //To change body of generated methods, choose Tools | Templates.
     }
 
+    
 }

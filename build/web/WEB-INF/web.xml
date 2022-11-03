@@ -17,6 +17,10 @@
         <servlet-class>controller.HomeController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>CateContro</servlet-name>
+        <servlet-class>controller.CateContro</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>Admin</servlet-name>
         <servlet-class>controller.AdminController</servlet-class>
     </servlet>
@@ -59,6 +63,10 @@
     <servlet>
         <servlet-name>ViewDetailFood</servlet-name>
         <servlet-class>controller.ViewDetailFoodController</servlet-class>
+    </servlet>
+     <servlet>
+        <servlet-name>InsertSeller</servlet-name>
+        <servlet-class>controller.InsertSeller</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DeleteSeller</servlet-name>
@@ -129,6 +137,10 @@
         <url-pattern>/admin</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>CateContro</servlet-name>
+        <url-pattern>/CateContro</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>Homeshipper</servlet-name>
         <url-pattern>/homeshipper</url-pattern>
     </servlet-mapping>
@@ -159,6 +171,10 @@
     <servlet-mapping>
         <servlet-name>DeleteSeller</servlet-name>
         <url-pattern>/delete-seller</url-pattern>
+    </servlet-mapping>
+     <servlet-mapping>
+        <servlet-name>InsertSeller</servlet-name>
+        <url-pattern>/insert-seller</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>EditAccount</servlet-name>
