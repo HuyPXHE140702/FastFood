@@ -31,11 +31,10 @@ import model.Account;
  */
 public class AdminController extends HttpServlet {
 
-    private List<Account> accountList = new ArrayList<>();
-    private int noOfRecords = 0;
-    private int noOfPages = 0;
     private String name = "";
     private String role = "";
+    String setRole = "";
+    String condition = "WHERE Displayname like '%" + name.trim() + "%' ";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -65,10 +64,20 @@ public class AdminController extends HttpServlet {
             }
             //get all account with paging
             List<Account> temp = new ArrayList<>();
+            AccountDAO accountDAO = new AccountDAOImpl();
+            List<Account> accountList = new ArrayList<>();
+            //get all account with paging and name contain
+            accountList = accountDAO.getAccountByNamePaging(name.trim(), setRole);
             if (accountList.size() > 0) {
                 if (page == 1) {
-                    for (int i = 0; i < recordsPerPage; i++) {
-                        temp.add(accountList.get((page - 1) * recordsPerPage + i));
+                    if (accountList.size() <= recordsPerPage) {
+                        for (int i = 0; i < accountList.size(); i++) {
+                            temp.add(accountList.get((page - 1) * recordsPerPage + i));
+                        }
+                    } else if (accountList.size() > recordsPerPage) {
+                        for (int i = 0; i < recordsPerPage; i++) {
+                            temp.add(accountList.get((page - 1) * recordsPerPage + i));
+                        }
                     }
                 } else if (page > 1) {
                     int remainSize = accountList.size() - recordsPerPage * (page - 1);
@@ -83,6 +92,8 @@ public class AdminController extends HttpServlet {
                     }
                 }
             }
+            int noOfRecords = accountDAO.getNoOfRecordsPost(condition + setRole);
+            int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
             request.setAttribute("listAccounts", temp);
             request.setAttribute("noOfPages", noOfPages);
             request.setAttribute("currentPage", page);
@@ -119,8 +130,7 @@ public class AdminController extends HttpServlet {
             String name = request.getParameter("Displayname");
             //get role for sql purpose
             String role = (String) request.getParameter("roles");
-            String setRole = "";
-            String condition = "WHERE Displayname like '%" + name.trim() + "%' ";
+
             if (role.equalsIgnoreCase("all")) {
                 setRole = "";
             } else if (role.equalsIgnoreCase("admin")) {
@@ -133,24 +143,38 @@ public class AdminController extends HttpServlet {
                 setRole = "and isShipper = 1";
             }
             AccountDAO accountDAO = new AccountDAOImpl();
+            List<Account> accountList = new ArrayList<>();
             //get all account with paging and name contain
             accountList = accountDAO.getAccountByNamePaging(name.trim(), setRole);
             List<Account> temp = new ArrayList<>();
             if (accountList.size() > 0) {
-                if (accountList.size() <= recordsPerPage) {
-                    for (int i = 0; i < accountList.size(); i++) {
-                        temp.add(accountList.get((page - 1) * recordsPerPage + i));
+                if (page == 1) {
+                    if (accountList.size() <= recordsPerPage) {
+                        for (int i = 0; i < accountList.size(); i++) {
+                            temp.add(accountList.get((page - 1) * recordsPerPage + i));
+                        }
+                    } else if (accountList.size() > recordsPerPage) {
+                        for (int i = 0; i < recordsPerPage; i++) {
+                            temp.add(accountList.get((page - 1) * recordsPerPage + i));
+                        }
                     }
-                } else if (accountList.size() > recordsPerPage) {
-                    for (int i = 0; i < recordsPerPage; i++) {
-                        temp.add(accountList.get((page - 1) * recordsPerPage + i));
+                } else if (page > 1) {
+                    int remainSize = accountList.size() - recordsPerPage * (page - 1);
+                    if (remainSize >= 0 && remainSize <= recordsPerPage) {
+                        for (int i = 0; i < remainSize; i++) {
+                            temp.add(accountList.get((page - 1) * recordsPerPage + i));
+                        }
+                    } else if (remainSize >= 0 && remainSize > recordsPerPage) {
+                        for (int i = 0; i < recordsPerPage; i++) {
+                            temp.add(accountList.get((page - 1) * recordsPerPage + i));
+                        }
                     }
                 }
             } else {
                 temp = null;
             }
-            noOfRecords = accountDAO.getNoOfRecordsPost(condition + setRole);
-            noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+            int noOfRecords = accountDAO.getNoOfRecordsPost(condition + setRole);
+            int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
             request.setAttribute("noOfPages", noOfPages);
             request.setAttribute("currentPage", page);
             request.setAttribute("listAccounts", temp);
