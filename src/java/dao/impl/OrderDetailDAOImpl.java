@@ -99,7 +99,7 @@ public class OrderDetailDAOImpl extends dao.impl.BaseDAOImpl implements OrderDet
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
-            String sql = "select * from OrderDetail where  OrderID = " + id;
+            String sql = "select * from OrderDetail where OrderID = " + id;
              connection = getConnection();
             preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();

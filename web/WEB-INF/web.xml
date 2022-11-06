@@ -64,7 +64,7 @@
         <servlet-name>ViewDetailFood</servlet-name>
         <servlet-class>controller.ViewDetailFoodController</servlet-class>
     </servlet>
-     <servlet>
+    <servlet>
         <servlet-name>InsertSeller</servlet-name>
         <servlet-class>controller.InsertSeller</servlet-class>
     </servlet>
@@ -111,6 +111,18 @@
     <servlet>
         <servlet-name>ViewBillController</servlet-name>
         <servlet-class>controller.ViewBillController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewBillByShipperController</servlet-name>
+        <servlet-class>controller.ViewBillByShipperController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AcceptOrderShipperController</servlet-name>
+        <servlet-class>controller.AcceptOrderShipperController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShippingSuccessController</servlet-name>
+        <servlet-class>controller.ShippingSuccessController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ShipperAcceptedOrderController</servlet-name>
@@ -172,7 +184,7 @@
         <servlet-name>DeleteSeller</servlet-name>
         <url-pattern>/delete-seller</url-pattern>
     </servlet-mapping>
-     <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>InsertSeller</servlet-name>
         <url-pattern>/insert-seller</url-pattern>
     </servlet-mapping>
@@ -223,6 +235,18 @@
     <servlet-mapping>
         <servlet-name>ViewBillController</servlet-name>
         <url-pattern>/viewBill</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewBillByShipperController</servlet-name>
+        <url-pattern>/viewBillByShipper</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AcceptOrderShipperController</servlet-name>
+        <url-pattern>/AcceptOrderShipper</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShippingSuccessController</servlet-name>
+        <url-pattern>/dedeliverymoney</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

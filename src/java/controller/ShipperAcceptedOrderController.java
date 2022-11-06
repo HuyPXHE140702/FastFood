@@ -7,6 +7,8 @@ package controller;
 
 import dao.impl.OrderDAOImpl;
 import dao.OrderDAO;
+import dao.ShipperDAO;
+import dao.impl.ShipperDAOImpl;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +19,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Order;
+import model.Shipper;
 
 /**
  *
@@ -24,11 +27,10 @@ import model.Order;
  */
 public class ShipperAcceptedOrderController extends HttpServlet {
 
-    private List<Order> orderList = new ArrayList<>();
-    private int noOfRecords = 0;
-    private int noOfPages = 0;
     private String name = "";
     private String role = "";
+    String condition = "and Name like '%" + name.trim() + "%' ";
+    String sortBy = "";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -62,11 +64,21 @@ public class ShipperAcceptedOrderController extends HttpServlet {
             if (request.getParameter("page") != null) {
                 page = Integer.parseInt(request.getParameter("page"));
             }
+            OrderDAO orderDAOImpl = new OrderDAOImpl();
+            int accountId = Integer.parseInt(request.getParameter("accountid"));
             List<Order> temp = new ArrayList<>();
+            List<Order> orderList = new ArrayList<>();
+            orderList = orderDAOImpl.ViewAccpectedOrder(accountId, sortBy);
             if (orderList.size() > 0) {
                 if (page == 1) {
-                    for (int i = 0; i < recordsPerPage; i++) {
-                        temp.add(orderList.get((page - 1) * recordsPerPage + i));
+                    if (orderList.size() <= recordsPerPage) {
+                        for (int i = 0; i < orderList.size(); i++) {
+                            temp.add(orderList.get((page - 1) * recordsPerPage + i));
+                        }
+                    } else if (orderList.size() > recordsPerPage) {
+                        for (int i = 0; i < recordsPerPage; i++) {
+                            temp.add(orderList.get((page - 1) * recordsPerPage + i));
+                        }
                     }
                 } else if (page > 1) {
                     int remainSize = orderList.size() - recordsPerPage * (page - 1);
@@ -81,14 +93,16 @@ public class ShipperAcceptedOrderController extends HttpServlet {
                     }
                 }
             }
-            if (orderList.size() <= 0) {
-                temp = null;
-            }
+            int noOfRecords = orderList.size();
+            int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+            ShipperDAO shipperDAOImpl = new ShipperDAOImpl();
+            Shipper shipper = shipperDAOImpl.getShipperByAccountID(accountId);
             request.setAttribute("listOrder", temp);
             request.setAttribute("noOfPages", noOfPages);
             request.setAttribute("currentPage", page);
             request.setAttribute("currentPage", name);
             request.setAttribute("roleSelect", role);
+            request.setAttribute("shipper", shipper);
             request.getRequestDispatcher("shipperacceptorder.jsp").forward(request, response);
         } catch (NumberFormatException | ServletException | IOException | IllegalStateException e) {
             e.printStackTrace();
@@ -119,8 +133,7 @@ public class ShipperAcceptedOrderController extends HttpServlet {
             int accountId = Integer.parseInt(request.getParameter("accountid"));
             String name = request.getParameter("customerName");
             String role = (String) request.getParameter("roles");
-            String sortBy = "";
-            String condition = "and Name like '%" + name.trim() + "%' ";
+
             if (role.equalsIgnoreCase("all")) {
                 sortBy = "";
             } else if (role.equalsIgnoreCase("newest")) {
@@ -130,14 +143,21 @@ public class ShipperAcceptedOrderController extends HttpServlet {
             } else if (role.equalsIgnoreCase("priceDes")) {
                 sortBy = "ORDER BY TotalPrice Desc";
             }
-
+            List<Order> orderList = new ArrayList<>();
             orderList = orderDAOImpl.ViewAccpectedOrder(accountId, sortBy);
-
+            ShipperDAO shipperDAOImpl = new ShipperDAOImpl();
+            Shipper shipper = shipperDAOImpl.getShipperByAccountID(accountId);
             List<Order> temp = new ArrayList<>();
             if (orderList.size() > 0) {
                 if (page == 1) {
-                    for (int i = 0; i < recordsPerPage; i++) {
-                        temp.add(orderList.get((page - 1) * recordsPerPage + i));
+                    if (orderList.size() <= recordsPerPage) {
+                        for (int i = 0; i < orderList.size(); i++) {
+                            temp.add(orderList.get((page - 1) * recordsPerPage + i));
+                        }
+                    } else if (orderList.size() > recordsPerPage) {
+                        for (int i = 0; i < recordsPerPage; i++) {
+                            temp.add(orderList.get((page - 1) * recordsPerPage + i));
+                        }
                     }
                 } else if (page > 1) {
                     int remainSize = orderList.size() - recordsPerPage * (page - 1);
@@ -154,13 +174,15 @@ public class ShipperAcceptedOrderController extends HttpServlet {
             } else {
                 temp = null;
             }
-            noOfRecords = orderList.size();
-            noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+            int noOfRecords = orderList.size();
+            int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
             request.setAttribute("noOfPages", noOfPages);
             request.setAttribute("currentPage", page);
             request.setAttribute("listOrder", temp);
             request.setAttribute("currentPage", name);
             request.setAttribute("roleSelect", role);
+            request.setAttribute("shipper", shipper);
+            //request.setAttribute("accountid", accountId);
             request.getRequestDispatcher("shipperacceptorder.jsp").forward(request, response);
         } catch (NumberFormatException | ServletException | IOException | IllegalStateException e) {
             e.printStackTrace();

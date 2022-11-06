@@ -544,7 +544,7 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
-            String sql = "select * from Orders where ShipperID = (select ShipperID from Shipper where AccountID = ?) "
+            String sql = "select * from Orders where ShipperID = (select ShipperID from Shipper where AccountID = ? and Orders.status = 1) "
                     + condition;
             connection = getConnection();
             preparedStatement = connection.prepareStatement(sql);
@@ -592,4 +592,76 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
         return super.getConnection(); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public void AddShipperIDtoOrder(int orderid, int accountid) {
+        List<Order> orderList = new ArrayList<>();
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            String sql = "Update Orders set ShipperID = (select ShipperID from Shipper where AccountID = ?) where OrderID = ?";
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement(sql);
+
+//            System.out.println(orderid + accountid);
+            preparedStatement.setInt(1, accountid);
+            preparedStatement.setInt(2, orderid);
+            preparedStatement.executeUpdate();
+//            while (rs.next()) {
+//                orderList.add(new Order(rs.getInt(1),
+//                        rs.getInt(2),
+//                        rs.getString(3),
+//                        rs.getString(4),
+//                        rs.getString(5),
+//                        rs.getFloat(6),
+//                        rs.getInt(7),
+//                        rs.getInt(8),
+//                        rs.getString(9),
+//                        rs.getBoolean(10)));
+//            }
+        } catch (Exception e) {
+        } finally {
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connection);
+        }
+    }
+
+    @Override
+    public float getTotalPriceByOrderId(int orderID) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            String sql = "  select TotalPrice from Orders where OrderID =?";
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, orderID);
+            resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                return resultSet.getInt(1);
+            }
+        } catch (Exception e) {
+        } finally {
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connection);
+        }
+        return 0;
+    }
+
+    @Override
+    public void UpdateStatusBackNull(int orderID) {
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            String sql = "update orders set status = 0 where OrderID = ?";
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, orderID);
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+        }
+    }
 }

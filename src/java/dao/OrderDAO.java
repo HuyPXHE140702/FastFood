@@ -39,4 +39,10 @@ public interface OrderDAO {
     public List<Order> DisplayOrderByShipperID(int accountID) throws Exception;
 
     public List<Order> ViewAccpectedOrder(int accountID, String condition) throws Exception;
+
+    public void AddShipperIDtoOrder(int orderid, int accountid);
+
+    public float getTotalPriceByOrderId(int orderID);
+
+    public void UpdateStatusBackNull(int orderID);
 }

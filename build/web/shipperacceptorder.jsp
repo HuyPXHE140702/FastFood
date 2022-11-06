@@ -65,7 +65,6 @@
                 <br>
 
                 <h1>List Accepted Order</h1>
-
                 <form action="Shipperacceptorder" method="POST">
                     <input type="hidden" name="accountid" value="${sessionScope.acc.id}">
                     <input type="text" id="noWhiteSpaceAtTheStart" name ="customerName" placeholder="Search customer names.." title="Type in a name" value="${nameSearch}">
@@ -88,7 +87,7 @@
                                 <th scope="col">Total Price</th>
                                 <!--                            <th scope="col">ShipperID</th>-->
                                 <!--                            <th scope="col">Money</th>-->
-                                <th scope="col">Status</th>
+                                <th scope="col">Shipping Status</th>
                                 <!--                            <th scope="col">ShipperID</th>-->
                                 <!--                            <th scope="col">Money</th>-->
                             </tr>
@@ -104,7 +103,7 @@
                                 <td>${l.phone}</td>                             
                                 <td>$${l.totalprice}</td>                             
                                 <td>
-                                    <a style="color: white" class="btn btn-success" href="dedeliverymoney?accountid=${sessionScope.acc.id}&orderid=${l.orderid}">Done</a>
+                                    <a style="color: white" class="btn btn-success" href="dedeliverymoney?accountid=${sessionScope.acc.id}&orderid=${l.orderid}">Success</a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -118,7 +117,7 @@
                                     <td>${i}</td>
                                 </c:when>
                                 <c:otherwise>
-                                    <td><a href="Shipperacceptorder?page=${i}">${i}</a></td>
+                                    <td><a href="Shipperacceptorder?page=${i}&accountid=${sessionScope.acc.id}">${i}</a></td>
                                     </c:otherwise>
                                 </c:choose>
                             </c:forEach>

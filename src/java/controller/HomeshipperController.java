@@ -32,11 +32,12 @@ import model.Order;
  */
 public class HomeshipperController extends HttpServlet {
 
-    private List<Order> orderList = new ArrayList<>();
-    private int noOfRecords = 0;
-    private int noOfPages = 0;
+    // private List<Order> orderList = new ArrayList<>();
+//    private int noOfRecords = 0;
+//    private int noOfPages = 0;
     private String dateFrom = "";
     private String dateTo = "";
+    String condition = "and created_date BETWEEN ? and ?";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -66,11 +67,20 @@ public class HomeshipperController extends HttpServlet {
             if (request.getParameter("page") != null) {
                 page = Integer.parseInt(request.getParameter("page"));
             }
+            OrderDAO orderDAO = new OrderDAOImpl();
             List<Order> temp = new ArrayList<>();
+            List<Order> orderList = new ArrayList<>();
+            orderList = orderDAO.getOrderByDateToDateNoOffset(dateFrom, dateTo, condition);
             if (orderList.size() > 0) {
                 if (page == 1) {
-                    for (int i = 0; i < recordsPerPage; i++) {
-                        temp.add(orderList.get((page - 1) * recordsPerPage + i));
+                    if (orderList.size() <= recordsPerPage) {
+                        for (int i = 0; i < orderList.size(); i++) {
+                            temp.add(orderList.get((page - 1) * recordsPerPage + i));
+                        }
+                    } else if (orderList.size() > recordsPerPage) {
+                        for (int i = 0; i < recordsPerPage; i++) {
+                            temp.add(orderList.get((page - 1) * recordsPerPage + i));
+                        }
                     }
                 } else if (page > 1) {
                     int remainSize = orderList.size() - recordsPerPage * (page - 1);
@@ -85,6 +95,8 @@ public class HomeshipperController extends HttpServlet {
                     }
                 }
             }
+            int noOfRecords = orderList.size();
+            int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
             request.setAttribute("listOrder", temp);
             request.setAttribute("noOfPages", noOfPages);
             request.setAttribute("currentPage", page);
@@ -123,46 +135,42 @@ public class HomeshipperController extends HttpServlet {
                 page = Integer.parseInt(request.getParameter("page"));
             }
             OrderDAO orderDAO = new OrderDAOImpl();
-            String condition = "and created_date BETWEEN ? and ?";
+
             //if search form empty
-            if (dateFrom.equals("") && dateTo.equals("")) {
-                orderList = orderDAO.getOrderNotAcceptByShipperID();
-                //orderList = orderDAO.viewAllOrders((page - 1) * recordsPerPage, recordsPerPage);
-                //noOfRecords = orderDAO.getNoOfRecords();
-                //if shipper do not choose start date
-            } else if (dateFrom.equals("")) {
-                condition = "and created_date <= ?";
-                orderList = orderDAO.getOrderByDateNoOffset(dateTo, condition);
-                //orderList = orderDAO.getOrderByDate(dateTo, condition, (page - 1) * recordsPerPage);
-                //noOfRecords = orderDAO.getNoOfRecordsOneDate(condition, dateTo);
-                //if shipper do not choose end date
-            } else if (dateTo.equals("")) {
-                condition = "and created_date >= ?";
-                orderList = orderDAO.getOrderByDateNoOffset(dateFrom, condition);
-                //orderList = orderDAO.getOrderByDate(dateFrom, condition, (page - 1) * recordsPerPage);
-                //noOfRecords = orderDAO.getNoOfRecordsOneDate(condition, dateFrom);
-            } else {
-                orderList = orderDAO.getOrderByDateToDateNoOffset(dateFrom, dateTo, condition);
-                //orderList = orderDAO.getOrderByDateToDate(dateFrom, dateTo, condition, (page - 1) * recordsPerPage);
-                //noOfRecords = orderDAO.getNoOfRecordsBetweenDate(condition, dateFrom, dateTo);
-            }
+            List<Order> orderList = new ArrayList<>();
+            orderList = orderDAO.getOrderByDateToDateNoOffset(dateFrom, dateTo, condition);
+            //orderList = orderDAO.getOrderByDateToDate(dateFrom, dateTo, condition, (page - 1) * recordsPerPage);
+            //noOfRecords = orderDAO.getNoOfRecordsBetweenDate(condition, dateFrom, dateTo);
 
             List<Order> temp = new ArrayList<>();
             if (orderList.size() > 0) {
-                if (orderList.size() <= recordsPerPage) {
-                    for (int i = 0; i < orderList.size(); i++) {
-                        temp.add(orderList.get((page - 1) * recordsPerPage + i));
+                if (page == 1) {
+                    if (orderList.size() <= recordsPerPage) {
+                        for (int i = 0; i < orderList.size(); i++) {
+                            temp.add(orderList.get((page - 1) * recordsPerPage + i));
+                        }
+                    } else if (orderList.size() > recordsPerPage) {
+                        for (int i = 0; i < recordsPerPage; i++) {
+                            temp.add(orderList.get((page - 1) * recordsPerPage + i));
+                        }
                     }
-                } else if (orderList.size() > recordsPerPage) {
-                    for (int i = 0; i < recordsPerPage; i++) {
-                        temp.add(orderList.get((page - 1) * recordsPerPage + i));
+                } else if (page > 1) {
+                    int remainSize = orderList.size() - recordsPerPage * (page - 1);
+                    if (remainSize >= 0 && remainSize <= recordsPerPage) {
+                        for (int i = 0; i < remainSize; i++) {
+                            temp.add(orderList.get((page - 1) * recordsPerPage + i));
+                        }
+                    } else if (remainSize >= 0 && remainSize > recordsPerPage) {
+                        for (int i = 0; i < recordsPerPage; i++) {
+                            temp.add(orderList.get((page - 1) * recordsPerPage + i));
+                        }
                     }
                 }
             } else {
                 temp = null;
             }
-            noOfRecords = orderList.size();
-            noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
+            int noOfRecords = orderList.size();
+            int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
             request.setAttribute("noOfPages", noOfPages);
             request.setAttribute("currentPage", page);
             request.setAttribute("listOrder", temp);
