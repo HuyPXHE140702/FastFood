@@ -18,7 +18,7 @@
     </servlet>
     <servlet>
         <servlet-name>CateContro</servlet-name>
-        <servlet-class>controller.CateContro</servlet-class>
+        <servlet-class>controller.PageCategoryController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Admin</servlet-name>
@@ -66,11 +66,11 @@
     </servlet>
     <servlet>
         <servlet-name>InsertSeller</servlet-name>
-        <servlet-class>controller.InsertSeller</servlet-class>
+        <servlet-class>controller.InsertSellerController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DeleteSeller</servlet-name>
-        <servlet-class>controller.DeleteSeller</servlet-class>
+        <servlet-class>controller.DeleteSellerController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>EditAccount</servlet-name>
@@ -123,6 +123,10 @@
     <servlet>
         <servlet-name>ShippingSuccessController</servlet-name>
         <servlet-class>controller.ShippingSuccessController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangePasswordController</servlet-name>
+        <servlet-class>controller.ChangePasswordController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ShipperAcceptedOrderController</servlet-name>
@@ -247,6 +251,10 @@
     <servlet-mapping>
         <servlet-name>ShippingSuccessController</servlet-name>
         <url-pattern>/dedeliverymoney</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangePasswordController</servlet-name>
+        <url-pattern>/change-pass</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

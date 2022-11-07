@@ -1,3 +1,12 @@
+/*
+* Copyright(C) 2005, FPT University
+* Java MVC:
+*  Fast Food Shop
+*
+* Record of change:
+* DATE            Version             AUTHOR                   DESCRIPTION
+* 2022-10-12      1.0                 NamVNHE140527            First Implement
+ */
 package controller;
 
 import java.io.IOException;
@@ -11,15 +20,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/*
-* Copyright(C) 2005, FPT University
-* Java MVC:
-*  Fast Food Shop
-*
-* Record of change:
-* DATE            Version             AUTHOR                   DESCRIPTION
-* 2022-10-12      1.0                 NamVNHE140527            First Implement
- */
 public class ViewCartsController extends HttpServlet {
 
     /**

@@ -108,7 +108,7 @@
                                     </script>
                                     <td>${C.value.product.unitprice*C.value.quantity}</td>
                                     <td>
-                                        <a href="delete-cart?foodid=${C.value.product.foodid}" class="btn btn-outline-danger "
+                                        <a href="delete-cart?foodid=${C.value.product.foodid}" onclick="return confirm('Are you sure you want to delete this item?');" class="btn btn-outline-danger "
                                            style="background-color: white; color: red"  >
                                             <i class="bi bi-trash"></i> Delete
                                         </a>

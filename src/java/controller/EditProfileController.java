@@ -1,13 +1,19 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+* Copyright(C) 2005, FPT University
+* Java MVC:
+*  Fast Food Shop
+*
+* Record of change:
+* DATE            Version             AUTHOR                   DESCRIPTION
+* 2022-10-12      1.0                 NamVNHE140527            First Implement
  */
 package controller;
 
 import dao.impl.AccountDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -43,7 +49,7 @@ public class EditProfileController extends HttpServlet {
             String url = "profile?id=" + id;
             request.getRequestDispatcher(url).forward(request, response);
         } catch (IOException | NumberFormatException | ServletException ex) {
-
+            Logger.getLogger(EditProfileController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

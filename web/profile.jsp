@@ -30,6 +30,7 @@
 
     </head>
     <body>
+
         <section style="background-color: #eee;">
             <div class="container py-5">
                 <div class="row">
@@ -52,6 +53,7 @@
                                 <h5 class="my-3">${profile.displayName}</h5>
                                 <div class="d-flex justify-content-center mb-2">
                                     <a href="#editprofile" data-toggle="modal"  class="btn btn-outline-primary ms-1">Edit Profile</a>
+                                    <a href="#change-pass" data-toggle="modal"  class="btn btn-outline-primary ms-1">Change Password</a>
                                 </div>
                             </div>
                         </div>
@@ -75,7 +77,6 @@
                                         <p  class="mb-0">Password</p>
                                     </div>
                                     <div  class="col-sm-9">
-
                                         <input type="password" value="${profile.password}" style="border: 0 ; background-color: white" disabled="">
                                     </div>
                                 </div>
@@ -99,13 +100,14 @@
                                     </div>
                                 </div>
                                 <hr>
+
                                 <div class="row">
                                     <div class="col-sm-3">
                                         <p class="mb-0">Role</p>
                                     </div>
                                     <c:if test="${profile.isAdmin == 1}">
                                         <div class="col-sm-9">
-                                            <p class="text-muted mb-0">Admin</p>
+                                            <p class="text-muted mb-0">Administrator</p>
                                         </div>
                                     </c:if>
                                     <c:if test="${profile.isCustomer == 1}">
@@ -139,6 +141,7 @@
                 </div>
             </div>
         </section>
+
         <!-- Edit profile -->
         <div id="editprofile" class="modal fade">
             <div class="modal-dialog">
@@ -146,33 +149,14 @@
                     <form action="edit-profile" method="post">
                         <div class="modal-header">						
                             <h4 class="modal-title">Edit Profile</h4>
-                            <h6 style="color: #be123c">${error}</h6>
                             <button style="background-color: white ; border: 0 ; font-weight: 700" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        </div>
-                        <script>
-                            function togglePassword() {
-                                var upass = document.getElementById('upass');
-                                var toggleBtn = document.getElementById('toggleBtn');
-
-                                toggleBtn.onclick = (() => {
-                                    if (upass.type === "password") {
-                                        upass.type = "text";
-
-                                        toggleBtn.classList.add("bi bi-eye-slash-fill");
-                                    } else {
-                                        upass.type = "password";
-                                        toggleBtn.classList.remove("bi bi-eye-slash-fill");
-
-                                    }
-                                });
-                            }
-                        </script>
+                        </div>                    
 
                         <div class="modal-body">	
                             <a hidden >
                                 <input value="${profile.id}" name="id" type="text" class="form-control" required>
                             </a>
-                            
+
                             <div class="form-group">
                                 <label>Name</label>
                                 <input maxlength="32" pattern="^[a-zA-Z]+(([',. -][a-zA-Z])?[a-zA-Z]*)*$" value="${profile.displayName}" name="name" type="text" class="form-control" required>
@@ -185,26 +169,129 @@
                                 <label>Address</label>
                                 <input maxlength="32" pattern="^[a-zA-Z]+((,?[',. -][a-zA-Z])?[a-zA-Z]*\.?)*$" value="${profile.address}" name="address" type="text" class="form-control" required>
                             </div>       
-                            <div class="form-group">
+                            <div class="form-group" hidden>
                                 <label>Password</label>
 
-                                <div class="row ">
+                                <div class="row " >
                                     <div class="col-sm-11"><input value="${profile.password}" class="form-control"   id="upass" type="password" name="userpass" required></div>
-                                    <div style="margin-left: -13px;margin-top: 8px" class="col-sm-1 "> <i  id="toggleBtn" onclick="togglePassword()"  class="fas fa-eye"></i></div>
+
+                                    <div style="margin-left: -13px;margin-top: 8px" class="col-sm-1 "> <i  id="toggleBtn" onclick="togglePassword('upass', 'toggleBtn')"  class="fas fa-eye"></i></div> 
+
                                 </div>
                             </div>
                         </div>
-                                    
+
                         <div class="modal-footer">
                             <input type="button" class="btn btn-default" style="background:#f5f5f5" data-dismiss="modal" value="Cancel">
-                            <input type="submit" class="btn btn-success" value="Edit">
+                            <input type="submit" class="btn btn-success" onclick="alert('Edit Profile Successfully')" value="Edit">
                         </div>
-                                    
+
                     </form>
                 </div>
             </div>
         </div>
         <!-- End edit profile -->
+
+        <!-- change password -->
+        <div id="change-pass" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form action="change-pass" method="post">
+                        <div class="modal-header">						
+                            <h4 class="modal-title">Change password</h4>
+                            <h6 style="color: #be123c">${error}</h6>
+                            <button style="background-color: white ; border: 0 ; font-weight: 700" type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>                      
+                        <script>
+                            function togglePassword(bypass, bytoggleBtn) {
+                                var password = document.getElementById(bypass);
+                                var toggleBtn = document.getElementById(bytoggleBtn);
+                                toggleBtn.onclick = (() => {
+                                    if (password.type === "text") {
+                                        password.type = "password";
+                                        toggleBtn.classList.remove("bi bi-eye-slash-fill");
+                                    } else {
+                                        password.type = "text";
+                                        toggleBtn.classList.add("bi bi-eye-slash-fill");
+                                    }
+                                });
+                            }
+
+                            function checkChange() {
+                                var oldpass = document.getElementById('oldpass');
+                                var upass = document.getElementById('upass');
+                                var newpass = document.getElementById('newpass');
+                                var confirmedpass = document.getElementById('confirmedpass');
+                                var changeBtn = document.getElementById('change');
+                                if (oldpass.value === upass.value) {
+                                    if (oldpass.value !== newpass.value) {
+                                        if (confirmedpass.value === newpass.value) {
+                                            alert('Change Password Successfully');
+                                            changeBtn.type = "submit";
+                                        } else {
+                                            alert('New password is not matched');
+                                        }
+                                    } else {
+                                        alert('New password must be different from Old password');
+                                    }
+                                } else {
+                                    alert('Old password is not matched');
+                                }
+                            }
+                        </script>
+
+                        <div class="modal-body">	
+                            <a hidden >
+                                <input value="${profile.id}" name="id" type="text" class="form-control" required>
+                            </a>
+                            <div class="form-group" hidden="">
+                                <label>Password</label>
+
+                                <div class="row " >
+                                    <div class="col-sm-11"><input value="${profile.password}" class="form-control"   id="upass" type="password" name="userpass" required></div>
+
+                                    <div style="margin-left: -13px;margin-top: 8px" class="col-sm-1 "> <i  id="toggleBtn" onclick="togglePassword('upass', 'toggleBtn')"  class="fas fa-eye"></i></div> 
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Old Password</label>
+                                <div class="row ">
+                                    <h6 style="color: #be123c">${error1}</h6>
+                                    <div class="col-sm-11"><input maxlength="32" minlength="3" pattern="[a-z0-9]+$" value="" class="form-control" id="oldpass" type="password" name="oldpass" required></div>
+                                    <div style="margin-left: -13px;margin-top: 8px" class="col-sm-1 "> <i  id="toggleBtn1" onclick="togglePassword('oldpass', 'toggleBtn1')"  class="fas fa-eye"></i></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>New Password</label>
+                                <div class="row ">
+                                    <h6 style="color: #be123c">${error2}</h6>
+                                    <div class="col-sm-11"><input maxlength="32" minlength="3" pattern="[a-z0-9]+$" value="1234" class="form-control" id="newpass" type="password" name="newpass" required></div>
+                                    <div style="margin-left: -13px;margin-top: 8px" class="col-sm-1 "> <i  id="toggleBtn2" onclick="togglePassword('newpass', 'toggleBtn2')"  class="fas fa-eye"></i></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Confirm Password</label>
+                                <div class="row ">
+                                    <div class="col-sm-11"><input maxlength="32" minlength="3" pattern="[a-z0-9]+$" value="1234" class="form-control" id="confirmedpass" type="password" name="confirmedpass" required></div>
+                                    <div style="margin-left: -13px;margin-top: 8px" class="col-sm-1 "> <i id="toggleBtn3" onclick="togglePassword('confirmedpass', 'toggleBtn3')"  class="fas fa-eye"></i></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <input type="button" class="btn btn-default" style="background:#f5f5f5" data-dismiss="modal" value="Cancel">
+
+                            <input id="change" type="button" onclick="checkChange()" class="btn btn-success" value="Change">
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- change password -->
+
+
         <!-- jQery -->
         <script src="js/jquery-3.4.1.min.js"></script>
         <!-- popper js -->

@@ -74,6 +74,13 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
     }
 
     // getAccountById
+
+    /**
+     *
+     * @param username
+     * @param password
+     * @return
+     */
     @Override
     public Account login(String username, String password) {
         String sql = "select *from Account where Username = ? and Password = ?";
@@ -111,6 +118,15 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         return null;
     }
 
+    /**
+     *
+     * @param username
+     * @param password
+     * @param displayName
+     * @param address
+     * @param phone
+     * @throws Exception
+     */
     @Override
     public void signup(String username, String password, String displayName, String address, String phone) throws Exception {
         String sql = "INSERT INTO [dbo].[Account]\n"
@@ -153,6 +169,11 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
 
     }
 
+    /**
+     *
+     * @param username
+     * @return
+     */
     @Override
     public Account checkAccountExist(String username) {
         String sql = "select *from Account where Username = ?";
@@ -188,6 +209,12 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         return null;
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     * @throws Exception
+     */
     @Override
     public Account getAccountByID(int id) throws Exception {
         String sql = "select *from Account where ID = ?";
@@ -223,6 +250,12 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         return null;
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     * @throws Exception
+     */
     @Override
     public Account deleteAccountByID(int id) throws Exception {
         String sql = "delete from Account where ID = ?";
@@ -258,6 +291,18 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         return null;
     }
 
+    /**
+     *
+     * @param username
+     * @param password
+     * @param displayName
+     * @param address
+     * @param phone
+     * @param isCustomer
+     * @param isShipper
+     * @param isSeller
+     * @throws Exception
+     */
     @Override
     public void addNewAccount(String username, String password, String displayName, String address, String phone, int isCustomer, int isShipper, int isSeller) throws Exception {
         String sql = "INSERT INTO [dbo].[Account]\n"
@@ -302,6 +347,18 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
 
     }
 
+    /**
+     *
+     * @param username
+     * @param password
+     * @param displayName
+     * @param address
+     * @param phone
+     * @param isCustomer
+     * @param isShipper
+     * @param isSeller
+     * @param id
+     */
     @Override
     public void editAccountById(String username, String password, String displayName, String address, String phone, int isCustomer, int isShipper, int isSeller, int id) {
         String sql = "UPDATE [dbo].[Account]\n"
@@ -343,6 +400,14 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
 
     }
 
+    /**
+     *
+     * @param password
+     * @param displayName
+     * @param address
+     * @param phone
+     * @param id
+     */
     @Override
     public void editProfileById(String password, String displayName, String address, String phone, int id) {
         String sql = "UPDATE [dbo].[Account]\n"
@@ -374,6 +439,44 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         }
     }
 
+    /**
+     *
+     * @param password
+     * @param id
+     * @throws Exception
+     */
+    @Override
+    public void changePasswordById(String password, int id) throws Exception {
+        String sql = "UPDATE [dbo].[Account]\n"
+                + "   SET [Password] =?\n"
+                + " WHERE  id=?";
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, password);
+            preparedStatement.setInt(2, id);
+            preparedStatement.executeUpdate();
+
+        } catch (Exception e) {
+        } finally {
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connection);
+        }
+    }
+    public static void main(String[] args) throws Exception {
+        AccountDAO accountDAO = new AccountDAOImpl();
+        accountDAO.changePasswordById("nambitest", 14);
+    }
+    /**
+     *
+     * @param id
+     * @return
+     */
     @Override
     public String getUsernameById(int id) {
         String sql = "select Username from Account where id = ?";
@@ -730,6 +833,13 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         return null;
     }
 
+    /**
+     *
+     * @param name
+     * @param role
+     * @return
+     * @throws Exception
+     */
     @Override
     public List<Account> getAccountByNamePaging(String name, String role) throws Exception {
         List<Account> accountList = new ArrayList<>();
@@ -783,29 +893,6 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
     @Override
     public Connection getConnection() throws Exception {
         return super.getConnection(); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public void editProfileById(String password, int id) throws Exception{
-        String sql = "UPDATE [dbo].[Account]\n"
-                + "   SET [Password] =?\n"
-                + " WHERE  id=?";
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-
-        try {
-            connection = getConnection();
-            preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, password);
-            preparedStatement.setInt(5, id);
-            preparedStatement.executeUpdate();
-
-        } catch (Exception e) {
-        } finally {
-            closeResultSet(resultSet);
-            closePreparedStatement(preparedStatement);
-            closeConnection(connection);
-        }
     }
 
 }
