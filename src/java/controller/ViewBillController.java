@@ -61,7 +61,7 @@ public class ViewBillController extends HttpServlet {
             request.setAttribute("idBill", idBill);
             request.setAttribute("totalAmout", totalAmout);
             request.setAttribute("list", list);
-            request.getRequestDispatcher("viewBill.jsp").forward(request, response);
+            request.getRequestDispatcher("viewOrder.jsp").forward(request, response);
         } catch (IOException | NumberFormatException | ServletException exception) {
         }
     }

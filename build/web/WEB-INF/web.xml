@@ -18,7 +18,7 @@
     </servlet>
     <servlet>
         <servlet-name>CateContro</servlet-name>
-        <servlet-class>controller.CateContro</servlet-class>
+        <servlet-class>controller.PageCategoryController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Admin</servlet-name>
@@ -66,11 +66,11 @@
     </servlet>
     <servlet>
         <servlet-name>InsertSeller</servlet-name>
-        <servlet-class>controller.InsertSeller</servlet-class>
+        <servlet-class>controller.InsertSellerController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>DeleteSeller</servlet-name>
-        <servlet-class>controller.DeleteSeller</servlet-class>
+        <servlet-class>controller.DeleteSellerController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>EditAccount</servlet-name>
