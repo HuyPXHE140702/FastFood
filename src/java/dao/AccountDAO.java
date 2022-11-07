@@ -32,6 +32,8 @@ public interface AccountDAO {
 
     public void editProfileById(String password, String displayName, String address, String phone, int id) throws Exception;
 
+    public void editProfileById(String password, int id) throws Exception;
+
     public String getUsernameById(int id) throws Exception;
 
     public List<Account> getAccountByName(String name, String role, int offset) throws Exception;
@@ -41,11 +43,12 @@ public interface AccountDAO {
     public int getNoOfRecords() throws Exception;
 
     public int getNoOfRecordsPost(String condition) throws Exception;
-    
+
     public Account deleteAcountByID(int accountID);
-    
+
     public Account updateStatusis0(int id);
 
     public Account updateStatusis1(int id);
+
     public List<Account> getAccountByNamePaging(String name, String role) throws Exception;
 }

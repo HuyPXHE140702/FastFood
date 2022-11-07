@@ -32,7 +32,6 @@ public class EditProfileController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
         try {
             int id = Integer.parseInt(request.getParameter("id"));
             String name = request.getParameter("name").trim();
@@ -43,7 +42,7 @@ public class EditProfileController extends HttpServlet {
             accdao.editProfileById(password.trim(), name.trim(), address, phone, id);
             String url = "profile?id=" + id;
             request.getRequestDispatcher(url).forward(request, response);
-        } catch (Exception ex) {
+        } catch (IOException | NumberFormatException | ServletException ex) {
 
         }
     }

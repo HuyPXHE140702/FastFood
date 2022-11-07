@@ -77,7 +77,7 @@ public class ViewProfileController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (Exception ex) {
-            Logger.getLogger(ViewProfileController.class.getName()).log(Level.SEVERE, null, ex);
+           Logger.getLogger(ViewProfileController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

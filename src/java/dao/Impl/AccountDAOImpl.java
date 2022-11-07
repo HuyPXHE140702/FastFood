@@ -43,7 +43,7 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
- 
+
         try {
             String sql = "select *from Account ";
             connection = getConnection();
@@ -629,7 +629,8 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         }
         return null;
     }
-     /**
+
+    /**
      * Get a number of records of Account table from Database<br>
      * The result is type of Integer<br>
      *
@@ -642,23 +643,23 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
      * @throws SQLException if an SQL error occurs
      */
     @Override
-    public Account updateStatusis1(int id)  {
+    public Account updateStatusis1(int id) {
         String sql = "update Account \n"
                 + "set [status] =1\n"
                 + "where Account.ID=?";
-                Connection connection = null;
-                PreparedStatement preparedStatement = null;
-                ResultSet resultSet = null;
-               
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
         try {
             connection = getConnection();
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, id);
             resultSet = preparedStatement.executeQuery();
-          
+
             while (resultSet.next()) {
                 return new Account(resultSet.getInt("ID"),
-                resultSet.getString("Username"),
+                        resultSet.getString("Username"),
                         resultSet.getString("Password"),
                         resultSet.getString("Displayname"),
                         resultSet.getString("Address"),
@@ -678,7 +679,8 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         }
         return null;
     }
- /**
+
+    /**
      * Get a number of records of Account table from Database<br>
      * The result is type of Integer<br>
      *
@@ -691,23 +693,23 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
      * @throws SQLException if an SQL error occurs
      */
     @Override
-    public Account updateStatusis0(int id)  {
+    public Account updateStatusis0(int id) {
         String sql = "update Account \n"
                 + "set [status] =0\n"
                 + "where Account.ID=?";
-                Connection connection = null;
-                PreparedStatement preparedStatement = null;
-                ResultSet resultSet = null;
-               
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
         try {
             connection = getConnection();
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, id);
             resultSet = preparedStatement.executeQuery();
-          
+
             while (resultSet.next()) {
                 return new Account(resultSet.getInt("ID"),
-                resultSet.getString("Username"),
+                        resultSet.getString("Username"),
                         resultSet.getString("Password"),
                         resultSet.getString("Displayname"),
                         resultSet.getString("Address"),
@@ -781,6 +783,29 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
     @Override
     public Connection getConnection() throws Exception {
         return super.getConnection(); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void editProfileById(String password, int id) throws Exception{
+        String sql = "UPDATE [dbo].[Account]\n"
+                + "   SET [Password] =?\n"
+                + " WHERE  id=?";
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, password);
+            preparedStatement.setInt(5, id);
+            preparedStatement.executeUpdate();
+
+        } catch (Exception e) {
+        } finally {
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connection);
+        }
     }
 
 }

@@ -107,15 +107,15 @@
                                     <input value="${sessionScope.acc.id}" name="id" type="text" class="form-control" required>
                                 </a>
                                 <label for="name" class="form-label">Name</label>
-                                <input onchange="this.form.submit()" onch maxlength="32" pattern="^[a-zA-Z]+(([',. -][a-zA-Z])?[a-zA-Z]*)*$" value="${profile.displayName}" name="name" type="text" class="form-control" required>
+                                <input maxlength="32" pattern="^[a-zA-Z]+(([',. -][a-zA-Z])?[a-zA-Z]*)*$" value="${profile.displayName}" name="name" type="text" class="form-control" required>
                             </div>
                             <div class="mb-3">
                                 <label for="phone" class="form-label">Phone</label>
-                                <input onchange="this.form.submit()" pattern="^0[0-9]{9}" type="text" class="form-control" id="phone" name="phone" aria-describedby="emailHelp" required> 
+                                <input pattern="^0[0-9]{9}" type="text" class="form-control" id="phone" name="phone" aria-describedby="emailHelp" required> 
                             </div>
                             <div class="mb-3">
                                 <label for="address" class="form-label">Address</label>
-                                <input onchange="this.form.submit()" maxlength="32" pattern="^[a-zA-Z]+(([',. -][a-zA-Z])?[a-zA-Z]*)*$"  type="text" class="form-control" id="address" name="address" aria-describedby="emailHelp" required>
+                                <input maxlength="32" pattern="^[a-zA-Z]+((,?[',. -][a-zA-Z])?[a-zA-Z]*\.?)*$"  type="text" class="form-control" id="address" name="address" aria-describedby="emailHelp" required>
                             </div>   
                             <div class="form-group row">
                                 <div class="col-md-6">
