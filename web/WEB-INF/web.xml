@@ -124,6 +124,10 @@
         <servlet-name>ShippingSuccessController</servlet-name>
         <servlet-class>controller.ShippingSuccessController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ChangePasswordController</servlet-name>
+        <servlet-class>controller.ChangePasswordController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ShipperAcceptedOrderController</servlet-name>
         <url-pattern>/Shipperacceptorder</url-pattern>
@@ -247,6 +251,10 @@
     <servlet-mapping>
         <servlet-name>ShippingSuccessController</servlet-name>
         <url-pattern>/dedeliverymoney</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangePasswordController</servlet-name>
+        <url-pattern>/change-pass</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

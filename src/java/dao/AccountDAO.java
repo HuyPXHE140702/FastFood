@@ -32,7 +32,7 @@ public interface AccountDAO {
 
     public void editProfileById(String password, String displayName, String address, String phone, int id) throws Exception;
 
-    public void editProfileById(String password, int id) throws Exception;
+    public void changePasswordById(String password, int id) throws Exception;
 
     public String getUsernameById(int id) throws Exception;
 
