@@ -107,7 +107,7 @@
                                     <input value="${sessionScope.acc.id}" name="id" type="text" class="form-control" required>
                                 </a>
                                 <label for="name" class="form-label">Name</label>
-                                <input pattern="[^!@#$%^&*()_+\-=\[\]{};':\\|,.<>\/?]+$" type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp" required>
+                                <input maxlength="32" pattern="^[a-zA-Z]+(([',. -][a-zA-Z])?[a-zA-Z]*)*$" value="${profile.displayName}" name="name" type="text" class="form-control" required>
                             </div>
                             <div class="mb-3">
                                 <label for="phone" class="form-label">Phone</label>
@@ -115,7 +115,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="address" class="form-label">Address</label>
-                                <input  type="text" class="form-control" id="address" name="address" aria-describedby="emailHelp" required>
+                                <input maxlength="32" pattern="^[a-zA-Z]+((,?[',. -][a-zA-Z])?[a-zA-Z]*\.?)*$"  type="text" class="form-control" id="address" name="address" aria-describedby="emailHelp" required>
                             </div>   
                             <div class="form-group row">
                                 <div class="col-md-6">

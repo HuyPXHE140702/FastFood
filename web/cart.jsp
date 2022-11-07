@@ -70,7 +70,7 @@
 
                         <br>
                         <h1>Shopping Cart</h1>
-                       
+
                         <table class="table" >
                             <thead>
                                 <tr>
@@ -92,7 +92,20 @@
                                     <td><img style="width: 50px;height: 50px" src="${C.value.product.image}"></td>
                                     <td>${C.value.product.foodname}</td>
                                     <td>${C.value.product.unitprice} </td>
-                                    <td ><input  onchange="this.form.submit()"  name="quantity" style="width: 50px" min="1" type="number" value="${C.value.quantity}"></td>
+                                    <td ><input  onchange="this.form.submit()" onkeypress="return isNumberKey(event)" min="1"  name="quantity" style="width: 50px" min="1" type="number" value="${C.value.quantity}"></td>
+                                    <script>
+                                        $(document).ready(function () {
+                                            $('.quantity-input').bind("cut copy paste drag drop", function (e) {
+                                                e.preventDefault();
+                                            });
+                                        });
+                                        function isNumberKey(e) {
+                                            var charCode = (e.which) ? e.which : e.keyCode;
+                                            if (charCode > 31 && (charCode < 48 || charCode > 57))
+                                                return false;
+                                            return true;
+                                        }
+                                    </script>
                                     <td>${C.value.product.unitprice*C.value.quantity}</td>
                                     <td>
                                         <a href="delete-cart?foodid=${C.value.product.foodid}" class="btn btn-outline-danger "

@@ -8,16 +8,21 @@ package controller;
 import dao.impl.AccountDAOImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Account;
 
 /**
  *
- * @author NamVN
+ * @author ACER
  */
-public class EditProfileController extends HttpServlet {
+@WebServlet(name = "ChangePasswordController", urlPatterns = {"/change-pass"})
+public class ChangePasswordController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,22 +34,17 @@ public class EditProfileController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
-        try {
-            int id = Integer.parseInt(request.getParameter("id"));
-            String name = request.getParameter("name").trim();
-            String address = request.getParameter("address").trim();
-            String phone = request.getParameter("phone").trim();
-            String password = request.getParameter("userpass");
-            AccountDAOImpl accdao = new AccountDAOImpl();
-            accdao.editProfileById(password.trim(), name.trim(), address, phone, id);
-            String url = "profile?id=" + id;
-            request.getRequestDispatcher(url).forward(request, response);
-        } catch (IOException | NumberFormatException | ServletException ex) {
+        AccountDAOImpl dao = new AccountDAOImpl();
 
-        }
+        String id1 = request.getParameter("id");
+        int id = Integer.parseInt(id1);
+
+        Account profile = dao.getAccountByID(id);
+
+        request.setAttribute("profile", profile);
+        request.getRequestDispatcher("profile.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -59,7 +59,11 @@ public class EditProfileController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(ChangePasswordController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -73,7 +77,28 @@ public class EditProfileController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        try {
+            int id = Integer.parseInt(request.getParameter("id"));
+            AccountDAOImpl accountDAO = new AccountDAOImpl();
+            String oldPassword = request.getParameter("oldpass");
+            String newPassword = request.getParameter("newpass");
+            String confirmedPassword = request.getParameter("confirmpass");
+            Account account = accountDAO.getAccountByID(id);
+            if(account.getPassword().equals(oldPassword)){
+                if(newPassword.equals(confirmedPassword)){
+                    accountDAO.editProfileById(newPassword, id);
+                    String url = "profile?id=" + id;
+                    request.getRequestDispatcher(url).forward(request, response);
+                }
+            }
+           
+        } catch (IOException | NumberFormatException | ServletException exception) {
+            Logger.getLogger(ChangePasswordController.class.getName()).log(Level.SEVERE, null, exception);
+        } catch (Exception ex) {
+            Logger.getLogger(ChangePasswordController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

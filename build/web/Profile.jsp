@@ -165,14 +165,6 @@
 
                                     }
                                 });
-//                                if (upass.type === "password") {
-//                                    upass.type = "text";
-//                 
-//                                    toggleBtn.classList.add("bi bi-eye-slash-fill");
-//                                } else {
-//                                    upass.type = "password";
-//                                     toggleBtn.classList.remove("bi bi-eye-slash-fill");
-//                                }
                             }
                         </script>
 
@@ -180,11 +172,10 @@
                             <a hidden >
                                 <input value="${profile.id}" name="id" type="text" class="form-control" required>
                             </a>
-
-
+                            
                             <div class="form-group">
                                 <label>Name</label>
-                                <input pattern="[^!@#$%^&*()_+\-=\[\]{};':\\|,.<>\/?]+$" value="${profile.displayName}" name="name" type="text" class="form-control" required>
+                                <input maxlength="32" pattern="^[a-zA-Z]+(([',. -][a-zA-Z])?[a-zA-Z]*)*$" value="${profile.displayName}" name="name" type="text" class="form-control" required>
                             </div>
                             <div class="form-group">
                                 <label>Phone</label>
@@ -192,7 +183,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Address</label>
-                                <input value="${profile.address}" name="address" type="text" class="form-control" required>
+                                <input maxlength="32" pattern="^[a-zA-Z]+((,?[',. -][a-zA-Z])?[a-zA-Z]*\.?)*$" value="${profile.address}" name="address" type="text" class="form-control" required>
                             </div>       
                             <div class="form-group">
                                 <label>Password</label>
@@ -202,12 +193,13 @@
                                     <div style="margin-left: -13px;margin-top: 8px" class="col-sm-1 "> <i  id="toggleBtn" onclick="togglePassword()"  class="fas fa-eye"></i></div>
                                 </div>
                             </div>
-
                         </div>
+                                    
                         <div class="modal-footer">
                             <input type="button" class="btn btn-default" style="background:#f5f5f5" data-dismiss="modal" value="Cancel">
                             <input type="submit" class="btn btn-success" value="Edit">
                         </div>
+                                    
                     </form>
                 </div>
             </div>
