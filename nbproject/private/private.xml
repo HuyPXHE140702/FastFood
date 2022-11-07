@@ -3,16 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/D:/FastFood/web/WEB-INF/web.xml</file>
-            <file>file:/D:/FastFood/src/java/dao/Impl/FoodDAOImpl.java</file>
-            <file>file:/D:/FastFood/src/java/controller/CateContro.java</file>
-=======
-            <file>file:/C:/Users/ACER/OneDrive/Documents/GitHub/FastFood/web/viewBill.jsp</file>
             <file>file:/C:/Users/ACER/OneDrive/Documents/GitHub/FastFood/web/profile.jsp</file>
-            <file>file:/C:/Users/ACER/OneDrive/Documents/GitHub/FastFood/web/checkOut.jsp</file>
-            <file>file:/C:/Users/ACER/OneDrive/Documents/GitHub/FastFood/web/login.jsp</file>
->>>>>>> namvnhe140527
+            <file>file:/C:/Users/ACER/OneDrive/Documents/GitHub/FastFood/src/java/controller/EditProfileController.java</file>
+            <file>file:/C:/Users/ACER/OneDrive/Documents/GitHub/FastFood/src/java/controller/ViewFoodMenuController.java</file>
+            <file>file:/C:/Users/ACER/OneDrive/Documents/GitHub/FastFood/src/java/controller/ViewCartsController.java</file>
+            <file>file:/C:/Users/ACER/OneDrive/Documents/GitHub/FastFood/web/cart.jsp</file>
+            <file>file:/C:/Users/ACER/OneDrive/Documents/GitHub/FastFood/src/java/dao/OrderDetailDAO.java</file>
+            <file>file:/C:/Users/ACER/OneDrive/Documents/GitHub/FastFood/src/java/dao/impl/OrderDetailDAOImpl.java</file>
+            <file>file:/C:/Users/ACER/OneDrive/Documents/GitHub/FastFood/src/java/controller/ChangePasswordController.java</file>
+            <file>file:/C:/Users/ACER/OneDrive/Documents/GitHub/FastFood/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/ACER/OneDrive/Documents/GitHub/FastFood/src/java/controller/ViewBillController.java</file>
         </group>
     </open-files>
 </project-private>
