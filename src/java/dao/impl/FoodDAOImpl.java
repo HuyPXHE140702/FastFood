@@ -166,7 +166,6 @@ public class FoodDAOImpl extends BaseDAOImpl implements FoodDAO {
             connection = getConnection();
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, (index - 1) * 9);
-<<<<<<< HEAD
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int FoodID = resultSet.getInt(1);
@@ -203,8 +202,6 @@ public class FoodDAOImpl extends BaseDAOImpl implements FoodDAO {
             connection = getConnection();
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, (index - 1) * 6);
-=======
->>>>>>> namvnhe140527
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int FoodID = resultSet.getInt(1);
@@ -228,21 +225,6 @@ public class FoodDAOImpl extends BaseDAOImpl implements FoodDAO {
         }
         return list;
     }
-
-<<<<<<< HEAD
-
-    /**
-     * Get a number of records of Food table from Database<br>
-     * The result is type of Integer<br>
-     *
-     * @param baseDAO handle connection from Database
-     * @param preparedStatement execute query to Database
-     * @param resultSet get data from Database
-     * @param accountID get id of delete account
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     * @throws SQLException if an SQL error occurs
-=======
     /*
    * Get a number of records of Food table from Database<br>
    * The result is type of Integer<br>
@@ -254,7 +236,6 @@ public class FoodDAOImpl extends BaseDAOImpl implements FoodDAO {
    * @throws ServletException if a servlet-specific error occurs
    * @throws IOException      if an I/O error occurs
    * @throws SQLException     if an SQL error occurs
->>>>>>> namvnhe140527
      */
     @Override
     public List<Food> getProductWithPaggingByName(int index, String name) throws Exception {
