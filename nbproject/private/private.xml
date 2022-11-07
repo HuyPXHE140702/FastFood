@@ -4,17 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/ACER/OneDrive/Documents/GitHub/FastFood/web/viewBill.jsp</file>
-            <file>file:/C:/Users/ACER/OneDrive/Documents/GitHub/FastFood/src/java/controller/UpdateCartQuantityController.java</file>
+            <file>file:/C:/Users/ACER/OneDrive/Documents/GitHub/FastFood/web/profile.jsp</file>
             <file>file:/C:/Users/ACER/OneDrive/Documents/GitHub/FastFood/web/checkOut.jsp</file>
-            <file>file:/C:/Users/ACER/OneDrive/Documents/GitHub/FastFood/src/java/controller/ViewCartsController.java</file>
-            <file>file:/C:/Users/ACER/OneDrive/Documents/GitHub/FastFood/src/java/dao/OrderDetailDAO.java</file>
-            <file>file:/C:/Users/ACER/OneDrive/Documents/GitHub/FastFood/src/java/controller/AddToCartController.java</file>
-            <file>file:/C:/Users/ACER/OneDrive/Documents/GitHub/FastFood/src/java/controller/CheckOutController.java</file>
-            <file>file:/C:/Users/ACER/OneDrive/Documents/GitHub/FastFood/web/thankForPayment.jsp</file>
-            <file>file:/C:/Users/ACER/OneDrive/Documents/GitHub/FastFood/src/java/dao/impl/OrderDetailDAOImpl.java</file>
-            <file>file:/C:/Users/ACER/OneDrive/Documents/GitHub/FastFood/src/java/controller/LoginController.java</file>
-            <file>file:/C:/Users/ACER/OneDrive/Documents/GitHub/FastFood/src/java/controller/ViewBillController.java</file>
-            <file>file:/C:/Users/ACER/OneDrive/Documents/GitHub/FastFood/web/error.jsp</file>
+            <file>file:/C:/Users/ACER/OneDrive/Documents/GitHub/FastFood/web/login.jsp</file>
         </group>
     </open-files>
 </project-private>

@@ -92,7 +92,7 @@
                                     <td><img style="width: 50px;height: 50px" src="${C.value.product.image}"></td>
                                     <td>${C.value.product.foodname}</td>
                                     <td>${C.value.product.unitprice} </td>
-                                    <td ><input  onchange="this.form.submit()" onkeypress="return isNumberKey(event)" pattern="\\d+" min="1"  name="quantity" style="width: 50px" min="1" type="number" value="${C.value.quantity}"></td>
+                                    <td ><input  onchange="this.form.submit()" onkeypress="return isNumberKey(event)" min="1"  name="quantity" style="width: 50px" min="1" type="number" value="${C.value.quantity}"></td>
                                     <script>
                                         $(document).ready(function () {
                                             $('.quantity-input').bind("cut copy paste drag drop", function (e) {
