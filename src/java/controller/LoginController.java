@@ -33,7 +33,7 @@ public class LoginController extends HttpServlet {
         }
     }
 
-  // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the
     // + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -46,7 +46,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    // Cookie[] cookies = request.getCookies();
+        // Cookie[] cookies = request.getCookies();
         // String username = null;
         // String password = null;
         // for (Cookie cooky : cookies) {
@@ -87,19 +87,26 @@ public class LoginController extends HttpServlet {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
             AccountDAO dao = new AccountDAOImpl();
+            Account checkActice = dao.checkActice(username, password);
             Account account = dao.login(username, password);
             //check input
-            if (account == null) {
-                //get fail request
-                request.setAttribute("msg", "Wrong username or password.");
+            if (checkActice != null) {
+                request.setAttribute("msg", "Your account is locked!");
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             } else {
-                //create session and save
-                HttpSession session = request.getSession();
-                session.setAttribute("acc", account);
-                session.setMaxInactiveInterval(300);
-                response.sendRedirect("home");
+                if (account == null) {
+                    //get fail request
+                    request.setAttribute("msg", "Wrong username or password.");
+                    request.getRequestDispatcher("login.jsp").forward(request, response);
+                } else {
+                    //create session and save
+                    HttpSession session = request.getSession();
+                    session.setAttribute("acc", account);
+                    session.setMaxInactiveInterval(300);
+                    response.sendRedirect("home");
+                }
             }
+
         } catch (Exception ex) {
             Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
         }

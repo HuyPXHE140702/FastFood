@@ -82,7 +82,7 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
      */
     @Override
     public Account login(String username, String password) {
-        String sql = "select *from Account where Username = ? and Password = ?";
+        String sql = "select *from Account where Username = ? and Password = ? and status = 1";
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -869,4 +869,39 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         return super.getConnection(); //To change body of generated methods, choose Tools | Templates.
     }
 
+    public Account checkActice(String username, String password) {
+        String sql = "select *from Account where Username = ? and Password = ? and status =0";
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, password);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                return new Account(resultSet.getInt("ID"),
+                        resultSet.getString("Username"),
+                        resultSet.getString("Password"),
+                        resultSet.getString("Displayname"),
+                        resultSet.getString("Address"),
+                        resultSet.getString("Phone"),
+                        resultSet.getInt("isAdmin"),
+                        resultSet.getInt("isCustomer"),
+                        resultSet.getInt("IsShipper"),
+                        resultSet.getInt("IsSaller"),
+                        resultSet.getInt("status")
+                );
+            }
+
+        } catch (Exception e) {
+        } finally {
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connection);
+        }
+        return null;
+    }
 }
