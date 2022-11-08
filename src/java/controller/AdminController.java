@@ -34,7 +34,7 @@ public class AdminController extends HttpServlet {
     private String name = "";
     private String role = "";
     String setRole = "";
-    String condition = "WHERE Displayname like '%" + name.trim() + "%' ";
+    //String condition = "WHERE Displayname like '%" + name.trim() + "%' ";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -67,6 +67,7 @@ public class AdminController extends HttpServlet {
             AccountDAO accountDAO = new AccountDAOImpl();
             List<Account> accountList = new ArrayList<>();
             //get all account with paging and name contain
+           
             accountList = accountDAO.getAccountByNamePaging(name.trim(), setRole);
             if (accountList.size() > 0) {
                 if (page == 1) {
@@ -92,7 +93,7 @@ public class AdminController extends HttpServlet {
                     }
                 }
             }
-            int noOfRecords = accountDAO.getNoOfRecordsPost(condition + setRole);
+            int noOfRecords = accountList.size();
             int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
             request.setAttribute("listAccounts", temp);
             request.setAttribute("noOfPages", noOfPages);
@@ -145,6 +146,7 @@ public class AdminController extends HttpServlet {
             AccountDAO accountDAO = new AccountDAOImpl();
             List<Account> accountList = new ArrayList<>();
             //get all account with paging and name contain
+             String tmp = name.trim();
             accountList = accountDAO.getAccountByNamePaging(name.trim(), setRole);
             List<Account> temp = new ArrayList<>();
             if (accountList.size() > 0) {
@@ -173,7 +175,7 @@ public class AdminController extends HttpServlet {
             } else {
                 temp = null;
             }
-            int noOfRecords = accountDAO.getNoOfRecordsPost(condition + setRole);
+            int noOfRecords = accountList.size();
             int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
             request.setAttribute("noOfPages", noOfPages);
             request.setAttribute("currentPage", page);

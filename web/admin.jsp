@@ -246,7 +246,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts-1.js"></script>
-        <script>
+        <!--<script>
             var inp = document.querySelector('#noWhiteSpaceAtTheStart');
             inp.addEventListener("keypress", function (e) {
                 var key = e.keyCode;
@@ -255,7 +255,7 @@
                     return false;
                 }
             })
-        </script>
+        </script>-->
     </body>
 
 </html>

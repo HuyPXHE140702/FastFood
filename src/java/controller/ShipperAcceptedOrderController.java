@@ -68,7 +68,7 @@ public class ShipperAcceptedOrderController extends HttpServlet {
             int accountId = Integer.parseInt(request.getParameter("accountid"));
             List<Order> temp = new ArrayList<>();
             List<Order> orderList = new ArrayList<>();
-            orderList = orderDAOImpl.ViewAccpectedOrder(accountId, sortBy);
+            orderList = orderDAOImpl.ViewAccpectedOrder(accountId, name, sortBy);
             if (orderList.size() > 0) {
                 if (page == 1) {
                     if (orderList.size() <= recordsPerPage) {
@@ -144,7 +144,7 @@ public class ShipperAcceptedOrderController extends HttpServlet {
                 sortBy = "ORDER BY TotalPrice Desc";
             }
             List<Order> orderList = new ArrayList<>();
-            orderList = orderDAOImpl.ViewAccpectedOrder(accountId, sortBy);
+            orderList = orderDAOImpl.ViewAccpectedOrder(accountId, name.trim(), sortBy);
             ShipperDAO shipperDAOImpl = new ShipperDAOImpl();
             Shipper shipper = shipperDAOImpl.getShipperByAccountID(accountId);
             List<Order> temp = new ArrayList<>();

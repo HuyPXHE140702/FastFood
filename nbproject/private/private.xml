@@ -2,6 +2,18 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< Updated upstream
         <group/>
+=======
+<<<<<<< HEAD
+        <group>
+            <file>file:/C:/Users/admin/Documents/GitHub/FastFood/src/java/dao/OrderDAO.java</file>
+            <file>file:/C:/Users/admin/Documents/GitHub/FastFood/web/shipperacceptorder.jsp</file>
+            <file>file:/C:/Users/admin/Documents/GitHub/FastFood/src/java/dao/Impl/OrderDAOImpl.java</file>
+        </group>
+=======
+        <group/>
+>>>>>>> 1aeab3d5e7579c7523630a74fe0e106f93dd54ae
+>>>>>>> Stashed changes
     </open-files>
 </project-private>

@@ -537,17 +537,18 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
     }
 
     @Override
-    public List<Order> ViewAccpectedOrder(int accountID, String condition) throws Exception {
+    public List<Order> ViewAccpectedOrder(int accountID, String searchName, String condition) throws Exception {
         List<Order> orderList = new ArrayList<>();
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
-            String sql = "select * from Orders where ShipperID = (select ShipperID from Shipper where AccountID = ? and Orders.status = 1) "
+            String sql = "select * from Orders where ShipperID = (select ShipperID from Shipper where AccountID = ? and Orders.status = 1 and Name like ? ) "
                     + condition;
             connection = getConnection();
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, accountID);
+            preparedStatement.setString(2, "%" + searchName + "%");
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 orderList.add(new Order(resultSet.getInt("OrderID"),

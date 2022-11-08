@@ -38,7 +38,7 @@ public interface OrderDAO {
 
     public List<Order> DisplayOrderByShipperID(int accountID) throws Exception;
 
-    public List<Order> ViewAccpectedOrder(int accountID, String condition) throws Exception;
+    public List<Order> ViewAccpectedOrder(int accountID,String nameSearch, String condition) throws Exception;
 
     public void AddShipperIDtoOrder(int orderid, int accountid);
 
