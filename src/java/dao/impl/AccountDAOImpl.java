@@ -74,7 +74,6 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
     }
 
     // getAccountById
-
     /**
      *
      * @param username
@@ -468,10 +467,12 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
             closeConnection(connection);
         }
     }
+
     public static void main(String[] args) throws Exception {
         AccountDAO accountDAO = new AccountDAOImpl();
         accountDAO.changePasswordById("nambitest", 14);
     }
+
     /**
      *
      * @param id
@@ -746,7 +747,7 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
      * @throws SQLException if an SQL error occurs
      */
     @Override
-    public Account updateStatusis1(int id) {
+    public void updateStatusis1(int id) {
         String sql = "update Account \n"
                 + "set [status] =1\n"
                 + "where Account.ID=?";
@@ -758,21 +759,8 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
             connection = getConnection();
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, id);
-            resultSet = preparedStatement.executeQuery();
+            preparedStatement.executeUpdate();
 
-            while (resultSet.next()) {
-                return new Account(resultSet.getInt("ID"),
-                        resultSet.getString("Username"),
-                        resultSet.getString("Password"),
-                        resultSet.getString("Displayname"),
-                        resultSet.getString("Address"),
-                        resultSet.getString("Phone"),
-                        resultSet.getInt("isAdmin"),
-                        resultSet.getInt("isCustomer"),
-                        resultSet.getInt("IsShipper"),
-                        resultSet.getInt("IsSaller"),
-                        resultSet.getInt("status"));
-            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -780,7 +768,7 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
             closePreparedStatement(preparedStatement);
             closeConnection(connection);
         }
-        return null;
+
     }
 
     /**
@@ -796,7 +784,7 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
      * @throws SQLException if an SQL error occurs
      */
     @Override
-    public Account updateStatusis0(int id) {
+    public void updateStatusis0(int id) {
         String sql = "update Account \n"
                 + "set [status] =0\n"
                 + "where Account.ID=?";
@@ -808,21 +796,8 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
             connection = getConnection();
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, id);
-            resultSet = preparedStatement.executeQuery();
+            preparedStatement.executeUpdate();
 
-            while (resultSet.next()) {
-                return new Account(resultSet.getInt("ID"),
-                        resultSet.getString("Username"),
-                        resultSet.getString("Password"),
-                        resultSet.getString("Displayname"),
-                        resultSet.getString("Address"),
-                        resultSet.getString("Phone"),
-                        resultSet.getInt("isAdmin"),
-                        resultSet.getInt("isCustomer"),
-                        resultSet.getInt("IsShipper"),
-                        resultSet.getInt("IsSaller"),
-                        resultSet.getInt("status"));
-            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -830,7 +805,6 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
             closePreparedStatement(preparedStatement);
             closeConnection(connection);
         }
-        return null;
     }
 
     /**

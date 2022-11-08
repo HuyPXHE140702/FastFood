@@ -14,9 +14,9 @@ import model.Seller;
 public interface SellerDAO {
   
   
-  public Seller insertSellerByAccountId(int id)  throws Exception;
+  public void insertSellerByAccountId(int id)  throws Exception;
 
-  public Seller deleteSellerByAccountid(int id)  throws Exception;
+  public void deleteSellerByAccountid(int id)  throws Exception;
 
   public Seller checkSellerExist(int id)throws Exception;
 }
