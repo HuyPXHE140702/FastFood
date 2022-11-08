@@ -18,7 +18,7 @@ public interface AccountDAO {
 
     public Account login(String username, String password) throws Exception;
     
-    public Account checkActice(String username, String password);
+    public Account checkActive(String username, String password);
 
     public void signup(String username, String password, String displayName, String address, String phone) throws Exception;
 

@@ -87,10 +87,10 @@ public class LoginController extends HttpServlet {
             String username = request.getParameter("username");
             String password = request.getParameter("password");
             AccountDAO dao = new AccountDAOImpl();
-            Account checkActice = dao.checkActice(username, password);
+            Account checkActive = dao.checkActive(username, password);
             Account account = dao.login(username, password);
             //check input
-            if (checkActice != null) {
+            if (checkActive != null) {
                 request.setAttribute("msg", "Your account is locked!");
                 request.getRequestDispatcher("login.jsp").forward(request, response);
             } else {

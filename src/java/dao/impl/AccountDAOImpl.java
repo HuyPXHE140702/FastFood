@@ -869,7 +869,7 @@ public class AccountDAOImpl extends BaseDAOImpl implements AccountDAO {
         return super.getConnection(); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public Account checkActice(String username, String password) {
+    public Account checkActive(String username, String password) {
         String sql = "select *from Account where Username = ? and Password = ? and status =0";
         Connection connection = null;
         PreparedStatement preparedStatement = null;
