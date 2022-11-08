@@ -12,6 +12,8 @@ package controller;
 import dao.ShipperDAO;
 import dao.impl.ShipperDAOImpl;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -33,7 +35,7 @@ public class BankToSellerController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         ShipperDAO shipperDAO = new ShipperDAOImpl();
         int accountid = Integer.parseInt(request.getParameter("accountid"));
@@ -41,6 +43,7 @@ public class BankToSellerController extends HttpServlet {
 
         shipperDAO.UpdateReceive(deliverymoney);
         shipperDAO.UpdateDeliveryEqualZero(accountid);
+
         response.sendRedirect("Shipperacceptorder?accountid=" + accountid);
     }
 
@@ -56,7 +59,11 @@ public class BankToSellerController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(BankToSellerController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -70,7 +77,11 @@ public class BankToSellerController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (Exception ex) {
+            Logger.getLogger(BankToSellerController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
