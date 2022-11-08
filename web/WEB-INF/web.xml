@@ -128,6 +128,10 @@
         <servlet-name>ChangePasswordController</servlet-name>
         <servlet-class>controller.ChangePasswordController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BankToSellerController</servlet-name>
+        <servlet-class>controller.BankToSellerController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ShipperAcceptedOrderController</servlet-name>
         <url-pattern>/Shipperacceptorder</url-pattern>
@@ -255,6 +259,10 @@
     <servlet-mapping>
         <servlet-name>ChangePasswordController</servlet-name>
         <url-pattern>/change-pass</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BankToSellerController</servlet-name>
+        <url-pattern>/bankToSeller</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

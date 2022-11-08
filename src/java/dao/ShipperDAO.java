@@ -12,8 +12,12 @@ import model.Shipper;
  * @author Admin
  */
 public interface ShipperDAO {
-    
-    public Shipper getShipperByAccountID(int accountid);
 
-    public void UpdateDeliveryMoney(float deliveryMoney, int accountid);
+    public Shipper getShipperByAccountID(int accountid) throws Exception;
+
+    public void UpdateDeliveryMoney(float deliveryMoney, int accountid) throws Exception;
+
+    public void UpdateReceive(float deliverymoney) throws Exception;
+
+    public void UpdateDeliveryEqualZero(int accountid) throws Exception;
 }

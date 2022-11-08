@@ -33,11 +33,7 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
      * Get a list of available Orders for Shipper role to view<br>
      * The result contain a list of <code>model.Order</code> objects<br>
      *
-     *
-     * @param preparedStatement execute query to Database
-     * @param resultSet get data from Database
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @return list Order object
      * @throws SQLException if an SQL error occurs
      */
     @Override
@@ -79,10 +75,6 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
      * The result contain a list of <code>model.Order</code> objects<br>
      *
      *
-     * @param preparedStatement execute query to Database
-     * @param resultSet get data from Database
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
      * @throws SQLException if an SQL error occurs
      */
     @Override
@@ -124,14 +116,9 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
      * The result contain a list of <code>model.Order</code> objects<br>
      *
      *
-     * @param preparedStatement execute query to Database
-     * @param resultSet get data from Database
      * @param dateFrom get the start date to search
      * @param dateTo get the end date to search
-     * @param codition get the condition of search
      * @param offset set offset for sql query
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
      * @throws SQLException if an SQL error occurs
      */
     @Override
