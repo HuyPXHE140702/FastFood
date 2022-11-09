@@ -7,14 +7,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
-import java.util.logging.Logger; 
+import java.util.logging.Logger;
+import javax.naming.Context;
 
 public class BaseDAOImpl implements BaseDAO {
 
     /*USE BELOW METHOD FOR YOUR DATABASE CONNECTION FOR BOTH SINGLE AND MULTILPE SQL SERVER INSTANCE(s)*/
- /*DO NOT EDIT THE BELOW METHOD, YOU MUST USE ONLY THIS ONE FOR YOUR DATABASE CONNECTION*/
+    /*DO NOT EDIT THE BELOW METHOD, YOU MUST USE ONLY THIS ONE FOR YOUR DATABASE CONNECTION*/
     @Override
     public Connection getConnection() throws Exception {
+        //imgFolder = (String) envirCxt.lookup("imgFolder");
         String url = "jdbc:sqlserver://" + serverName + ":" + portNumber + "\\" + instance + ";databaseName=" + dbName;
         if (instance == null || instance.trim().isEmpty()) {
             url = "jdbc:sqlserver://" + serverName + ":" + portNumber + ";databaseName=" + dbName;
@@ -30,6 +32,8 @@ public class BaseDAOImpl implements BaseDAO {
     private final String instance = "";//LEAVE THIS ONE EMPTY IF YOUR SQL IS A SINGLE INSTANCE
     private final String userID = "sa";
     private final String password = "123";
+    Context envirCxt = null;
+    String imgFolder;
 
     @Override
     public void closeResultSet(ResultSet rs) {
@@ -62,6 +66,12 @@ public class BaseDAOImpl implements BaseDAO {
         } catch (SQLException ex) {
             Logger.getLogger(BaseDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    @Override
+    public String getResource() throws Exception {
+        imgFolder = (String) envirCxt.lookup("imgFolder");
+        return imgFolder;
     }
 
 }

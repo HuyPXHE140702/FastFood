@@ -22,4 +22,8 @@ public interface BaseDAO {
     public void closePreparedStatement(PreparedStatement ps);
 
     public void closeConnection(Connection cnn);
+    
+    public String getResource() throws Exception ;
+    
+    
 }
