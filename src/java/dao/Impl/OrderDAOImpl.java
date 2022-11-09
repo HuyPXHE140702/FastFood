@@ -77,8 +77,7 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
      *
      * @throws SQLException if an SQL error occurs
      */
-    
-    public List<Order> getAllOrder() throws Exception{
+    public List<Order> getAllOrder() throws Exception {
         List<Order> list = new ArrayList<>();
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -104,7 +103,7 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
         }
         return list;
     }
-    
+
     @Override
     public List<Order> getOrderAcceptByShipperID() throws Exception {
         List<Order> orderList = new ArrayList<>();
@@ -679,9 +678,9 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
         } catch (Exception e) {
         }
     }
-    
-    public List<Order> getOrderWithpagging(int index) throws Exception{
-        List<Order> list = new ArrayList<Order>();
+
+    public List<Order> getOrderWithpagging(int index) throws Exception {
+        List<Order> list = new ArrayList<>();
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -689,31 +688,31 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
             String sql = "select * from Orders where status = 0 order by OrderID offset ? row fetch next 9 rows only";
             connection = getConnection();
             preparedStatement = connection.prepareStatement(sql);
-            resultSet = preparedStatement.executeQuery();
             preparedStatement.setInt(1, (index - 1) * 6);
+            resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                int OrderId = resultSet.getInt(1); 
+                int OrderId = resultSet.getInt(1);
                 int acount_id = resultSet.getInt(2);
                 String name = resultSet.getString(3);
-                String phone = resultSet.getString(4); 
-                String address = resultSet.getString(5); 
+                String phone = resultSet.getString(4);
+                String address = resultSet.getString(5);
                 float totalprice = resultSet.getFloat(6);
                 int sellerID = resultSet.getInt(7);
-                int shipperID = resultSet.getInt(8); 
-     
-                String DateCreated = resultSet.getString(9);   
+                int shipperID = resultSet.getInt(8);
+
+                String DateCreated = resultSet.getString(9);
                 boolean Status = resultSet.getBoolean(10);
                 Order order = new Order(OrderId, acount_id, name, phone, address, totalprice, sellerID, shipperID, DateCreated, Status);
                 list.add(order);
             }
         } catch (Exception e) {
-            
+
         }
         return list;
-     }
-    
-    public List<Order> getOrderWithpaggingByPhone (int index, String textSearch) throws Exception{
-         List<Order> list = new ArrayList<Order>();
+    }
+
+    public List<Order> getOrderWithpaggingByPhone(int index, String textSearch) throws Exception {
+        List<Order> list = new ArrayList<Order>();
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -724,23 +723,23 @@ public class OrderDAOImpl extends BaseDAOImpl implements OrderDAO {
             resultSet = preparedStatement.executeQuery();
             preparedStatement.setInt(1, (index - 1) * 6);
             while (resultSet.next()) {
-                int OrderId = resultSet.getInt(1); 
+                int OrderId = resultSet.getInt(1);
                 int acount_id = resultSet.getInt(2);
                 String name = resultSet.getString(3);
-                String phone = resultSet.getString(4); 
-                String address = resultSet.getString(5); 
+                String phone = resultSet.getString(4);
+                String address = resultSet.getString(5);
                 float totalprice = resultSet.getFloat(6);
                 int sellerID = resultSet.getInt(7);
-                int shipperID = resultSet.getInt(8); 
+                int shipperID = resultSet.getInt(8);
                 boolean Status = resultSet.getBoolean(10);
                 String DateCreated = resultSet.getString(9);
                 Order order = new Order(OrderId, acount_id, name, phone, address, totalprice, sellerID, shipperID, DateCreated, Status);
                 list.add(order);
             }
         } catch (Exception e) {
-            
+
         }
-     
+
         return list;
     }
 }

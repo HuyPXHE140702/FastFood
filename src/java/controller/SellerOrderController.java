@@ -51,7 +51,7 @@ public class SellerOrderController extends HttpServlet {
             ShipperDAOImpl shipperDAOImpl = new ShipperDAOImpl();
             List<Order> list2 = oderDAO.getAllOrder();
             String indexPage = request.getParameter("index");
-            String searchName = request.getParameter("searchName");
+            //String searchName = request.getParameter("searchName");
             List<Order> list = new ArrayList<>();
             if (indexPage == null) {
                 indexPage = "1";
@@ -64,11 +64,7 @@ public class SellerOrderController extends HttpServlet {
             if (count % 9 != 0) {
                 endPage++;
             }
-            if (searchName == null) {
-                list = oderDAO.getOrderWithpagging(index);
-            } else {
-                list = oderDAO.getOrderWithpaggingByPhone(index, searchName);
-            }
+            list = oderDAO.getOrderWithpagging(index);
             request.setAttribute("page", indexPage);//de khi an vao trang 2 thi trang 2 mau den
             request.setAttribute("endP", endPage);
             request.setAttribute("receivemoney", recieveMoney);
