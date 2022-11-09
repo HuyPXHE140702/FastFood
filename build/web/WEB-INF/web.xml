@@ -152,6 +152,10 @@
         <servlet-name>deleteFoodController</servlet-name>
         <servlet-class>controller.deleteFoodController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SellerOrderController</servlet-name>
+        <servlet-class>controller.SellerOrderController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ShipperAcceptedOrderController</servlet-name>
         <url-pattern>/Shipperacceptorder</url-pattern>
@@ -303,6 +307,10 @@
     <servlet-mapping>
         <servlet-name>deleteFoodController</servlet-name>
         <url-pattern>/deleteFoodController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SellerOrderController</servlet-name>
+        <url-pattern>/SellerOrder</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

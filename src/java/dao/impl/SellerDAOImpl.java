@@ -129,6 +129,27 @@ public class SellerDAOImpl extends BaseDAOImpl implements SellerDAO {
             closeConnection(connection);
         }
     }
+    
+    public int getReceiveMoney(int id) throws Exception {
+        String sql = "select ReceiveMoney from Seller where AccountID = ?";
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeQuery();
+
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connection);
+        }
+        return 0;
+    }
 
     @Override
     public void closeConnection(Connection cnn) {
