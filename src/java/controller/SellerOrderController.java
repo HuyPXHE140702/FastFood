@@ -5,6 +5,7 @@
  */
 package controller;
 
+import dao.SellerDAO;
 import dao.impl.OrderDAOImpl;
 import dao.impl.SellerDAOImpl;
 import dao.impl.ShipperDAOImpl;
@@ -21,12 +22,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Order;
+import model.Seller;
 
 /**
  *
  * @author dangtm
  */
-
 public class SellerOrderController extends HttpServlet {
 
     /**
@@ -44,37 +45,38 @@ public class SellerOrderController extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
 //           int idseller = Integer.parseInt(request.getParameter("idSeller"));
 //            System.out.println(idseller);
-            float  receiveMoney = new SellerDAOImpl().getReceiveMoney(12);
-            OrderDAOImpl dAO = new OrderDAOImpl();
-           ShipperDAOImpl shipperDAOImpl = new ShipperDAOImpl();
-             List<Order> list2 = dAO.getAllOrder();
+            SellerDAO sellerDAO = new SellerDAOImpl();
+            float recieveMoney = sellerDAO.getReceiveMoney(12);
+            OrderDAOImpl oderDAO = new OrderDAOImpl();
+            ShipperDAOImpl shipperDAOImpl = new ShipperDAOImpl();
+            List<Order> list2 = oderDAO.getAllOrder();
             String indexPage = request.getParameter("index");
             String searchName = request.getParameter("searchName");
-             List<Order> list = new ArrayList<>();
-            if(indexPage == null){
+            List<Order> list = new ArrayList<>();
+            if (indexPage == null) {
                 indexPage = "1";
             }
-          
+
             int index = Integer.parseInt(indexPage);
-            
+
             int count = list2.size();
             int endPage = count / 9;
             if (count % 9 != 0) {
                 endPage++;
-            } 
-            if(searchName == null){
-                 list = dAO.getOrderWithpagging(index);
-            }else{
-                list = dAO.getOrderWithpaggingByPhone(index, searchName);
-            }       
+            }
+            if (searchName == null) {
+                list = oderDAO.getOrderWithpagging(index);
+            } else {
+                list = oderDAO.getOrderWithpaggingByPhone(index, searchName);
+            }
             request.setAttribute("page", indexPage);//de khi an vao trang 2 thi trang 2 mau den
             request.setAttribute("endP", endPage);
-            request.setAttribute("receivemoney", receiveMoney);
+            request.setAttribute("receivemoney", recieveMoney);
             HttpSession session = request.getSession();
             session.setAttribute("listfood", list);
             request.getRequestDispatcher("sellerOrder.jsp").forward(request, response);
         }
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -132,19 +132,20 @@ public class SellerDAOImpl extends BaseDAOImpl implements SellerDAO {
 
     @Override
     public float getReceiveMoney(int id) throws Exception {
-        String sql = "select ReceiveMoney from Seller where AccountID = ?";
+        String sql = "select * from Seller where AccountID = ?";
         Connection connection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
+        float money = 0;
         try {
             connection = getConnection();
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, id);
-            preparedStatement.executeQuery();
+            resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                return resultSet.getFloat("ReceiveMoney");
-
+                money = resultSet.getFloat("ReceiveMoney");
             }
+
         } catch (Exception e) {
             throw e;
         } finally {
@@ -152,7 +153,7 @@ public class SellerDAOImpl extends BaseDAOImpl implements SellerDAO {
             closePreparedStatement(preparedStatement);
             closeConnection(connection);
         }
-        return 0;
+        return money;
     }
 
     @Override
