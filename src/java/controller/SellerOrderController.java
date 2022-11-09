@@ -26,7 +26,7 @@ import model.Order;
  *
  * @author dangtm
  */
-@WebServlet(name = "SellerOrderController", urlPatterns = {"/SellerOrder"})
+
 public class SellerOrderController extends HttpServlet {
 
     /**
@@ -44,7 +44,7 @@ public class SellerOrderController extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
 //           int idseller = Integer.parseInt(request.getParameter("idSeller"));
 //            System.out.println(idseller);
-            int  receiveMoney = new SellerDAOImpl().getReceiveMoney(6);
+            float  receiveMoney = new SellerDAOImpl().getReceiveMoney(12);
             OrderDAOImpl dAO = new OrderDAOImpl();
            ShipperDAOImpl shipperDAOImpl = new ShipperDAOImpl();
              List<Order> list2 = dAO.getAllOrder();

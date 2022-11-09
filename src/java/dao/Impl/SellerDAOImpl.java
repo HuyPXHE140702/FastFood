@@ -129,8 +129,9 @@ public class SellerDAOImpl extends BaseDAOImpl implements SellerDAO {
             closeConnection(connection);
         }
     }
-    
-    public int getReceiveMoney(int id) throws Exception {
+
+    @Override
+    public float getReceiveMoney(int id) throws Exception {
         String sql = "select ReceiveMoney from Seller where AccountID = ?";
         Connection connection = null;
         PreparedStatement preparedStatement = null;
@@ -140,7 +141,10 @@ public class SellerDAOImpl extends BaseDAOImpl implements SellerDAO {
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, id);
             preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                return resultSet.getFloat("ReceiveMoney");
 
+            }
         } catch (Exception e) {
             throw e;
         } finally {
