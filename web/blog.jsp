@@ -59,7 +59,7 @@
                                 <div class="icon-post-${post.getType()}"></div>
                                 <div class="content-post">
                                     <div class="title-post">
-                                        <a href="DetailsPost?id=${post.getId()}">${post.getTitle()}</a>
+                                        <a href="DetailsPost?id=${post.getId()}"><h4>${post.getTitle()}</h4></a>
                                         </br>
                                         <span>${post.getCreateDate()}</span>
                                     </div>
@@ -87,7 +87,9 @@
                             </c:forEach>
                         </div>
 
-                <%@include file="component/footer.jsp" %>
+                        <%@include file="component/footer.jsp" %>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- jQery -->

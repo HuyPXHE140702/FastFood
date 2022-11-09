@@ -115,4 +115,36 @@ public class BlogDAOImpl extends BaseDAOImpl implements BlogDAO {
         String query = "select count(*) from Home";
         return getNumPage(pageSize, query);
     }
+
+    @Override
+    public Home getDetailsPost(int id) throws Exception {
+        Home home = null;
+        String sql = "select * from Home where id = ?";
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+        try {
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int idPost = resultSet.getInt(1);
+                String type = resultSet.getString(2);
+                String title = resultSet.getString(3);
+                String imgLink = resultSet.getString(4);
+                String content = resultSet.getString(6);
+                String createDate = formatDate("dd-MM-yyyy", resultSet.getString(7));
+                System.out.println(resultSet.getString(7));
+                home = new Home(idPost, type, title, imgLink, content, createDate);
+            }
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connection);
+        }
+        return home;
+    }
 }

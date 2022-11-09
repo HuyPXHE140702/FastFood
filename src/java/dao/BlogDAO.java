@@ -21,4 +21,6 @@ public interface BlogDAO {
 
     public String formatDate(String pattern, String input) throws ParseException;
 
+    public Home getDetailsPost(int parseInt) throws Exception;
+
 }

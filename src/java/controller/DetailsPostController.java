@@ -15,12 +15,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Home;
 
 /**
  *
  * @author Admin
  */
-public class BlogController extends HttpServlet {
+public class DetailsPostController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,18 +37,14 @@ public class BlogController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try {
             BlogDAO blogDAO = new BlogDAOImpl();
-            int page = 1, pageSize = 2;
-            if (request.getParameter("page") != null) { // check param page
-                page = Integer.parseInt(request.getParameter("page")); // get param page
-            }
+            String id = request.getParameter("id"); // get id of post
 
-            request.setAttribute("homes", blogDAO.getPost(page, pageSize));
-            request.setAttribute("page", page);
-            request.setAttribute("totalPage", blogDAO.getTotalPage(pageSize));
-            request.getRequestDispatcher("blog.jsp").forward(request, response);
+            Home home = blogDAO.getDetailsPost(Integer.parseInt(id));
+            request.setAttribute("content", home);
+            request.getRequestDispatcher("detailsPost.jsp").forward(request, response);
         } catch (Exception ex) {
             response.sendRedirect("error.jsp");
-            Logger.getLogger(HomeController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(DetailsPostController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

@@ -442,3 +442,7 @@ body{
 .content-s{
     font-family: sans-serif;
 }
+.com-text{
+    white-space: pre-wrap;
+      word-wrap: break-word;
+}
