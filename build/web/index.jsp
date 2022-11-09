@@ -38,10 +38,11 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
         <link href="css/styles-1.css" rel="stylesheet" />
+        <link type="text/css" rel="stylesheet" href="css/styleBlog.css">
     </head>
     <body class="sub_page">  
 
-        <div class="hero_area ">
+        <div class="hero_area">
             <div class="bg-box">
                 <img src="images/hero-bg.jpg" alt="">
             </div>
@@ -49,44 +50,46 @@
             <%@include file="component/header.jsp" %>
             <!-- end header section -->
         </div>
+        <div class="wrap">
+            <div class="content">
+                <div class="main-content">
+                    <div class="content-left">
+                        <c:forEach var="post" items="${homes}">
+                            <div class="post">
+                                <div class="icon-post-${post.getType()}"></div>
+                                <div class="content-post">
+                                    <div class="title-post">
+                                        <a href="DetailsPost?id=${post.getId()}">${post.getTitle()}</a>
+                                        </br>
+                                        <span>${post.getCreateDate()}</span>
+                                    </div>
+                                    <div class="${post.getType()}">
+                                        <a href="DetailsPost?id=${post.getId()}"><img src="image/${post.getImgLink()}"></a>
+                                        <span class="content-s">${post.getContent()}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border-post"></div>
+                        </c:forEach>
 
-        <div class="content-left">
-            
-            <c:forEach var="post" items="${homes}">
-                <div class="post">
-                    <div class="icon-post-${post.getType()}"></div>
-                    <div class="content-post">
-                        <div class="title-post">
-                            <a href="DetailsPost?id=${post.getId()}">${post.getTitle()}</a>
-                            <span>${post.getCreateDate()}</span>
+                        <div class="overview">
+                            <a href="OverviewController">Overview</a>
                         </div>
-                        <div class="${post.getType()}">
-                            <a href="DetailsPost?id=${post.getId()}"><img src="image/${post.getImgLink()}"></a>
-                            <span class="content-s">${post.getContent()}</span>
+
+                        <div class="paging">
+                            <c:forEach var="j" begin="1" step="1" end="${totalPage}">
+                                <c:if test="${page != j}">
+                                    <span class="canSelect"><a href="BlogController?page=${j}" >${j}</a></span> |
+                                    </c:if>
+                                    <c:if test="${page == j}">
+                                    <span class="notSelect">${j}</span> |
+                                </c:if>
+                            </c:forEach>
                         </div>
-                    </div>
-                </div>
-                <div class="border-post"></div>
-            </c:forEach>
 
-            <div class="overview">
-                <a href="OverviewController">Overview</a>
+                <%@include file="component/footer.jsp" %>
             </div>
-
-            <div class="paging">
-                <c:forEach var="j" begin="1" step="1" end="${totalPage}">
-                    <c:if test="${page != j}">
-                        <span class="canSelect"><a href="HomeController?page=${j}" >${j}</a></span> |
-                        </c:if>
-                        <c:if test="${page == j}">
-                        <span class="notSelect">${j}</span> |
-                    </c:if>
-                </c:forEach>
-            </div>
-
         </div>
-
-        <%@include file="component/footer.jsp" %>
         <!-- jQery -->
         <script src="js/jquery-3.4.1.min.js"></script>
         <!-- popper js -->

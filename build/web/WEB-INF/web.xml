@@ -136,6 +136,10 @@
         <servlet-name>BlogController</servlet-name>
         <servlet-class>controller.BlogController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>OverviewController</servlet-name>
+        <servlet-class>controller.OverviewController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ShipperAcceptedOrderController</servlet-name>
         <url-pattern>/Shipperacceptorder</url-pattern>
@@ -271,6 +275,10 @@
     <servlet-mapping>
         <servlet-name>BlogController</servlet-name>
         <url-pattern>/BlogController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>OverviewController</servlet-name>
+        <url-pattern>/OverviewController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
