@@ -148,6 +148,10 @@
         <servlet-name>SendMessageController</servlet-name>
         <servlet-class>controller.SendMessageController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>deleteFoodController</servlet-name>
+        <servlet-class>controller.deleteFoodController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ShipperAcceptedOrderController</servlet-name>
         <url-pattern>/Shipperacceptorder</url-pattern>
@@ -295,6 +299,10 @@
     <servlet-mapping>
         <servlet-name>SendMessageController</servlet-name>
         <url-pattern>/SendMessage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deleteFoodController</servlet-name>
+        <url-pattern>/deleteFoodController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

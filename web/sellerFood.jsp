@@ -43,7 +43,7 @@ Author     : dmanh
 
     </head>
 
-   <body class="sub_page">
+    <body class="sub_page">
 
         <div class="hero_area ">
             <div class="bg-box">
@@ -122,8 +122,9 @@ Author     : dmanh
                                     <th scope="col">Quantity</th>
                                     <th scope="col">UnitPrice</th>
                                     <th scope="col">Description</th>
-                                    
+
                                     <th scope="col">DateCreated</th>
+                                    <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -136,9 +137,11 @@ Author     : dmanh
                                         <td>${f.quantity}</td>
                                         <td>${f.unitprice}</td>
                                         <td>${f.description}</td>                                                                               
-                                        
-                                        <td>${f.createdate}</td>
 
+                                        <td>${f.createdate}</td>
+                                        <td> 
+                                            <a href="deleteFoodController?foodid=${f.foodid}" class="btn btn-outline-danger">Delete</a> 
+                                        </td>
                                         <!-- <li class="nav-item"><a class="nav-link" href="View.jsp">View</a></li>-->
                                         </td>
                                     </tr>

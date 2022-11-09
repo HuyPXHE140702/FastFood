@@ -96,9 +96,9 @@ public class FoodDAOImpl extends BaseDAOImpl implements FoodDAO {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try {
-            String sql = "select * from Foods where CategoryID = '" + categoryID + "'";            
+            String sql = "select * from Foods where CategoryID = '" + categoryID + "'";
             connection = getConnection();
-            preparedStatement = connection.prepareStatement(sql);     
+            preparedStatement = connection.prepareStatement(sql);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int FoodID = resultSet.getInt(1);
@@ -189,8 +189,7 @@ public class FoodDAOImpl extends BaseDAOImpl implements FoodDAO {
         }
         return list;
     }
-    
-    
+
     public List<Food> getProductwithpagging1(int index, int categoryID) throws Exception {
         List<Food> list = new ArrayList<Food>();
         Connection connection = null;
@@ -198,7 +197,7 @@ public class FoodDAOImpl extends BaseDAOImpl implements FoodDAO {
         ResultSet resultSet = null;
 
         try {
-            String sql = "select * from Foods where CategoryID = '"+categoryID+"' order by CategoryID offset ? row fetch next 9 rows only";
+            String sql = "select * from Foods where CategoryID = '" + categoryID + "' order by CategoryID offset ? row fetch next 9 rows only";
             connection = getConnection();
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setInt(1, (index - 1) * 6);
@@ -225,6 +224,7 @@ public class FoodDAOImpl extends BaseDAOImpl implements FoodDAO {
         }
         return list;
     }
+
     /*
    * Get a number of records of Food table from Database<br>
    * The result is type of Integer<br>
@@ -272,6 +272,37 @@ public class FoodDAOImpl extends BaseDAOImpl implements FoodDAO {
         }
         return list;
     }
+     /**
+     *
+     * @param 
+     * @param id
+     * @throws Exception
+     */
+    @Override
+    public void deleteFoodById(int id) throws Exception {
+        String sql = "delete from Foods where FoodID = ?";
+        Connection connection = null;
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
+
+        try {
+            connection = getConnection();
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            closeResultSet(resultSet);
+            closePreparedStatement(preparedStatement);
+            closeConnection(connection);
+        }
+    }
+    @Override
+    public void addFood(String FoodName, int CategoryID, String Image, int Quantity, float UnitPrice, String Description, boolean Status, String dateCreated) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     @Override
     public void closeConnection(Connection cnn) {
@@ -294,4 +325,7 @@ public class FoodDAOImpl extends BaseDAOImpl implements FoodDAO {
     }
 
     
+
+    
+
 }
