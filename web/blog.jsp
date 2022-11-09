@@ -72,9 +72,9 @@
                             <div class="border-post"></div>
                         </c:forEach>
 
-                        <div class="overview">
+                        <!--<div class="overview">
                             <a href="OverviewController">Overview</a>
-                        </div>
+                        </div>.-->
 
                         <div class="paging">
                             <c:forEach var="j" begin="1" step="1" end="${totalPage}">
@@ -86,7 +86,6 @@
                                 </c:if>
                             </c:forEach>
                         </div>
-
                         <%@include file="component/footer.jsp" %>
                     </div>
                 </div>

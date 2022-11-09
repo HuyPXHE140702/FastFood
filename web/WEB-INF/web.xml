@@ -144,6 +144,10 @@
         <servlet-name>DetailsPostController</servlet-name>
         <servlet-class>controller.DetailsPostController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SendMessageController</servlet-name>
+        <servlet-class>controller.SendMessageController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ShipperAcceptedOrderController</servlet-name>
         <url-pattern>/Shipperacceptorder</url-pattern>
@@ -287,6 +291,10 @@
     <servlet-mapping>
         <servlet-name>DetailsPostController</servlet-name>
         <url-pattern>/DetailsPost</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SendMessageController</servlet-name>
+        <url-pattern>/SendMessage</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

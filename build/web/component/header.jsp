@@ -61,6 +61,9 @@
                         <li class="nav-item">
                             <a class="nav-link active" aria-current="page"  href="BlogController">Blog</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page"  href="findus.jsp">Contact Us</a>
+                        </li>
 
                     </ul>
                     <div class="d-flex" >
@@ -68,9 +71,7 @@
                             <i class="bi-cart-fill me-1"></i>
                             Cart
 
-
                             <span id="cart_number" class="badge bg-dark text-white ms-1 rounded-pill">${sessionScope.carts.size()}</span>    
-
 
                         </a>
                     </div>
