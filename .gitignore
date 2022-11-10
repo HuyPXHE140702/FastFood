@@ -1,1 +1,5 @@
 /dist/
+*.class
+*.war
+*.properties
+nbproject/ant-deploy.xml

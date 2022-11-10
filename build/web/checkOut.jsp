@@ -115,7 +115,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="address" class="form-label">Address</label>
-                                <input maxlength="32" pattern="^[a-zA-Z]+((,?[',. -][a-zA-Z])?[a-zA-Z]*\.?)*$"  type="text" class="form-control" id="address" name="address" aria-describedby="emailHelp" required>
+                                <input maxlength="32" pattern="^[a-zA-Z0-9]+((,?[',. -][a-zA-Z0-9])?[a-zA-Z0-9]*\.?)*$"  type="text" class="form-control" id="address" name="address" aria-describedby="emailHelp" required>
                             </div>   
                             <div class="form-group row">
                                 <div class="col-md-6">

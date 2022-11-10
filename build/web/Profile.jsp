@@ -167,7 +167,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Address</label>
-                                <input maxlength="32" pattern="^[a-zA-Z]+((,?[',. -][a-zA-Z])?[a-zA-Z]*\.?)*$" value="${profile.address}" name="address" type="text" class="form-control" required>
+                                <input maxlength="32" pattern="^[a-zA-Z0-9]+((,?[',. -][a-zA-Z0-9])?[a-zA-Z0-9]*\.?)*$" value="${profile.address}" name="address" type="text" class="form-control" required>
                             </div>       
                             <div class="form-group" hidden>
                                 <label>Password</label>
@@ -266,14 +266,14 @@
                                 <label>New Password</label>
                                 <div class="row ">
                                     <h6 style="color: #be123c">${error2}</h6>
-                                    <div class="col-sm-11"><input maxlength="32" minlength="3" pattern="[a-z0-9]+$" value="1234" class="form-control" id="newpass" type="password" name="newpass" required></div>
+                                    <div class="col-sm-11"><input maxlength="32" minlength="3" pattern="[a-z0-9]+$" value="" class="form-control" id="newpass" type="password" name="newpass" required></div>
                                     <div style="margin-left: -13px;margin-top: 8px" class="col-sm-1 "> <i  id="toggleBtn2" onclick="togglePassword('newpass', 'toggleBtn2')"  class="fas fa-eye"></i></div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label>Confirm Password</label>
                                 <div class="row ">
-                                    <div class="col-sm-11"><input maxlength="32" minlength="3" pattern="[a-z0-9]+$" value="1234" class="form-control" id="confirmedpass" type="password" name="confirmedpass" required></div>
+                                    <div class="col-sm-11"><input maxlength="32" minlength="3" pattern="[a-z0-9]+$" value="" class="form-control" id="confirmedpass" type="password" name="confirmedpass" required></div>
                                     <div style="margin-left: -13px;margin-top: 8px" class="col-sm-1 "> <i id="toggleBtn3" onclick="togglePassword('confirmedpass', 'toggleBtn3')"  class="fas fa-eye"></i></div>
                                 </div>
                             </div>
